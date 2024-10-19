@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Yarnique.Common.Application\Yarnique.Common.Application.csproj" />
+    <ProjectReference Include="..\..\..\Common\Yarnique.Common.Infrastructure\Yarnique.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.Designs.Domain\Yarnique.Modules.Designs.Domain.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.Designs.IntegrationEvents\Yarnique.Modules.Designs.IntegrationEvents.csproj" />
+  </ItemGroup>
+
+</Project>

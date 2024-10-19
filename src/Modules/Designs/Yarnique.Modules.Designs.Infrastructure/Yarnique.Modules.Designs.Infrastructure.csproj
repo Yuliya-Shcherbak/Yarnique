@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="Polly" Version="8.4.2" />
+    <PackageReference Include="Quartz" Version="3.13.0" />
+    <PackageReference Include="Serilog" Version="4.0.2" />
+    <PackageReference Include="Serilog.Extensions" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Yarnique.Common.Infrastructure\Yarnique.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.Designs.Application\Yarnique.Modules.Designs.Application.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.Designs.Domain\Yarnique.Modules.Designs.Domain.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.Designs.IntegrationEvents\Yarnique.Modules.Designs.IntegrationEvents.csproj" />
+  </ItemGroup>
+
+</Project>
