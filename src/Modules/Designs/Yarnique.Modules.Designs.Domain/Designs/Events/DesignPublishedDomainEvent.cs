@@ -5,11 +5,11 @@ namespace Yarnique.Modules.Designs.Domain.Designs.Events
 {
     public class DesignPublishedDomainEvent : DomainEventBase
     {
-        public DesignPublishedDomainEvent(DesignId id)
+        public DesignPublishedDomainEvent(Guid designId)
         {
-            DesignId = id;
+            DesignId = designId;
         }
 
-        public DesignId DesignId { get; }
+        public Guid DesignId { get; }
     }
 }

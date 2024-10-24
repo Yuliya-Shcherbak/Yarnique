@@ -62,6 +62,7 @@
     <Folder Include="Structure\designs" />
     <Folder Include="Structure\consumables\Tables" />
     <Folder Include="Structure\designs\Tables" />
+    <Folder Include="StoredProcedures" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\CreateDatabase.sql" />
@@ -77,5 +78,6 @@
     <None Include="Structure\designs\Tables\OutboxMessages.sql" />
     <None Include="Structure\designs\Tables\InternalCommands.sql" />
     <None Include="Structure\designs\Tables\InboxMessages.sql" />
+    <None Include="StoredProcedures\Orders.PublishDesign.sql" />
   </ItemGroup>
 </Project>

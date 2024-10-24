@@ -7,9 +7,11 @@ using Yarnique.API.Configuration;
 using Yarnique.API.Configuration.ExecutionContext;
 using Yarnique.API.Configuration.Validation;
 using Yarnique.API.Modules.Designs;
+using Yarnique.API.Modules.OrderSubmitting;
 using Yarnique.Common.Application;
 using Yarnique.Common.Domain;
 using Yarnique.Modules.Designs.Infrastructure.Configuration;
+using Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration;
 using ILogger = Serilog.ILogger;
 
 namespace Yarnique.API
@@ -56,6 +58,7 @@ namespace Yarnique.API
         public void ConfigureContainer(ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterModule(new DesignsAutofacModule());
+            containerBuilder.RegisterModule(new OrderSubmittingAutofacModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,7 +92,7 @@ namespace Yarnique.API
             app.UseRouting();
 
             // app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
@@ -121,6 +124,12 @@ namespace Yarnique.API
                 executionContextAccessor,
                 _logger,
                 null);
+
+            OrderSubmittingStartup.Initialize(
+               _configuration.GetConnectionString(YarniqueConnectionString),
+               executionContextAccessor,
+               _logger,
+               null);
         }
     }
 }

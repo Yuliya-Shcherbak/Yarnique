@@ -23,6 +23,7 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.GetDesign
                            [d].[Id] 
                            , [d].[Name]
                            , [d].[Price]
+                           , [d].[Published]
                            , [dps].[Id]
                            , [dp].[Name] AS DesignPartName
                            , [dps].[YarnAmount]

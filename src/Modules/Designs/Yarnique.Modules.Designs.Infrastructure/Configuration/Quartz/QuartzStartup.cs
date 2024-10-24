@@ -44,7 +44,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Quartz
                     TriggerBuilder
                         .Create()
                         .StartNow()
-                        .WithCronSchedule("* 0/10 * ? * *")
+                        .WithCronSchedule("0/5 * * ? * *")
                         .Build();
             }
 
@@ -72,7 +72,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Quartz
                     TriggerBuilder
                         .Create()
                         .StartNow()
-                        .WithCronSchedule("0 0/10 * ? * *")
+                        .WithCronSchedule("0/5 * * ? * *")
                         .Build();
             }
 
@@ -100,7 +100,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Quartz
                     TriggerBuilder
                         .Create()
                         .StartNow()
-                        .WithCronSchedule("0 0/10 * ? * *")
+                        .WithCronSchedule("0/5 * * ? * *")
                         .Build();
             }
 

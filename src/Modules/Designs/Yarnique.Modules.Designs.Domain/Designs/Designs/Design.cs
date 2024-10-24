@@ -35,7 +35,7 @@ namespace Yarnique.Modules.Designs.Domain.Designs.Designs
         {
             this._published = true;
 
-            AddDomainEvent(new DesignPublishedDomainEvent(Id));
+            AddDomainEvent(new DesignPublishedDomainEvent(Id.Value));
         }
 
         private Design(Guid id, string name, double price, List<DesignPartSpecification> parts)

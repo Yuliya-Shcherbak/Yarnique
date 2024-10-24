@@ -8,9 +8,10 @@ using Yarnique.Modules.Designs.Application.DesignCreation.CreateDesignPart;
 using Yarnique.Modules.Designs.Application.DesignCreation.EditDesign;
 using Yarnique.Modules.Designs.Application.DesignCreation.GetAllDesignParts;
 using Yarnique.Modules.Designs.Application.DesignCreation.GetDesign;
+using Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign;
 
 namespace Yarnique.API.Controllers
-{    
+{
     [ApiController]
     [Route("api/designs")]
     public class DesignsController : ControllerBase
@@ -61,6 +62,16 @@ namespace Yarnique.API.Controllers
                     request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount)).ToList()
                     )
                 );
+
+            return Ok();
+        }
+
+        [HttpPut("{id}/publish")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> PublishDesign([FromRoute] Guid id)
+        {
+            await _designsModule.ExecuteCommandAsync(new PublishDesignCommand(id));
 
             return Ok();
         }

@@ -5,11 +5,11 @@ namespace Yarnique.Modules.Designs.Domain.Designs.Events
 {
     public class DesignPartSpecificationCreatedDomainEvent : DomainEventBase
     {
-        public DesignPartSpecificationCreatedDomainEvent(DesignPartSpecificationId id)
+        public DesignPartSpecificationCreatedDomainEvent(DesignPartSpecificationId designPartSpecificationId)
         {
-            Id = id;
+            DesignId = designPartSpecificationId;
         }
 
-        public new DesignPartSpecificationId Id { get; }
+        public DesignPartSpecificationId DesignId { get; }
     }
 }

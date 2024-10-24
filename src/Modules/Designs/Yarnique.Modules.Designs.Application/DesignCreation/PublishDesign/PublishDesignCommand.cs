@@ -3,9 +3,9 @@ using Yarnique.Modules.Designs.Domain.Designs.Designs;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign
 {
-    public class PublishDesignComand : CommandBase
+    public class PublishDesignCommand : CommandBase
     {
-        public PublishDesignComand(Guid designId)
+        public PublishDesignCommand(Guid designId)
         {
             DesignId = new DesignId(designId);
         }

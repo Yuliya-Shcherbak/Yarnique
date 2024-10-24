@@ -21,7 +21,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.EventsBus
                 ContractResolver = new AllPropertiesContractResolver()
             });
 
-            var sql = "INSERT INTO [administration].[InboxMessages] (Id, OccurredOn, Type, Data) " +
+            var sql = "INSERT INTO [designs].[InboxMessages] (Id, OccurredOn, Type, Data) " +
                       "VALUES (@Id, @OccurredOn, @Type, @Data)";
 
             await connection.ExecuteScalarAsync(sql, new

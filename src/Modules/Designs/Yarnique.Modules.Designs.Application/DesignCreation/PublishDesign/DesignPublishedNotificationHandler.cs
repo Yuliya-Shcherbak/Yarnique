@@ -19,7 +19,7 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign
                 new DesignPublishedIntegrationEvent(
                     Guid.NewGuid(),
                     notification.DomainEvent.OccurredOn,
-                    notification.DomainEvent.DesignId.Value
+                    notification.DomainEvent.DesignId
                 ));
         }
     }
