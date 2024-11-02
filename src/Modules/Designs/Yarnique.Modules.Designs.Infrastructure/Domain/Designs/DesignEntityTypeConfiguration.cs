@@ -26,6 +26,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Domain.Designs
                 y.Property<DesignId>("DesignId");
                 y.Property<DesignPartId>("_designPartId").HasColumnName("DesignPartId");
                 y.Property<int>("_yarnAmount").HasColumnName("YarnAmount");
+                y.Property<string>("_term").HasColumnName("Term");
             });
         }
     }

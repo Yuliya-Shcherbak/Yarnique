@@ -12,9 +12,10 @@ using Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign;
 
 namespace Yarnique.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/designs")]
-    public class DesignsController : ControllerBase
+    public class DesignsController : BaseController
     {
         private readonly IDesignsModule _designsModule;
 
@@ -24,7 +25,6 @@ namespace Yarnique.API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         [ProducesResponseType(typeof(List<DesignPartDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetDesignById([FromQuery] GetDesignRequest request)
         {
@@ -34,7 +34,6 @@ namespace Yarnique.API.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> CreateDesign([FromBody] CreateDesignRequest request)
         {
@@ -42,7 +41,7 @@ namespace Yarnique.API.Controllers
                 new CreateDesignCommand(
                     request.Name,
                     request.Price,
-                    request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount)).ToList()
+                    request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount, x.Term)).ToList()
                     )
                 );
 
@@ -50,7 +49,6 @@ namespace Yarnique.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateDesign([FromRoute] Guid id, [FromBody] EditDesignRequest request)
         {
@@ -59,7 +57,7 @@ namespace Yarnique.API.Controllers
                     id,
                     request.Name,
                     request.Price,
-                    request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount)).ToList()
+                    request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount, x.Term)).ToList()
                     )
                 );
 
@@ -67,7 +65,6 @@ namespace Yarnique.API.Controllers
         }
 
         [HttpPut("{id}/publish")]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> PublishDesign([FromRoute] Guid id)
         {
@@ -77,7 +74,6 @@ namespace Yarnique.API.Controllers
         }
 
         [HttpGet("parts")]
-        [AllowAnonymous]
         [ProducesResponseType(typeof(List<DesignPartDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllDesignParts()
         {
@@ -87,7 +83,6 @@ namespace Yarnique.API.Controllers
         }
 
         [HttpPost("parts")]
-        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> CreateDesignPart([FromBody] CreateDesignPartRequest request)
         {

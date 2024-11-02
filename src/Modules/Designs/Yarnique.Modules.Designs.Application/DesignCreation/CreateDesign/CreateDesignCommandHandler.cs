@@ -16,7 +16,7 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.CreateDesign
 
         public async Task<Guid> Handle(CreateDesignCommand command, CancellationToken cancellationToken)
         {
-            var parts = command.Parts.Select(x => DesignPartSpecification.Create(x.DesignPartId, x.YarnAmount)).ToList();
+            var parts = command.Parts.Select(x => DesignPartSpecification.Create(x.DesignPartId, x.YarnAmount, x.Term)).ToList();
             var design = Design.Create(command.Name, command.Price, parts);
 
             await _designsRepository.AddDesignAsync(design);

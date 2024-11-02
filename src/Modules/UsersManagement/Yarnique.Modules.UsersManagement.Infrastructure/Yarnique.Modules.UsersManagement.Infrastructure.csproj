@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Quartz" Version="3.13.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Yarnique.Common.Infrastructure\Yarnique.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.UsersManagement.Application\Yarnique.Modules.UsersManagement.Application.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.UsersManagement.Domain\Yarnique.Modules.UsersManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

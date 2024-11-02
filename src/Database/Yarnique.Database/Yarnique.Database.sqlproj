@@ -78,6 +78,6 @@
     <None Include="Structure\designs\Tables\OutboxMessages.sql" />
     <None Include="Structure\designs\Tables\InternalCommands.sql" />
     <None Include="Structure\designs\Tables\InboxMessages.sql" />
-    <None Include="StoredProcedures\Orders.PublishDesign.sql" />
+    <None Include="StoredProcedures\[orders].CopyPublishedDesign.sql" />
   </ItemGroup>
 </Project>

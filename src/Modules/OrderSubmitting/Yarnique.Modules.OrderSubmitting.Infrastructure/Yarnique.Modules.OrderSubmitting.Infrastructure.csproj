@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\..\Common\Yarnique.Common.Application\Yarnique.Common.Application.csproj" />
     <ProjectReference Include="..\..\..\Common\Yarnique.Common.Infrastructure\Yarnique.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Yarnique.Modules.OrderSubmitting.Application\Yarnique.Modules.OrderSubmitting.Application.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.OrderSubmitting.Domain\Yarnique.Modules.OrderSubmitting.Domain.csproj" />
   </ItemGroup>
 
 </Project>

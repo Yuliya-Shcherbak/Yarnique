@@ -1,8 +1,14 @@
 using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Hellang.Middleware.ProblemDetails;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Formatting.Compact;
+using System.Net.Http.Headers;
+using System.Text;
 using Yarnique.API.Configuration;
 using Yarnique.API.Configuration.ExecutionContext;
 using Yarnique.API.Configuration.Validation;
@@ -12,6 +18,7 @@ using Yarnique.Common.Application;
 using Yarnique.Common.Domain;
 using Yarnique.Modules.Designs.Infrastructure.Configuration;
 using Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration;
+using Yarnique.Modules.UsersManagement.Infrastructure.Configuration;
 using ILogger = Serilog.ILogger;
 
 namespace Yarnique.API
@@ -19,6 +26,7 @@ namespace Yarnique.API
     public class Startup
     {
         private const string YarniqueConnectionString = "YarniqueConnectionString";
+        private const string PaymentAPIString = "PaymentUrl";
         private static ILogger _logger;
         private static ILogger _loggerForApi;
         private readonly IConfiguration _configuration;
@@ -34,16 +42,20 @@ namespace Yarnique.API
                 .AddEnvironmentVariables("Yarnique_")
                 .Build();
 
+            GetApplicationConfig();
+
             _loggerForApi.Information("Connection string:" + _configuration.GetConnectionString(YarniqueConnectionString));
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            YarniqueConfig config = GetApplicationConfig();
+            ConfigureAuthentication(services, config);
+
+
             services.AddControllers();
 
             services.AddSwaggerDocumentation();
-
-            //services.ConfigureIdentityService();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IExecutionContextAccessor, ExecutionContextAccessor>();
@@ -59,9 +71,9 @@ namespace Yarnique.API
         {
             containerBuilder.RegisterModule(new DesignsAutofacModule());
             containerBuilder.RegisterModule(new OrderSubmittingAutofacModule());
+            containerBuilder.RegisterModule(new UsersManagementAutofacModule());
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             var container = app.ApplicationServices.GetAutofacRoot();
@@ -75,8 +87,6 @@ namespace Yarnique.API
 
             app.UseSwaggerDocumentation();
 
-            //app.AddIdentityService();
-
             if (env.IsDevelopment())
             {
                 app.UseProblemDetails();
@@ -89,10 +99,11 @@ namespace Yarnique.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseRouting();
 
-            // app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
@@ -114,6 +125,7 @@ namespace Yarnique.API
 
         private void InitializeModules(ILifetimeScope container)
         {
+            YarniqueConfig config = GetApplicationConfig();
             var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
             var executionContextAccessor = new ExecutionContextAccessor(httpContextAccessor);
 
@@ -127,9 +139,59 @@ namespace Yarnique.API
 
             OrderSubmittingStartup.Initialize(
                _configuration.GetConnectionString(YarniqueConnectionString),
+               _configuration[PaymentAPIString],
                executionContextAccessor,
                _logger,
                null);
+
+            UsersManagementStartup.Initialize(
+               _configuration.GetConnectionString(YarniqueConnectionString),
+               config.Identity,
+               executionContextAccessor,
+               _logger,
+               null);
+        }
+
+        private YarniqueConfig GetApplicationConfig()
+        {
+            YarniqueConfig config = new YarniqueConfig();
+            _configuration.Bind(config);
+            return config;
+        }
+
+        private void ConfigureAuthentication(IServiceCollection services, YarniqueConfig config)
+        {
+            var key = Encoding.ASCII.GetBytes(config.Identity.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.Events = new JwtBearerEvents()
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        if (context.Exception.GetType() == typeof(SecurityTokenValidationException))
+                            context.Response.Headers.Append("Token-Expired", "true");
+                        return Task.CompletedTask;
+                    }
+                };
+                x.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidIssuer = config.Identity.JwtIssuer,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidateLifetime = true
+                };
+            });
         }
     }
 }

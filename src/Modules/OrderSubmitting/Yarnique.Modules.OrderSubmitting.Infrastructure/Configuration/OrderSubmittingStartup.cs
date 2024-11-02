@@ -18,6 +18,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
 
         public static void Initialize(
             string connectionString,
+            string paymentApiUrl,
             IExecutionContextAccessor executionContextAccessor,
             ILogger logger,
             IEventsBus eventsBus,
@@ -27,6 +28,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
 
             ConfigureCompositionRoot(
                 connectionString,
+                paymentApiUrl,
                 executionContextAccessor,
                 logger,
                 eventsBus);
@@ -38,6 +40,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
 
         private static void ConfigureCompositionRoot(
             string connectionString,
+            string paymentApiUrl,
             IExecutionContextAccessor executionContextAccessor,
             ILogger logger,
             IEventsBus eventsBus)
@@ -55,6 +58,8 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
             containerBuilder.RegisterModule(new OutboxModule(new BiDictionary<string, Type>()));
 
             containerBuilder.RegisterModule(new QuartzModule());
+
+            containerBuilder.RegisterModule(new OrderPaymentHttpClientModule(paymentApiUrl));
 
             containerBuilder.RegisterInstance(executionContextAccessor);
 

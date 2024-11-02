@@ -11,20 +11,22 @@ namespace Yarnique.Modules.Designs.Domain.Designs.DesignPartSpecifications
         private DesignPartId _designPartId;
 
         private int _yarnAmount;
+        private string _term;
 
         public DesignPartSpecification() { }
 
-        public static DesignPartSpecification Create(DesignPartId designPartId, int yarnAmount)
+        public static DesignPartSpecification Create(DesignPartId designPartId, int yarnAmount, string term)
         {
-            return new DesignPartSpecification(Guid.NewGuid(), designPartId, yarnAmount);
+            return new DesignPartSpecification(Guid.NewGuid(), designPartId, yarnAmount, term);
         }
 
-        private DesignPartSpecification(Guid id, DesignPartId designPartId, int yarnAmount)
+        private DesignPartSpecification(Guid id, DesignPartId designPartId, int yarnAmount, string term)
         {
             Id = new DesignPartSpecificationId(id);
             _designPartId = designPartId;
             _yarnAmount = yarnAmount;
-            
+            _term = term;
+
             AddDomainEvent(new DesignPartSpecificationCreatedDomainEvent(Id));
         }
     }

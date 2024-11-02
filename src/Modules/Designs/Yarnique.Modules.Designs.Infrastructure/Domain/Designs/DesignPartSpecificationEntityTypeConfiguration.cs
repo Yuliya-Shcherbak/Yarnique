@@ -21,6 +21,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Domain.Designs
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property<DesignPartId>("_designPartId").HasColumnName("DesignPartId");
+            builder.Property<string>("_term").HasColumnName("Term");
         }
     }
 }

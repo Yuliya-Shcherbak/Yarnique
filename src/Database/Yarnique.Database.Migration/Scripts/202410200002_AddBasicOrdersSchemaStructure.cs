@@ -35,6 +35,23 @@ namespace Yarnique.Database.Migrations.Scripts
                 .WithColumn("Type").AsString()
                 .WithColumn("Data").AsMaxString()
                 .WithColumn("ProcessedDate").AsDateTime().Nullable();
+
+            Create.Table("[InternalCommands]")
+                .InSchema("[orders]")
+                .WithColumn("Id").AsGuid().PrimaryKey("PK_orders_InternalCommands_Id")
+                .WithColumn("EnqueueDate").AsDateTime()
+                .WithColumn("Type").AsString()
+                .WithColumn("Data").AsMaxString()
+                .WithColumn("ProcessedDate").AsDateTime().Nullable()
+                .WithColumn("Error").AsMaxString().Nullable();
+
+            Create.Table("[OutboxMessages]")
+                .InSchema("[orders]")
+                .WithColumn("Id").AsGuid().PrimaryKey("PK_orders_OutboxMessages_Id")
+                .WithColumn("OccurredOn").AsDateTime()
+                .WithColumn("Type").AsString()
+                .WithColumn("Data").AsMaxString()
+                .WithColumn("ProcessedDate").AsDateTime().Nullable();
         }
 
         public override void Down()
@@ -43,6 +60,9 @@ namespace Yarnique.Database.Migrations.Scripts
             Delete.Table("[DesignParts]").InSchema("[orders]");
             Delete.Table("[Designs]").InSchema("[orders]");
             Delete.Table("[DesignPartSpecifications]").InSchema("[orders]");
+            Delete.Table("[InboxMessages]").InSchema("[orders]");
+            Delete.Table("[InternalCommands]").InSchema("[orders]");
+            Delete.Table("[OutboxMessages]").InSchema("[orders]");
         }
     }
 }

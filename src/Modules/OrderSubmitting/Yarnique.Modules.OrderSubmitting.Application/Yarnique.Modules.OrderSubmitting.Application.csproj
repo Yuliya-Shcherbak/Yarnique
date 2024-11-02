@@ -7,11 +7,15 @@
 
   <ItemGroup>
 	<PackageReference Include="Dapper" Version="2.1.35" />
+	<PackageReference Include="FluentValidation" Version="11.10.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Designs\Yarnique.Modules.Designs.IntegrationEvents\Yarnique.Modules.Designs.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\Yarnique.Modules.OrderSubmitting.Domain\Yarnique.Modules.OrderSubmitting.Domain.csproj" />
   </ItemGroup>
 
 </Project>

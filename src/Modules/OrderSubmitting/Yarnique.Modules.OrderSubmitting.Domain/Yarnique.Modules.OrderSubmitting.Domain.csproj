@@ -9,8 +9,4 @@
 	<ProjectReference Include="..\..\..\Common\Yarnique.Common.Domain\Yarnique.Common.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Designs\" />
-  </ItemGroup>
-
 </Project>

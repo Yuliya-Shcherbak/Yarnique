@@ -1,4 +1,8 @@
-﻿CREATE PROCEDURE [orders].[CopyPublisedhDesign] @DesignId UNIQUEIDENTIFIER
+﻿IF OBJECT_ID(N'[orders].[CopyPublisedhDesign]', N'U') IS NOT NULL
+   DROP TABLE [orders].[CopyPublisedhDesign];
+GO
+
+CREATE PROCEDURE [orders].[CopyPublisedhDesign] @DesignId UNIQUEIDENTIFIER
 AS
 	DECLARE @NewDesignId UNIQUEIDENTIFIER
 	DECLARE @TempDesigns TABLE
@@ -14,7 +18,8 @@ AS
 		[Id] UNIQUEIDENTIFIER NOT NULL,
 		[DesignId] UNIQUEIDENTIFIER NOT NULL,
 		[DesignPartId] UNIQUEIDENTIFIER NOT NULL,
-		[YarnAmount] INT NOT NULL
+		[YarnAmount] INT NOT NULL,
+		[Term] VARCHAR(255) NOT NULL
 	)
 
 	DECLARE @TempDesignSpecificationsWithNewParts TABLE
@@ -23,7 +28,8 @@ AS
 		[DesignId] UNIQUEIDENTIFIER NOT NULL,
 		[DesignPartId] UNIQUEIDENTIFIER NOT NULL,
 		[Name] VARCHAR(255) NOT NULL,
-		[YarnAmount] INT NOT NULL
+		[YarnAmount] INT NOT NULL,
+		[Term] VARCHAR(255) NOT NULL
 	)
 
 	INSERT INTO @TempDesigns
@@ -43,6 +49,7 @@ AS
 		, @NewDesignId
 		, odp.Id
 		, dps.YarnAmount
+		, dps.Term
 	FROM [designs].[DesignPartSpecifications] AS dps
 	JOIN [designs].[DesignParts] AS dp ON dps.DesignPartId = dp.Id
 	JOIN [orders].[DesignParts] AS odp ON dp.Name = odp.Name
@@ -55,6 +62,7 @@ AS
 		, dps.DesignPartId
 		, dp.Name
 		, dps.YarnAmount
+		, dps.Term
 	FROM [designs].[DesignPartSpecifications] AS dps
 	JOIN [designs].[DesignParts] AS dp ON dps.DesignPartId = dp.Id
 	WHERE dps.DesignId = @DesignId AND Name NOT IN (SELECT Name FROM [orders].[DesignParts])
@@ -62,7 +70,7 @@ AS
 	BEGIN TRANSACTION
 		INSERT INTO [orders].[Designs] SELECT [Id], [Name], [Price], [Discontinued] FROM @TempDesigns
 		INSERT INTO [orders].[DesignParts] SELECT [DesignPartId], [Name] FROM @TempDesignSpecificationsWithNewParts
-		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount] FROM @TempDesignSpecifications
-		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount] FROM @TempDesignSpecificationsWithNewParts
+		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount], [Term] FROM @TempDesignSpecifications
+		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount], [Term] FROM @TempDesignSpecificationsWithNewParts
 	COMMIT TRANSACTION
 GO

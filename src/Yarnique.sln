@@ -45,18 +45,30 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Common.Domain", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Common.Infrastructure", "Common\Yarnique.Common.Infrastructure\Yarnique.Common.Infrastructure.csproj", "{CC6D8C9A-7963-4C36-934F-7409F3AB73C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarnique.Modules.OrderSubmitting.Application", "Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.Application\Yarnique.Modules.OrderSubmitting.Application.csproj", "{6249A8A6-F30A-439E-97A7-5859A9C2A737}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.OrderSubmitting.Application", "Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.Application\Yarnique.Modules.OrderSubmitting.Application.csproj", "{6249A8A6-F30A-439E-97A7-5859A9C2A737}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarnique.Modules.OrderSubmitting.Domain", "Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.Domain\Yarnique.Modules.OrderSubmitting.Domain.csproj", "{1E677B11-0F10-4B2E-A0E8-945E32647E61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.OrderSubmitting.Domain", "Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.Domain\Yarnique.Modules.OrderSubmitting.Domain.csproj", "{1E677B11-0F10-4B2E-A0E8-945E32647E61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarnique.Modules.OrderSubmitting.Infrastructure", "Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.Infrastructure\Yarnique.Modules.OrderSubmitting.Infrastructure.csproj", "{37371DD5-D529-4734-A7D2-153405F4D469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.OrderSubmitting.Infrastructure", "Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.Infrastructure\Yarnique.Modules.OrderSubmitting.Infrastructure.csproj", "{37371DD5-D529-4734-A7D2-153405F4D469}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1E677B11-0F10-4B2E-A0E8-945E32647E61} = {1E677B11-0F10-4B2E-A0E8-945E32647E61}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarnique.Modules.OrderSubmitting.IntegrationEvents", "Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.IntegrationEvents\Yarnique.Modules.OrderSubmitting.IntegrationEvents.csproj", "{760D2F29-841D-4013-8D06-F13D7AE8F149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.OrderSubmitting.IntegrationEvents", "Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.IntegrationEvents\Yarnique.Modules.OrderSubmitting.IntegrationEvents.csproj", "{760D2F29-841D-4013-8D06-F13D7AE8F149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarnique.Database.Migrations", "Database\Yarnique.Database.Migration\Yarnique.Database.Migrations.csproj", "{D94EB069-2DE8-4920-B9AD-9A24639681BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Database.Migrations", "Database\Yarnique.Database.Migration\Yarnique.Database.Migrations.csproj", "{D94EB069-2DE8-4920-B9AD-9A24639681BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsersManagement", "UsersManagement", "{2619DA8A-098F-429F-B080-49109E2F0AC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.UsersManagement.Application", "Modules\UsersManagement\Yarnique.Modules.UsersManagement.Application\Yarnique.Modules.UsersManagement.Application.csproj", "{D0290B52-BEA0-4519-96A8-4198D6D63CCA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.UsersManagement.Domain", "Modules\UsersManagement\Yarnique.Modules.UsersManagement.Domain\Yarnique.Modules.UsersManagement.Domain.csproj", "{AA59E26B-FCAB-4B70-ABF5-5DE46B1EC406}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.UsersManagement.Infrastructure", "Modules\UsersManagement\Yarnique.Modules.UsersManagement.Infrastructure\Yarnique.Modules.UsersManagement.Infrastructure.csproj", "{0A0F8F47-B605-411C-94BB-C13D81B3966D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.UsersManagement.IntegrationEvents", "Modules\UsersManagement\Yarnique.Modules.UsersManagement.IntegrationEvents\Yarnique.Modules.UsersManagement.IntegrationEvents.csproj", "{E3BFA18F-0AF3-4DD0-AF44-82349AB207B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Payment.API", "PaymentAPI\Yarnique.Payment.API\Yarnique.Payment.API.csproj", "{5AC93409-EE1B-4124-B474-A4CF5455A9AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,6 +150,26 @@ Global
 		{D94EB069-2DE8-4920-B9AD-9A24639681BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D94EB069-2DE8-4920-B9AD-9A24639681BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D94EB069-2DE8-4920-B9AD-9A24639681BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0290B52-BEA0-4519-96A8-4198D6D63CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0290B52-BEA0-4519-96A8-4198D6D63CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0290B52-BEA0-4519-96A8-4198D6D63CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0290B52-BEA0-4519-96A8-4198D6D63CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA59E26B-FCAB-4B70-ABF5-5DE46B1EC406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA59E26B-FCAB-4B70-ABF5-5DE46B1EC406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA59E26B-FCAB-4B70-ABF5-5DE46B1EC406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA59E26B-FCAB-4B70-ABF5-5DE46B1EC406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A0F8F47-B605-411C-94BB-C13D81B3966D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A0F8F47-B605-411C-94BB-C13D81B3966D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A0F8F47-B605-411C-94BB-C13D81B3966D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A0F8F47-B605-411C-94BB-C13D81B3966D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3BFA18F-0AF3-4DD0-AF44-82349AB207B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3BFA18F-0AF3-4DD0-AF44-82349AB207B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3BFA18F-0AF3-4DD0-AF44-82349AB207B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3BFA18F-0AF3-4DD0-AF44-82349AB207B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC93409-EE1B-4124-B474-A4CF5455A9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC93409-EE1B-4124-B474-A4CF5455A9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC93409-EE1B-4124-B474-A4CF5455A9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC93409-EE1B-4124-B474-A4CF5455A9AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +197,11 @@ Global
 		{37371DD5-D529-4734-A7D2-153405F4D469} = {7C1A0058-9458-4ED2-A12A-518F8E3BCA1A}
 		{760D2F29-841D-4013-8D06-F13D7AE8F149} = {7C1A0058-9458-4ED2-A12A-518F8E3BCA1A}
 		{D94EB069-2DE8-4920-B9AD-9A24639681BE} = {09346689-7690-451B-ABBB-FCCD4EDB8CDC}
+		{2619DA8A-098F-429F-B080-49109E2F0AC2} = {D25C8672-6E6F-404D-8167-449D33A03C5E}
+		{D0290B52-BEA0-4519-96A8-4198D6D63CCA} = {2619DA8A-098F-429F-B080-49109E2F0AC2}
+		{AA59E26B-FCAB-4B70-ABF5-5DE46B1EC406} = {2619DA8A-098F-429F-B080-49109E2F0AC2}
+		{0A0F8F47-B605-411C-94BB-C13D81B3966D} = {2619DA8A-098F-429F-B080-49109E2F0AC2}
+		{E3BFA18F-0AF3-4DD0-AF44-82349AB207B9} = {2619DA8A-098F-429F-B080-49109E2F0AC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80077703-C2FF-48D5-9529-1855A1858F61}
