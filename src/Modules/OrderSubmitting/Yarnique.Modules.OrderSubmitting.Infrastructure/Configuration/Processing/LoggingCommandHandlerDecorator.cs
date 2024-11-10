@@ -46,7 +46,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processi
 
                     await _decorated.Handle(command, cancellationToken);
 
-                    this._logger.Information("Command {Command} processed successful", command.GetType().Name);
+                    this._logger.Information("Command {Command} processed successfully", command.GetType().Name);
                 }
                 catch (Exception exception)
                 {

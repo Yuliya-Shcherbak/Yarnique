@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Designs\Yarnique.Modules.Designs.Application\Yarnique.Modules.Designs.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\Designs\Yarnique.Modules.Designs.Infrastructure\Yarnique.Modules.Designs.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.Application\Yarnique.Modules.OrderSubmitting.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\OrderSubmitting\Yarnique.Modules.OrderSubmitting.Infrastructure\Yarnique.Modules.OrderSubmitting.Infrastructure.csproj" />
+    <ProjectReference Include="..\Yarnique.Tests.Common\Yarnique.Test.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

@@ -45,7 +45,7 @@ namespace Yarnique.Modules.UsersManagement.Infrastructure.Configuration.Processi
 
                     var result = await _decorated.Handle(command, cancellationToken);
 
-                    this._logger.Information("Command processed successful, result {Result}", result);
+                    this._logger.Information("Command processed successfully, result {Result}", result);
 
                     return result;
                 }

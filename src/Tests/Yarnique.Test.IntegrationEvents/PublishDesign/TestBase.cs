@@ -3,7 +3,6 @@ using Dapper;
 using Serilog;
 using System.Data.SqlClient;
 using Yarnique.Common.Infrastructure.EventBus;
-using Yarnique.Common.Infrastructure.EventBus.Configuration;
 using Yarnique.Modules.Designs.Application.Contracts;
 using Yarnique.Modules.Designs.Infrastructure;
 using Yarnique.Modules.Designs.Infrastructure.Configuration;
