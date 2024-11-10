@@ -11,12 +11,13 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Quartz
 {
     internal static class QuartzStartup
     {
-        internal static void Initialize(ILogger logger, long? internalProcessingPoolingInterval = null)
+        internal static void Initialize(ILogger logger, bool inTest = false, long? internalProcessingPoolingInterval = null)
         {
             logger.Information("Quartz starting...");
 
             var schedulerConfiguration = new NameValueCollection();
-            schedulerConfiguration.Add("quartz.scheduler.instanceName", "Designs");
+            var instanceName = inTest ? $"OrderSubmitting-{Guid.NewGuid()}" : "OrderSubmitting";
+            schedulerConfiguration.Add("quartz.scheduler.instanceName", instanceName);
 
             ISchedulerFactory schedulerFactory = new StdSchedulerFactory(schedulerConfiguration);
             IScheduler scheduler = schedulerFactory.GetScheduler().GetAwaiter().GetResult();

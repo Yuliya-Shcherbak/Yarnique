@@ -1,21 +1,20 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Formatting.Compact;
-using System.Net.Http.Headers;
 using System.Text;
 using Yarnique.API.Configuration;
 using Yarnique.API.Configuration.ExecutionContext;
 using Yarnique.API.Configuration.Validation;
 using Yarnique.API.Modules.Designs;
+using Yarnique.API.Modules.EventsBus;
 using Yarnique.API.Modules.OrderSubmitting;
 using Yarnique.Common.Application;
 using Yarnique.Common.Domain;
+using Yarnique.Common.Infrastructure.EventBus;
 using Yarnique.Modules.Designs.Infrastructure.Configuration;
 using Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration;
 using Yarnique.Modules.UsersManagement.Infrastructure.Configuration;
@@ -25,11 +24,10 @@ namespace Yarnique.API
 {
     public class Startup
     {
-        private const string YarniqueConnectionString = "YarniqueConnectionString";
-        private const string PaymentAPIString = "PaymentUrl";
         private static ILogger _logger;
         private static ILogger _loggerForApi;
         private readonly IConfiguration _configuration;
+        private readonly YarniqueConfig _config;
 
         public Startup(IWebHostEnvironment env)
         {
@@ -42,15 +40,14 @@ namespace Yarnique.API
                 .AddEnvironmentVariables("Yarnique_")
                 .Build();
 
-            GetApplicationConfig();
+            _config = BindApplicationConfig();
 
-            _loggerForApi.Information("Connection string:" + _configuration.GetConnectionString(YarniqueConnectionString));
+            _loggerForApi.Information("Connection string:" + _config.ConnectionStrings.YarniqueConnectionString);
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            YarniqueConfig config = GetApplicationConfig();
-            ConfigureAuthentication(services, config);
+            ConfigureAuthentication(services, _config);
 
 
             services.AddControllers();
@@ -69,6 +66,7 @@ namespace Yarnique.API
 
         public void ConfigureContainer(ContainerBuilder containerBuilder)
         {
+            containerBuilder.RegisterModule(new EventsBusAutofacModule(_config.Rabbitmq, _logger));
             containerBuilder.RegisterModule(new DesignsAutofacModule());
             containerBuilder.RegisterModule(new OrderSubmittingAutofacModule());
             containerBuilder.RegisterModule(new UsersManagementAutofacModule());
@@ -125,34 +123,35 @@ namespace Yarnique.API
 
         private void InitializeModules(ILifetimeScope container)
         {
-            YarniqueConfig config = GetApplicationConfig();
             var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
             var executionContextAccessor = new ExecutionContextAccessor(httpContextAccessor);
 
             //var emailsConfiguration = new EmailsConfiguration(_configuration["EmailsConfiguration:FromEmail"]);
 
+            var eventsBus = container.Resolve<IEventsBus>();
+
             DesignsStartup.Initialize(
-                _configuration.GetConnectionString(YarniqueConnectionString),
+                _config.ConnectionStrings.YarniqueConnectionString,
                 executionContextAccessor,
                 _logger,
-                null);
+                eventsBus);
 
             OrderSubmittingStartup.Initialize(
-               _configuration.GetConnectionString(YarniqueConnectionString),
-               _configuration[PaymentAPIString],
+               _config.ConnectionStrings.YarniqueConnectionString,
+               _config.PaymentUrl,
                executionContextAccessor,
                _logger,
-               null);
+               eventsBus);
 
             UsersManagementStartup.Initialize(
-               _configuration.GetConnectionString(YarniqueConnectionString),
-               config.Identity,
+               _config.ConnectionStrings.YarniqueConnectionString,
+               _config.Identity,
                executionContextAccessor,
                _logger,
                null);
         }
 
-        private YarniqueConfig GetApplicationConfig()
+        private YarniqueConfig BindApplicationConfig()
         {
             YarniqueConfig config = new YarniqueConfig();
             _configuration.Bind(config);

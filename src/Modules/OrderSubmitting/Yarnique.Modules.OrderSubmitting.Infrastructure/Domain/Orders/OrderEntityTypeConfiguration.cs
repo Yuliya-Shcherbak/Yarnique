@@ -6,7 +6,7 @@ using Yarnique.Modules.OrderSubmitting.Domain.Users;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Domain.Orders
 {
-    internal class OrderEntityTypeonfiguration : IEntityTypeConfiguration<Order>
+    internal class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {

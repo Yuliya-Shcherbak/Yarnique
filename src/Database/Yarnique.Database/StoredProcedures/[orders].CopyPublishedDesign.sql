@@ -1,8 +1,8 @@
-﻿IF OBJECT_ID(N'[orders].[CopyPublisedhDesign]', N'U') IS NOT NULL
-   DROP TABLE [orders].[CopyPublisedhDesign];
+﻿IF OBJECT_ID(N'[orders].[CopyPublishedDesign]', N'U') IS NOT NULL
+   DROP TABLE [orders].[CopyPublishedDesign];
 GO
 
-CREATE PROCEDURE [orders].[CopyPublisedhDesign] @DesignId UNIQUEIDENTIFIER
+CREATE PROCEDURE [orders].[CopyPublishedDesign] @DesignId UNIQUEIDENTIFIER
 AS
 	DECLARE @NewDesignId UNIQUEIDENTIFIER
 	DECLARE @TempDesigns TABLE

@@ -1,4 +1,5 @@
-﻿using Yarnique.Modules.UsersManagement.Domain.Identity;
+﻿using Yarnique.Common.Infrastructure.EventBus.Configuration;
+using Yarnique.Modules.UsersManagement.Domain.Identity;
 
 namespace Yarnique.API.Configuration
 {
@@ -7,6 +8,10 @@ namespace Yarnique.API.Configuration
         public ConnectionStringsConfig ConnectionStrings { get; set; }
 
         public IdentityConfig Identity { get; set; }
+
+        public RabbitMqConfig Rabbitmq { get; set; }
+
+        public string PaymentUrl { get; set; }
     }
 
     public class ConnectionStringsConfig

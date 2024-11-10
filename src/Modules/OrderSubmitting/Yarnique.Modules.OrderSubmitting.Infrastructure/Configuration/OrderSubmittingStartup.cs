@@ -22,6 +22,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
             IExecutionContextAccessor executionContextAccessor,
             ILogger logger,
             IEventsBus eventsBus,
+            bool inTest = false,
             long? internalProcessingPoolingInterval = null)
         {
             var moduleLogger = logger.ForContext("Module", "OrderSubmitting");
@@ -33,7 +34,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
                 logger,
                 eventsBus);
 
-            QuartzStartup.Initialize(moduleLogger, internalProcessingPoolingInterval);
+            QuartzStartup.Initialize(moduleLogger, inTest, internalProcessingPoolingInterval);
 
             EventsBusStartup.Initialize(moduleLogger);
         }

@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "b92549aa-d86a-4561-871c-a8b61f66ffd7",
+		"name": "Yarnique",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33277806"
+	},
+	"item": [
+		{
+			"name": "DesignParts",
+			"item": [
+				{
+					"name": "Get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/designs/parts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"designs",
+								"parts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tail Bow\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/designs/parts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"designs",
+								"parts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Designs",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"designId\", jsonData);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"White Dragon\",\r\n    \"price\": 200,\r\n    \"parts\": [\r\n        {\r\n            \"designPartId\": \"dcda1e27-34bf-49f9-a313-42e5a28fa5f5\",\r\n            \"yarnAmount\": 36\r\n        },\r\n        {\r\n            \"designPartId\": \"733ca26b-f88f-45fe-9ead-955ab84ca34e\",\r\n            \"yarnAmount\": 36\r\n        },\r\n        {\r\n            \"designPartId\": \"d1ad6238-1ca2-4efe-a9b6-704e4c8dfce0\",\r\n            \"yarnAmount\": 23\r\n        },\r\n        {\r\n            \"designPartId\": \"794a7f68-6cb3-4d30-8c03-af9ea4f69a7c\",\r\n            \"yarnAmount\": 23\r\n        },\r\n        {\r\n            \"designPartId\": \"a246c67d-0948-446b-8533-e974ff3a355b\",\r\n            \"yarnAmount\": 60\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/designs",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"designs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/designs?id={{designId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"designs"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{designId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Baby Doll 2\",\r\n    \"price\": 150,\r\n    \"parts\": [\r\n        {\r\n            \"id\": \"9d95b118-36ec-4735-a690-d7c4f15c783e\",\r\n            \"designPartId\": \"a246c67d-0948-446b-8533-e974ff3a355b\",\r\n            \"yarnAmount\": 150\r\n        },\r\n        {\r\n            \"designPartId\": \"733ca26b-f88f-45fe-9ead-955ab84ca34e\",\r\n            \"yarnAmount\": 50\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/designs/{{designId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"designs",
+								"{{designId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/designs/{{designId}}/publish",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"designs",
+								"{{designId}}",
+								"publish"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Designs",
+					"item": [
+						{
+							"name": "Get",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/orders/designs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"orders",
+										"designs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"orderId\", jsonData);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"designId\": \"3fd20415-7b1f-47c4-bcac-047fde1cfc9f\",\r\n    \"executionDate\": \"2025-03-28\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardNumber\": \"4111111111111111\",\r\n    \"cardholderName\": \"John Doe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/orders/{{orderId}}/payment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"accessToken\", jsonData.accessToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{customerUserName}}\",\r\n    \"password\": \"{{customerPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{customerUserName}}\",\r\n    \"firstName\": \"Jade\",\r\n    \"lastName\": \"Killman\",\r\n    \"email\": \"customer1@yarnique.com\",\r\n    \"password\": \"{{customerPassword}}\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -70,6 +70,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Modules.UsersManag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Payment.API", "PaymentAPI\Yarnique.Payment.API\Yarnique.Payment.API.csproj", "{5AC93409-EE1B-4124-B474-A4CF5455A9AF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7CDAA6FC-4B7E-4CF3-B868-E10A7805D5EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Test.Module.Designs", "Tests\Yarnique.Tesst.Module.Designs\Yarnique.Test.Module.Designs\Yarnique.Test.Module.Designs.csproj", "{20707046-60F4-456B-AB5B-478EAC660786}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Tests.Module.OrderSubmitting", "Tests\Yarnique.Tests.Module.OrderSubmitting\Yarnique.Tests.Module.OrderSubmitting.csproj", "{537040DC-F2F8-4BBD-938F-D01B4C365825}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarnique.Test.Common", "Tests\Yarnique.Tests.Common\Yarnique.Test.Common.csproj", "{061DDF85-A8C7-4BA3-AA16-E53E92B6C6A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarnique.Test.Integration", "Yarnique.Test.IntegrationEvents\Yarnique.Test.Integration.csproj", "{0E55570F-CBE4-43C6-8D29-288782D1E852}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -170,6 +180,22 @@ Global
 		{5AC93409-EE1B-4124-B474-A4CF5455A9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AC93409-EE1B-4124-B474-A4CF5455A9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AC93409-EE1B-4124-B474-A4CF5455A9AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20707046-60F4-456B-AB5B-478EAC660786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20707046-60F4-456B-AB5B-478EAC660786}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20707046-60F4-456B-AB5B-478EAC660786}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20707046-60F4-456B-AB5B-478EAC660786}.Release|Any CPU.Build.0 = Release|Any CPU
+		{537040DC-F2F8-4BBD-938F-D01B4C365825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{537040DC-F2F8-4BBD-938F-D01B4C365825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{537040DC-F2F8-4BBD-938F-D01B4C365825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{537040DC-F2F8-4BBD-938F-D01B4C365825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{061DDF85-A8C7-4BA3-AA16-E53E92B6C6A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{061DDF85-A8C7-4BA3-AA16-E53E92B6C6A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{061DDF85-A8C7-4BA3-AA16-E53E92B6C6A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{061DDF85-A8C7-4BA3-AA16-E53E92B6C6A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E55570F-CBE4-43C6-8D29-288782D1E852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E55570F-CBE4-43C6-8D29-288782D1E852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E55570F-CBE4-43C6-8D29-288782D1E852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E55570F-CBE4-43C6-8D29-288782D1E852}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,6 +228,10 @@ Global
 		{AA59E26B-FCAB-4B70-ABF5-5DE46B1EC406} = {2619DA8A-098F-429F-B080-49109E2F0AC2}
 		{0A0F8F47-B605-411C-94BB-C13D81B3966D} = {2619DA8A-098F-429F-B080-49109E2F0AC2}
 		{E3BFA18F-0AF3-4DD0-AF44-82349AB207B9} = {2619DA8A-098F-429F-B080-49109E2F0AC2}
+		{20707046-60F4-456B-AB5B-478EAC660786} = {7CDAA6FC-4B7E-4CF3-B868-E10A7805D5EC}
+		{537040DC-F2F8-4BBD-938F-D01B4C365825} = {7CDAA6FC-4B7E-4CF3-B868-E10A7805D5EC}
+		{061DDF85-A8C7-4BA3-AA16-E53E92B6C6A1} = {7CDAA6FC-4B7E-4CF3-B868-E10A7805D5EC}
+		{0E55570F-CBE4-43C6-8D29-288782D1E852} = {7CDAA6FC-4B7E-4CF3-B868-E10A7805D5EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80077703-C2FF-48D5-9529-1855A1858F61}

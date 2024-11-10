@@ -8,7 +8,7 @@
 
         public double Price { get; set; }
 
-        public bool Published { get; set; }
+        public bool IsPublished { get; set; }
 
         public List<DesignPartsSpecificationDto> Parts { get; set; } 
     }

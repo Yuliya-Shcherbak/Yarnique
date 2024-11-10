@@ -1,0 +1,12 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+    ports:
+      - 5672:5672
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+volumes:
+  rabbitmq:

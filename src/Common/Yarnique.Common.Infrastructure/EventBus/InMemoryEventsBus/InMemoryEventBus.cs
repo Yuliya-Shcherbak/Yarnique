@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure.EventBus
+﻿namespace Yarnique.Common.Infrastructure.EventBus.InMemoryEventsBus
 {
     public sealed class InMemoryEventBus
     {
@@ -21,14 +21,17 @@
             var eventType = typeof(T).FullName;
             if (eventType != null)
             {
-                if (_handlersDictionary.ContainsKey(eventType))
+                lock (_handlersDictionary)
                 {
-                    var handlers = _handlersDictionary[eventType];
-                    handlers.Add(handler);
-                }
-                else
-                {
-                    _handlersDictionary.Add(eventType, [handler]);
+                    if (_handlersDictionary.ContainsKey(eventType))
+                    {
+                        var handlers = _handlersDictionary[eventType];
+                        handlers.Add(handler);
+                    }
+                    else
+                    {
+                        _handlersDictionary.Add(eventType, [handler]);
+                    }
                 }
             }
         }

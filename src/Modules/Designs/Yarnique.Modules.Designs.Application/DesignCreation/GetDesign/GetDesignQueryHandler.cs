@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Yarnique.Common.Application.Data;
 using Yarnique.Modules.Designs.Application.Configuration.Queries;
+using Yarnique.Modules.Designs.Application.DesignCreation.GetAllDesignParts;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.GetDesign
 {
@@ -23,7 +24,7 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.GetDesign
                            [d].[Id] 
                            , [d].[Name]
                            , [d].[Price]
-                           , [d].[Published]
+                           , [d].[Published] AS [{nameof(DesignDto.IsPublished)}]
                            , [dps].[Id]
                            , [dp].[Name] AS DesignPartName
                            , [dps].[YarnAmount]

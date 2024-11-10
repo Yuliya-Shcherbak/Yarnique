@@ -16,7 +16,7 @@ namespace Yarnique.Modules.OrderSubmitting.Application.Designs.PublishDesign
         public async Task Handle(CopyPublishedDesignCommand command, CancellationToken cancellationToken)
         {
             var connection = _sqlConnectionFactory.GetOpenConnection();
-            await connection.ExecuteAsync("exec [orders].[PublishDesign] @id", new { id = command.DesignId });
+            await connection.ExecuteAsync("exec [orders].[CopyPublishedDesign] @id", new { id = command.DesignId });
         }
     }
 }

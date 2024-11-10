@@ -3,6 +3,7 @@ using Serilog;
 using Yarnique.Common.Application;
 using Yarnique.Common.Infrastructure;
 using Yarnique.Common.Infrastructure.EventBus;
+using Yarnique.Common.Infrastructure.EventBus.Configuration;
 using Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign;
 using Yarnique.Modules.Designs.Infrastructure.Configuration.DataAccess;
 using Yarnique.Modules.Designs.Infrastructure.Configuration.EventsBus;
@@ -22,6 +23,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration
             IExecutionContextAccessor executionContextAccessor,
             ILogger logger,
             IEventsBus eventsBus,
+            bool inTest = false,
             long? internalProcessingPoolingInterval = null)
         {
             var moduleLogger = logger.ForContext("Module", "Designs");
@@ -32,9 +34,14 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration
                 logger,
                 eventsBus);
 
-            QuartzStartup.Initialize(moduleLogger, internalProcessingPoolingInterval);
+            QuartzStartup.Initialize(moduleLogger, inTest, internalProcessingPoolingInterval);
 
             EventsBusStartup.Initialize(moduleLogger);
+        }
+
+        public static void Stop()
+        {
+            QuartzStartup.StopQuartz();
         }
 
         private static void ConfigureCompositionRoot(

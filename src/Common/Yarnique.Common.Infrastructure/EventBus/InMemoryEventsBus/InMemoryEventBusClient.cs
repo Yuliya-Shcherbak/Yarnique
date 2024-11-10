@@ -1,4 +1,5 @@
 ﻿using Serilog;
+using Yarnique.Common.Infrastructure.EventBus.InMemoryEventsBus;
 
 namespace Yarnique.Common.Infrastructure.EventBus
 {

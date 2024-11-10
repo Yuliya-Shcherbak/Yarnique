@@ -34,7 +34,6 @@ namespace Yarnique.Modules.Designs.Infrastructure
         {
             modelBuilder.ApplyConfiguration(new DesignEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DesignPartEntityTypeConfiguration());
-            //modelBuilder.ApplyConfiguration(new DesignPartSpecificationEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new OutboxMessageEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InternalCommandEntityTypeConfiguration());
         }

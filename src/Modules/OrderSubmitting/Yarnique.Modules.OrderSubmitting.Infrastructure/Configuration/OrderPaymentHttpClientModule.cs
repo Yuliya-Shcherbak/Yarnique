@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Microsoft.Extensions.DependencyInjection;
+using RestSharp;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
 {
@@ -14,18 +14,14 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register<IHttpClientFactory>(_ =>
+            builder.Register(_ =>
             {
-                var services = new ServiceCollection();
-                services.AddHttpClient("PaymentApiClient", c =>
-                {
-                    c.BaseAddress = new Uri(PaymentApiUrl);
-                    c.DefaultRequestHeaders.Add("Accept", "application/json");
-                });
-                var provider = services.BuildServiceProvider();
-                return provider.GetRequiredService<IHttpClientFactory>();
-            });
-        }
-        
+                var baseUrl = new Uri(PaymentApiUrl);
+                var client = new RestClient(baseUrl);
+                return client;
+            })
+            .As<RestClient>()
+            .SingleInstance();
+        }   
     }
 }

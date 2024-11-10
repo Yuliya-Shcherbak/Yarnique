@@ -22,7 +22,7 @@ namespace Yarnique.Database.Migrations.Scripts
                 .WithColumn("[Published]").AsBoolean();
 
             Create.Table("[DesignPartSpecifications]").InSchema("[designs]")
-                .WithColumn("[Id]").AsGuid().PrimaryKey("[FK_designs_DesignPartSpecification_designs_Designs]")
+                .WithColumn("[Id]").AsGuid().PrimaryKey("[PK_designs_DesignPartSpecification_Id]")
                 .WithColumn("DesignId").AsGuid().ForeignKey("FK_designs_DesignPartSpecification_designs_Designs", "[designs]", "[Designs]", "[Id]")
                 .WithColumn("DesignPartId").AsGuid().ForeignKey("FK_designs_DesignPartSpecification_designs_DesignParts", "[designs]", "[DesignParts]", "[Id]")
                 .WithColumn("YarnAmount").AsInt32();

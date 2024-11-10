@@ -25,7 +25,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new OrderEntityTypeonfiguration());
+            modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new OutboxMessageEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new InternalCommandEntityTypeConfiguration());
         }

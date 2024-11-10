@@ -14,16 +14,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.EventsBus
 
         protected override void Load(ContainerBuilder builder)
         {
-            if (_eventsBus != null)
-            {
-                builder.RegisterInstance(_eventsBus).SingleInstance();
-            }
-            else
-            {
-                builder.RegisterType<InMemoryEventBusClient>()
-                    .As<IEventsBus>()
-                    .SingleInstance();
-            }
+            builder.RegisterInstance(_eventsBus).SingleInstance();
         }
     }
 }

@@ -11,19 +11,22 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Quartz
 {
     internal static class QuartzStartup
     {
-        internal static void Initialize(ILogger logger, long? internalProcessingPoolingInterval = null)
+        private static IScheduler _scheduler;
+
+        internal static void Initialize(ILogger logger, bool inTest = false, long? internalProcessingPoolingInterval = null)
         {
             logger.Information("Quartz starting...");
 
             var schedulerConfiguration = new NameValueCollection();
-            schedulerConfiguration.Add("quartz.scheduler.instanceName", "Designs");
+            var instanceName = inTest ? $"Designs-{Guid.NewGuid()}" : "Designs";
+            schedulerConfiguration.Add("quartz.scheduler.instanceName", instanceName);
 
             ISchedulerFactory schedulerFactory = new StdSchedulerFactory(schedulerConfiguration);
-            IScheduler scheduler = schedulerFactory.GetScheduler().GetAwaiter().GetResult();
+            _scheduler = schedulerFactory.GetScheduler().GetAwaiter().GetResult();
 
             LogProvider.SetCurrentLogProvider(new SerilogLogProvider(logger));
 
-            scheduler.Start().GetAwaiter().GetResult();
+            _scheduler.Start().GetAwaiter().GetResult();
 
             var processOutboxJob = JobBuilder.Create<ProcessOutboxJob>().Build();
             ITrigger trigger;
@@ -48,7 +51,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Quartz
                         .Build();
             }
 
-            scheduler
+            _scheduler
                 .ScheduleJob(processOutboxJob, trigger)
                 .GetAwaiter().GetResult();
 
@@ -76,7 +79,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Quartz
                         .Build();
             }
 
-            scheduler
+            _scheduler
                 .ScheduleJob(processInboxJob, processInboxTrigger)
                 .GetAwaiter().GetResult();
 
@@ -104,9 +107,14 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Quartz
                         .Build();
             }
 
-            scheduler.ScheduleJob(processInternalCommandsJob, processInternalCommandsTrigger).GetAwaiter().GetResult();
+            _scheduler.ScheduleJob(processInternalCommandsJob, processInternalCommandsTrigger).GetAwaiter().GetResult();
 
             logger.Information("Quartz started.");
+        }
+
+        internal static void StopQuartz()
+        {
+            _scheduler?.Shutdown();
         }
     }
 }
