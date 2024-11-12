@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using Yarnique.API.Modules.Designs.DesignParts;
 using Yarnique.API.Modules.Designs.Designs;
 using Yarnique.Modules.Designs.Application.Contracts;
@@ -41,7 +42,8 @@ namespace Yarnique.API.Controllers
                 new CreateDesignCommand(
                     request.Name,
                     request.Price,
-                    request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount, x.Term)).ToList()
+                    _userId(),
+                    request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount, x.Order, x.Term)).ToList()
                     )
                 );
 
@@ -57,7 +59,7 @@ namespace Yarnique.API.Controllers
                     id,
                     request.Name,
                     request.Price,
-                    request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount, x.Term)).ToList()
+                    request.Parts.Select(x => new CreateDesignPartSpecificationCommand(x.DesignPartId, x.YarnAmount, x.Order, x.Term)).ToList()
                     )
                 );
 

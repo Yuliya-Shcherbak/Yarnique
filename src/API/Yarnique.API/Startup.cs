@@ -126,8 +126,6 @@ namespace Yarnique.API
             var httpContextAccessor = container.Resolve<IHttpContextAccessor>();
             var executionContextAccessor = new ExecutionContextAccessor(httpContextAccessor);
 
-            //var emailsConfiguration = new EmailsConfiguration(_configuration["EmailsConfiguration:FromEmail"]);
-
             var eventsBus = container.Resolve<IEventsBus>();
 
             DesignsStartup.Initialize(

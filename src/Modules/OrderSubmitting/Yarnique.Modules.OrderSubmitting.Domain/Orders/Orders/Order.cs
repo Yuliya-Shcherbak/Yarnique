@@ -1,9 +1,10 @@
 ﻿using Yarnique.Common.Domain;
+using Yarnique.Common.Domain.OrderStatuses;
 using Yarnique.Modules.OrderSubmitting.Domain.Designs;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders.Events;
 using Yarnique.Modules.OrderSubmitting.Domain.Users;
 
-namespace Yarnique.Modules.OrderSubmitting.Domain.Orders
+namespace Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders
 {
     public class Order : Entity
     {
@@ -16,9 +17,13 @@ namespace Yarnique.Modules.OrderSubmitting.Domain.Orders
         private string _transactionError;
         private OrderStatus _status;
         private DateOnly _executionDate;
+        private DateTime? _acceptedDate;
 
-        private Order()
+        public DesignId DesignId {  get; private set; }
+
+        private Order(DesignId _designId)
         {
+            DesignId = _designId;
         }
 
         public static Order Create(UserId userId, DesignId designId, OrderStatus status, DateOnly executionDate)
@@ -28,9 +33,15 @@ namespace Yarnique.Modules.OrderSubmitting.Domain.Orders
 
         public void AddPaymentInfo(bool isPaid, string transactionId, string transactionError)
         {
-            this._isPaid = isPaid;
-            this._transactionId = transactionId;
-            this._transactionError = transactionError;
+            _isPaid = isPaid;
+            _transactionId = transactionId;
+            _transactionError = transactionError;
+        }
+
+        public void AcceptOrder()
+        {
+            _status = OrderStatus.Accepted;
+            _acceptedDate = DateTime.UtcNow;
         }
 
         private Order(Guid id, UserId userId, DesignId designId, OrderStatus status, DateOnly executionDate)

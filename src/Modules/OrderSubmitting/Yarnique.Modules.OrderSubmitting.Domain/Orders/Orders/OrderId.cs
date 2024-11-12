@@ -1,6 +1,6 @@
 ﻿using Yarnique.Common.Domain;
 
-namespace Yarnique.Modules.OrderSubmitting.Domain.Orders
+namespace Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders
 {
     public class OrderId : TypedIdValueBase
     {

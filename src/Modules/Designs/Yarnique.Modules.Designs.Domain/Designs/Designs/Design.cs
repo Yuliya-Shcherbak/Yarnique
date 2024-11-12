@@ -2,6 +2,7 @@
 using Yarnique.Modules.Designs.Domain.Designs.Events;
 using Yarnique.Modules.Designs.Domain.Designs.Rules;
 using Yarnique.Modules.Designs.Domain.Designs.DesignPartSpecifications;
+using Yarnique.Modules.Designs.Domain.Users;
 
 namespace Yarnique.Modules.Designs.Domain.Designs.Designs
 {
@@ -12,6 +13,7 @@ namespace Yarnique.Modules.Designs.Domain.Designs.Designs
         private string _name;
         private double _price;
         private bool _published;
+        private UserId _sellerId;
         private List<DesignPartSpecification> _parts;
 
         private Design() 
@@ -19,9 +21,9 @@ namespace Yarnique.Modules.Designs.Domain.Designs.Designs
             _parts = [];
         }
 
-        public static Design Create(string name, double price, List<DesignPartSpecification> parts)
+        public static Design Create(string name, double price, UserId sellerId, List<DesignPartSpecification> parts)
         {
-            return new Design(Guid.NewGuid(), name, price, parts);
+            return new Design(Guid.NewGuid(), name, price, sellerId, parts);
         }
 
         public void Update(string name, double price, List<DesignPartSpecification> parts)
@@ -38,7 +40,7 @@ namespace Yarnique.Modules.Designs.Domain.Designs.Designs
             AddDomainEvent(new DesignPublishedDomainEvent(Id.Value));
         }
 
-        private Design(Guid id, string name, double price, List<DesignPartSpecification> parts)
+        private Design(Guid id, string name, double price, UserId sellerId, List<DesignPartSpecification> parts)
         {
             this.CheckRule(new DesignNameRequiredRule(name));
 
@@ -46,6 +48,7 @@ namespace Yarnique.Modules.Designs.Domain.Designs.Designs
             _name = name;
             _price = price;
             _parts = parts;
+            _sellerId = sellerId;
             _published = false;
 
             AddDomainEvent(new DesignCreatedDomainEvent(Id));

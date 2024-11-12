@@ -19,7 +19,7 @@ namespace Yarnique.Modules.OrderSubmitting.Application.Orders.PayOrder
 
         public async Task Handle(PayOrderCommand command, CancellationToken cancellationToken)
         {
-            var order = await _ordersRepository.GetByIdAsync(command.OrderId);
+            var order = await _ordersRepository.GetOrderByIdAsync(command.OrderId);
 
             PaymentTransactionRequestModel requestBody = new()
             {

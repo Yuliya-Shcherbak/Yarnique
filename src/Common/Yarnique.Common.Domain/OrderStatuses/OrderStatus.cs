@@ -1,10 +1,8 @@
-﻿using Yarnique.Common.Domain;
-
-namespace Yarnique.Modules.OrderSubmitting.Domain.Orders
+﻿namespace Yarnique.Common.Domain.OrderStatuses
 {
     public class OrderStatus : ValueObject
     {
-        public static OrderStatus Pendind => new OrderStatus(nameof(Pendind));
+        public static OrderStatus Pending => new OrderStatus(nameof(Pending));
 
         public static OrderStatus Negotiation => new OrderStatus(nameof(Negotiation));
 

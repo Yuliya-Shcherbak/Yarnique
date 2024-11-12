@@ -1,5 +1,7 @@
-﻿using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
+﻿using Yarnique.Common.Domain.OrderStatuses;
+using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders;
+using Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders;
 
 namespace Yarnique.Modules.OrderSubmitting.Application.Orders.CreateOrder
 {
@@ -17,9 +19,9 @@ namespace Yarnique.Modules.OrderSubmitting.Application.Orders.CreateOrder
             // TODO : Add query of the DesignPartSpecification, calculate the approximate ExecutionDate and if requested date is earlier - set the Status as Negotiation
             // TODO : Query design and check if it is Discontinued -> add validation
 
-            var order = Order.Create(command.UserId, command.DesignId, OrderStatus.Pendind, command.ExecutionDate);
+            var order = Order.Create(command.UserId, command.DesignId, OrderStatus.Pending, command.ExecutionDate);
 
-            await _ordersRepository.AddAsync(order);
+            await _ordersRepository.AddOrderAsync(order);
             return order.Id.Value;
         }
     }

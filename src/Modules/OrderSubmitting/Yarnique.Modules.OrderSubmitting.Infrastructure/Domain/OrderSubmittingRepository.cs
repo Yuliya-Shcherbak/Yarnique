@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders;
+using Yarnique.Modules.OrderSubmitting.Domain.Orders.OrderExecutions;
+using Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Domain
 {
@@ -12,12 +14,17 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Domain
             _orderSubmittingContext = orderSubmittingContext;
         }
 
-        public async Task AddAsync(Order order)
+        public async Task AddOrderAsync(Order order)
         {
             await _orderSubmittingContext.Orders.AddAsync(order);
         }
 
-        public async Task<Order> GetByIdAsync(OrderId orderId)
+        public async Task AddOrderExectutionAsync(OrderExecution orderExecution)
+        {
+            await _orderSubmittingContext.OrderExecutions.AddAsync(orderExecution);
+        }
+
+        public async Task<Order> GetOrderByIdAsync(OrderId orderId)
         {
             return await _orderSubmittingContext.Orders.FirstOrDefaultAsync(x => x.Id == orderId);
         }

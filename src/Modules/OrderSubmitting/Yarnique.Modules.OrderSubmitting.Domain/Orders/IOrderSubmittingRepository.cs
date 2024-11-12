@@ -1,9 +1,14 @@
-﻿namespace Yarnique.Modules.OrderSubmitting.Domain.Orders
+﻿using Yarnique.Modules.OrderSubmitting.Domain.Orders.OrderExecutions;
+using Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders;
+
+namespace Yarnique.Modules.OrderSubmitting.Domain.Orders
 {
     public interface IOrderSubmittingRepository
     {
-        Task AddAsync(Order order);
+        Task AddOrderAsync(Order order);
 
-        Task<Order> GetByIdAsync(OrderId id);
+        Task AddOrderExectutionAsync(OrderExecution orderExecution);
+
+        Task<Order> GetOrderByIdAsync(OrderId id);
     }
 }

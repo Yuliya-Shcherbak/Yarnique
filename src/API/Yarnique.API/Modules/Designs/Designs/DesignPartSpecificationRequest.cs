@@ -4,6 +4,7 @@
     {
         public Guid DesignPartId { get; set; }
         public int YarnAmount { get; set; }
+        public int Order { get; set; }
         public string Term { get; set; }
     }
 }

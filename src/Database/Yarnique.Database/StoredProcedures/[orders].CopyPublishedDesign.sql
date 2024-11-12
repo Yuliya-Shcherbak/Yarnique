@@ -1,5 +1,10 @@
-﻿IF OBJECT_ID(N'[orders].[CopyPublishedDesign]', N'U') IS NOT NULL
-   DROP TABLE [orders].[CopyPublishedDesign];
+﻿IF EXISTS ( SELECT *
+            FROM   sysobjects
+            WHERE  id = object_id(N'[orders].[CopyPublishedDesign]')
+                   and OBJECTPROPERTY(id, N'IsProcedure') = 1 )
+BEGIN
+    DROP PROCEDURE [orders].[CopyPublishedDesign]
+END
 GO
 
 CREATE PROCEDURE [orders].[CopyPublishedDesign] @DesignId UNIQUEIDENTIFIER
@@ -10,7 +15,8 @@ AS
 		[Id] UNIQUEIDENTIFIER NOT NULL,
 		[Name] VARCHAR(255) NOT NULL,
 		[Price] FLOAT NULL,
-		[Discontinued] BIT NOT NULL
+		[Discontinued] BIT NOT NULL,
+		[SellerId] UNIQUEIDENTIFIER NOT NULL
 	)
 
 	DECLARE @TempDesignSpecifications TABLE
@@ -19,7 +25,8 @@ AS
 		[DesignId] UNIQUEIDENTIFIER NOT NULL,
 		[DesignPartId] UNIQUEIDENTIFIER NOT NULL,
 		[YarnAmount] INT NOT NULL,
-		[Term] VARCHAR(255) NOT NULL
+		[Term] VARCHAR(255) NOT NULL,
+		[ExecutionOrder] INT NOT NULL
 	)
 
 	DECLARE @TempDesignSpecificationsWithNewParts TABLE
@@ -29,7 +36,8 @@ AS
 		[DesignPartId] UNIQUEIDENTIFIER NOT NULL,
 		[Name] VARCHAR(255) NOT NULL,
 		[YarnAmount] INT NOT NULL,
-		[Term] VARCHAR(255) NOT NULL
+		[Term] VARCHAR(255) NOT NULL,
+		[ExecutionOrder] INT NOT NULL
 	)
 
 	INSERT INTO @TempDesigns
@@ -38,6 +46,7 @@ AS
 		, d.Name
 		, d.Price
 		, 0
+		, d.SellerId
 	FROM [designs].[Designs] AS d
 	WHERE d.Id = @DesignId
 
@@ -50,6 +59,7 @@ AS
 		, odp.Id
 		, dps.YarnAmount
 		, dps.Term
+		, dps.ExecutionOrder
 	FROM [designs].[DesignPartSpecifications] AS dps
 	JOIN [designs].[DesignParts] AS dp ON dps.DesignPartId = dp.Id
 	JOIN [orders].[DesignParts] AS odp ON dp.Name = odp.Name
@@ -63,14 +73,20 @@ AS
 		, dp.Name
 		, dps.YarnAmount
 		, dps.Term
+		, dps.ExecutionOrder
 	FROM [designs].[DesignPartSpecifications] AS dps
 	JOIN [designs].[DesignParts] AS dp ON dps.DesignPartId = dp.Id
 	WHERE dps.DesignId = @DesignId AND Name NOT IN (SELECT Name FROM [orders].[DesignParts])
 
-	BEGIN TRANSACTION
-		INSERT INTO [orders].[Designs] SELECT [Id], [Name], [Price], [Discontinued] FROM @TempDesigns
+	BEGIN TRANSACTION [CopyPublishedDesignTransaction]
+	BEGIN TRY
+		INSERT INTO [orders].[Designs] SELECT [Id], [Name], [Price], [Discontinued], [SellerId] FROM @TempDesigns
 		INSERT INTO [orders].[DesignParts] SELECT [DesignPartId], [Name] FROM @TempDesignSpecificationsWithNewParts
-		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount], [Term] FROM @TempDesignSpecifications
-		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount], [Term] FROM @TempDesignSpecificationsWithNewParts
-	COMMIT TRANSACTION
+		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount], [Term], [ExecutionOrder] FROM @TempDesignSpecifications
+		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount], [Term], [ExecutionOrder] FROM @TempDesignSpecificationsWithNewParts
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION [CopyPublishedDesignTransaction]
+	END CATCH
 GO

@@ -16,6 +16,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Domain.Designs
 
             builder.Property<string>("_name").HasColumnName("Name");
             builder.Property<double>("_price").HasColumnName("Price");
+            builder.Property<Guid>("_sellerId").HasColumnName("SellerId");
             builder.Property<bool>("_published").HasColumnName("Published");
 
             builder.OwnsMany<DesignPartSpecification>("_parts", y =>
@@ -26,6 +27,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Domain.Designs
                 y.Property<DesignId>("DesignId");
                 y.Property<DesignPartId>("_designPartId").HasColumnName("DesignPartId");
                 y.Property<int>("_yarnAmount").HasColumnName("YarnAmount");
+                y.Property<int>("_executionOrder").HasColumnName("ExecutionOrder");
                 y.Property<string>("_term").HasColumnName("Term");
             });
         }

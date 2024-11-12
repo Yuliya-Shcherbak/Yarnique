@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Yarnique.API.Modules.OrderSubmitting.Orders;
 using Yarnique.Modules.OrderSubmitting.Application.Contracts;
 using Yarnique.Modules.OrderSubmitting.Application.Designs.GetDesigns;
+using Yarnique.Modules.OrderSubmitting.Application.Orders.AcceptOrder;
 using Yarnique.Modules.OrderSubmitting.Application.Orders.CreateOrder;
 using Yarnique.Modules.OrderSubmitting.Application.Orders.PayOrder;
-using Yarnique.Modules.OrderSubmitting.Domain.Orders;
 
 namespace Yarnique.API.Controllers
 {
@@ -35,6 +35,15 @@ namespace Yarnique.API.Controllers
         public async Task<IActionResult> PayOrder([FromRoute] Guid orderId, [FromBody] PaymentOrderRequest request)
         {
             await _ordersModule.ExecuteCommandAsync(new PayOrderCommand(_userId(), orderId, request.CardNumber, request.CardholderName));
+
+            return Ok();
+        }
+
+        [HttpPut("{orderId}/accept")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> AcceptOrder([FromRoute] Guid orderId)
+        {
+            await _ordersModule.ExecuteCommandAsync(new AcceptOrderCommand(orderId));
 
             return Ok();
         }

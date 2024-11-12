@@ -3,7 +3,6 @@ using Serilog;
 using Yarnique.Common.Application;
 using Yarnique.Common.Infrastructure;
 using Yarnique.Common.Infrastructure.EventBus;
-using Yarnique.Common.Infrastructure.EventBus.Configuration;
 using Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign;
 using Yarnique.Modules.Designs.Infrastructure.Configuration.DataAccess;
 using Yarnique.Modules.Designs.Infrastructure.Configuration.EventsBus;

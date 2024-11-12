@@ -16,7 +16,7 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.EditDesign
         public async Task Handle(EditDesignCommand command, CancellationToken cancellationToken)
         {
             var design = await _designsRepository.GetByIdAsync(command.DesignId);
-            var parts = command.Parts.Select(x => DesignPartSpecification.Create(x.DesignPartId, x.YarnAmount, x.Term)).ToList();
+            var parts = command.Parts.Select(x => DesignPartSpecification.Create(x.DesignPartId, x.YarnAmount, x.Order, x.Term)).ToList();
             design.Update(command.Name, command.Price, parts);
         }
     }
