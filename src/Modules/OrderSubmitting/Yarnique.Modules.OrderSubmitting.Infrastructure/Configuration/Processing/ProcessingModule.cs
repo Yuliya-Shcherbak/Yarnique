@@ -3,7 +3,7 @@ using MediatR;
 using Yarnique.Common.Application.Events;
 using Yarnique.Common.Infrastructure.DomainEventsDispatching;
 using Yarnique.Common.Infrastructure.UnitOfWork;
-using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing.InternalCommands;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing

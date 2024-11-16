@@ -1,5 +1,8 @@
-﻿namespace Yarnique.Modules.Designs.Application.DesignCreation.GetAllDesignParts
+﻿using Yarnique.Common.Application.Configuration.Attributes;
+
+namespace Yarnique.Modules.Designs.Application.DesignCreation.GetAllDesignParts
 {
+    [CacheableEntity("DesignPart")]
     public class DesignPartDto
     {
         public Guid Id { get; set; }

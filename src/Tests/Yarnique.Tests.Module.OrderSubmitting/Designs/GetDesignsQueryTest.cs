@@ -19,7 +19,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting.Designs
 
             // Assert
             Assert.NotNull(designs);
-            var design = designs.FirstOrDefault(x => x.Id == designId);
+            var design = designs.Items.FirstOrDefault(x => x.Id == designId);
             Assert.NotNull(design);
             Assert.Equal("Tiny Rabbit", design.Name);
             Assert.Equal(2, design.Parts.Count);

@@ -5,8 +5,8 @@ using MediatR;
 using MediatR.Pipeline;
 using System.Reflection;
 using Yarnique.Common.Infrastructure;
-using Yarnique.Modules.UsersManagement.Application.Configuration.Commands;
-using Yarnique.Modules.UsersManagement.Application.Configuration.Queries;
+using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Queries;
 
 namespace Yarnique.Modules.UsersManagement.Infrastructure.Configuration.Mediator
 {

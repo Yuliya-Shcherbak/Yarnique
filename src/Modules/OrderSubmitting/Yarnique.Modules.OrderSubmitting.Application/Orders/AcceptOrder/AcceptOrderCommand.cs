@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.OrderSubmitting.Application.Contracts;
+﻿using Yarnique.Common.Application.Contracts;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders;
 
 namespace Yarnique.Modules.OrderSubmitting.Application.Orders.AcceptOrder

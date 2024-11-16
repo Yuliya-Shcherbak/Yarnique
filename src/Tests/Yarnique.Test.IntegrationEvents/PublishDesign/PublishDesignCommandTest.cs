@@ -40,10 +40,10 @@ namespace Yarnique.Test.Integration.PublishDesign
             {
                 await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, 'Left Arm') ", new { Id = designPartIdFirst });
                 await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, 'Right Arm') ", new { Id = designPartIdSecond });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[Designs] VALUES (@Id, @Name, 120, 0) ", new { Id = designId, Name = designName });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 80, '1.00:00:00') ",
+                await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[Designs] VALUES (@Id, @Name, 120, 0, @SellerId) ", new { Id = designId, Name = designName, SellerId = Guid.NewGuid() });
+                await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 80, '1.00:00:00', 1) ",
                     new { Id = Guid.NewGuid(), DesignId = designId, DesignPartId = designPartIdFirst });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 50, '1.00:00:00') ",
+                await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 50, '1.00:00:00', 2) ",
                     new { Id = Guid.NewGuid(), DesignId = designId, DesignPartId = designPartIdSecond });
             }
         }
@@ -97,7 +97,7 @@ namespace Yarnique.Test.Integration.PublishDesign
 
             public async Task SampleAsync()
             {
-                _designs = await _ordersModule.ExecuteQueryAsync(new GetDesignsQuery());
+                _designs = (await _ordersModule.ExecuteQueryAsync(new GetDesignsQuery(1, 5))).Items;
             }
 
             public string DescribeFailureTo()

@@ -16,8 +16,8 @@ namespace Yarnique.Test.Module.Designs.DesignCreation
             await _designsModule.ExecuteCommandAsync(command);
 
             // Assert
-            var designParts = await _designsModule.ExecuteQueryAsync(new GetAllDesignPartsQuery());
-            var designPart = designParts.FirstOrDefault(x => x.Name == designPartName);
+            var designParts = await _designsModule.ExecuteQueryAsync(new GetAllDesignPartsQuery(1, 5));
+            var designPart = designParts.Items.FirstOrDefault(x => x.Name == designPartName);
             Assert.NotNull(designPart);
             Assert.Equal(designPartName, designPart.Name);
         }

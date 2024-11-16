@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Polly;
 using Yarnique.Common.Application.Data;
-using Yarnique.Modules.Designs.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 
 namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Processing.InternalCommands
 {

@@ -1,6 +1,6 @@
 ﻿using Yarnique.Common.Infrastructure.UnitOfWork;
-using Yarnique.Modules.UsersManagement.Application.Configuration.Commands;
-using Yarnique.Modules.UsersManagement.Application.Contracts;
+using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.UsersManagement.Infrastructure.Configuration.Processing
 {

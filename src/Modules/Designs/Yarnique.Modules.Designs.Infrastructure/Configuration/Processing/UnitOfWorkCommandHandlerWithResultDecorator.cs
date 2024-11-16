@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Yarnique.Common.Infrastructure.UnitOfWork;
-using Yarnique.Modules.Designs.Application.Configuration.Commands;
-using Yarnique.Modules.Designs.Application.Contracts;
+using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Processing
 {

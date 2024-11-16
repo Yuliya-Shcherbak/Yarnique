@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Modules.Designs.IntegrationEvents;
-using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
 using Yarnique.Modules.OrderSubmitting.Application.Designs.PublishDesign;
 
 namespace Yarnique.Modules.OrderSubmitting.Application.Designs.Publish

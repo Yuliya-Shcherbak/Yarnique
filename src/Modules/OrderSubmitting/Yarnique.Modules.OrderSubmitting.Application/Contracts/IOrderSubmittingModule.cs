@@ -1,4 +1,6 @@
-﻿namespace Yarnique.Modules.OrderSubmitting.Application.Contracts
+﻿using Yarnique.Common.Application.Contracts;
+
+namespace Yarnique.Modules.OrderSubmitting.Application.Contracts
 {
     public interface IOrderSubmittingModule
     {

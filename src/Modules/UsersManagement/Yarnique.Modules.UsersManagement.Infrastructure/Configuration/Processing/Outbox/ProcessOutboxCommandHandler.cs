@@ -7,7 +7,7 @@ using Serilog.Events;
 using Yarnique.Common.Application.Data;
 using Yarnique.Common.Application.Events;
 using Yarnique.Common.Infrastructure.DomainEventsDispatching;
-using Yarnique.Modules.UsersManagement.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 
 namespace Yarnique.Modules.UsersManagement.Infrastructure.Configuration.Processing.Outbox
 {

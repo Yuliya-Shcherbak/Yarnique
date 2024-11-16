@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.OrderSubmitting.Application.Contracts
+﻿namespace Yarnique.Common.Application.Contracts
 {
     public abstract class CommandBase : ICommand
     {

@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using Yarnique.Common.Application.Data;
-using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 
 namespace Yarnique.Modules.OrderSubmitting.Application.Designs.PublishDesign
 {

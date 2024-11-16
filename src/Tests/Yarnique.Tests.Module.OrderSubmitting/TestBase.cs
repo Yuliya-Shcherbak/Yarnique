@@ -63,10 +63,10 @@ namespace Yarnique.Tests.Module.OrderSubmitting
 
                 await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignParts] VALUES (@Id, 'Pretty Tie') ", new { Id = designPartIdFirst });
                 await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignParts] VALUES (@Id, 'Pretty Bow') ", new { Id = designPartIdSecond });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[Designs] VALUES (@Id, 'Tiny Rabbit', 120, 0) ", new { Id = designId });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 80, '1.00:00:00') ",
+                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[Designs] VALUES (@Id, 'Tiny Rabbit', 120, 0, @SellerId) ", new { Id = designId, SellerId = Guid.NewGuid() });
+                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 80, '1.00:00:00', 1) ",
                     new { Id = Guid.NewGuid(), DesignId = designId, DesignPartId = designPartIdFirst });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 50, '1.00:00:00') ",
+                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 50, '1.00:00:00', 2) ",
                     new { Id = Guid.NewGuid(), DesignId = designId, DesignPartId = designPartIdSecond });
             }
         }

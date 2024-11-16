@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Yarnique.Common.Application.Data;
-using Yarnique.Modules.Designs.Application.Configuration.Queries;
-using Yarnique.Modules.Designs.Application.DesignCreation.GetAllDesignParts;
+using Yarnique.Common.Application.Configuration.Queries;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.GetDesign
 {

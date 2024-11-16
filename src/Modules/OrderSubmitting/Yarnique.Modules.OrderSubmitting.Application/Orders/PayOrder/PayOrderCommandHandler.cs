@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
+﻿using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders;
 using Newtonsoft.Json;
 using System.Text;

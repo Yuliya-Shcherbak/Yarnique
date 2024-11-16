@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Yarnique.Modules.Designs.Application.Contracts
+namespace Yarnique.Common.Application.Contracts
 {
     public interface ICommand<out TResult> : IRequest<TResult>
     {

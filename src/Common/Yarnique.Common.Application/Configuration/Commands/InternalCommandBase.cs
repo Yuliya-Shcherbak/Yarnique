@@ -1,6 +1,6 @@
-﻿using Yarnique.Modules.UsersManagement.Application.Contracts;
+﻿using Yarnique.Common.Application.Contracts;
 
-namespace Yarnique.Modules.UsersManagement.Application.Configuration.Commands
+namespace Yarnique.Common.Application.Configuration.Commands
 {
     public abstract class InternalCommandBase : ICommand
     {

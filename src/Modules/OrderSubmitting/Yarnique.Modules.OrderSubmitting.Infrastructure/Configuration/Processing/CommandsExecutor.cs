@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using MediatR;
-using Yarnique.Modules.OrderSubmitting.Application.Contracts;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing
 {

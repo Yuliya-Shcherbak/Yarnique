@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.Designs.Application.Contracts;
+﻿using Yarnique.Common.Application.Contracts;
 using Yarnique.Modules.Designs.Domain.Users;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.CreateDesign

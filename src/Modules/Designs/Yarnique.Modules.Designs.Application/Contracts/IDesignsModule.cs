@@ -1,4 +1,6 @@
-﻿namespace Yarnique.Modules.Designs.Application.Contracts
+﻿using Yarnique.Common.Application.Contracts;
+
+namespace Yarnique.Modules.Designs.Application.Contracts
 {
     public interface IDesignsModule
     {

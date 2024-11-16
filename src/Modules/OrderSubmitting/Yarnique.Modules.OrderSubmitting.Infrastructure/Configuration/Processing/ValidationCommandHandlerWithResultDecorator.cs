@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Yarnique.Common.Application;
-using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
-using Yarnique.Modules.OrderSubmitting.Application.Contracts;
+using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing
 {

@@ -2,8 +2,8 @@
 using Newtonsoft.Json;
 using Yarnique.Common.Application.Data;
 using Yarnique.Common.Infrastructure.Serialization;
-using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
-using Yarnique.Modules.OrderSubmitting.Application.Contracts;
+using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing.InternalCommands
 {

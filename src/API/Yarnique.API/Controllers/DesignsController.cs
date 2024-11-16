@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Yarnique.API.Modules.Designs.DesignParts;
 using Yarnique.API.Modules.Designs.Designs;
+using Yarnique.Common.Application.Pagination;
 using Yarnique.Modules.Designs.Application.Contracts;
 using Yarnique.Modules.Designs.Application.DesignCreation.CreateDesign;
 using Yarnique.Modules.Designs.Application.DesignCreation.CreateDesignPart;
@@ -77,9 +78,9 @@ namespace Yarnique.API.Controllers
 
         [HttpGet("parts")]
         [ProducesResponseType(typeof(List<DesignPartDto>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAllDesignParts()
+        public async Task<IActionResult> GetAllDesignParts([FromQuery] PaginatedRequest request)
         {
-            var result = await _designsModule.ExecuteQueryAsync(new GetAllDesignPartsQuery());
+            var result = await _designsModule.ExecuteQueryAsync(new GetAllDesignPartsQuery(request.PageNumber, request.PageSize));
 
             return Ok(result);
         }

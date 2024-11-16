@@ -1,9 +1,11 @@
-﻿using Yarnique.Modules.Designs.Application.Contracts;
+﻿using Yarnique.Common.Application.Configuration.Attributes;
+using Yarnique.Common.Application.Contracts;
 using Yarnique.Modules.Designs.Application.DesignCreation.CreateDesign;
 using Yarnique.Modules.Designs.Domain.Designs.Designs;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.EditDesign
 {
+    [CacheableEntity("DesignPart")]
     public class EditDesignCommand : CommandBase
     {
         public EditDesignCommand(Guid id, string name, double price, List<CreateDesignPartSpecificationCommand> parts)

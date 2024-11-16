@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Yarnique.Modules.Designs.Domain.Designs.Designs;
 using Yarnique.Modules.Designs.Domain.Designs.DesignPartSpecifications;
 using Yarnique.Modules.Designs.Domain.Designs.DesignParts;
+using Yarnique.Modules.Designs.Domain.Users;
 
 namespace Yarnique.Modules.Designs.Infrastructure.Domain.Designs
 {
@@ -16,7 +17,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Domain.Designs
 
             builder.Property<string>("_name").HasColumnName("Name");
             builder.Property<double>("_price").HasColumnName("Price");
-            builder.Property<Guid>("_sellerId").HasColumnName("SellerId");
+            builder.Property<UserId>("_sellerId").HasColumnName("SellerId");
             builder.Property<bool>("_published").HasColumnName("Published");
 
             builder.OwnsMany<DesignPartSpecification>("_parts", y =>

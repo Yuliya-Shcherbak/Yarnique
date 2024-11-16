@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Yarnique.Modules.UsersManagement.Application.Contracts;
+using Yarnique.Common.Application.Contracts;
 
-namespace Yarnique.Modules.UsersManagement.Application.Configuration.Queries
+namespace Yarnique.Common.Application.Configuration.Queries
 {
     public interface IQueryHandler<in TQuery, TResult> :
         IRequestHandler<TQuery, TResult>

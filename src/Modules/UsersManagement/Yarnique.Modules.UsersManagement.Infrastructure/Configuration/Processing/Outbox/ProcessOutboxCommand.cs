@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.UsersManagement.Application.Contracts;
+﻿using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.UsersManagement.Infrastructure.Configuration.Processing.Outbox
 {

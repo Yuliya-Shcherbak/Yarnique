@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Yarnique.Common.Application;
-using Yarnique.Modules.Designs.Application.Configuration.Commands;
-using Yarnique.Modules.Designs.Application.Contracts;
+using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Processing
 {

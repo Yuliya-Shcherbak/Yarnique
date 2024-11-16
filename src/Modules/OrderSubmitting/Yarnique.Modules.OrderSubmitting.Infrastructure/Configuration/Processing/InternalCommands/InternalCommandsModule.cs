@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Yarnique.Common.Infrastructure.InternalCommands;
 using Yarnique.Common.Infrastructure;
-using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing.InternalCommands
 {

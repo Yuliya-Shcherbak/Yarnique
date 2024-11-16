@@ -2,7 +2,7 @@
 using MediatR;
 using Newtonsoft.Json;
 using Yarnique.Common.Application.Data;
-using Yarnique.Modules.OrderSubmitting.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing.Inbox
 {

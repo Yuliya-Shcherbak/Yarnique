@@ -2,7 +2,7 @@
 using Yarnique.Common.Application.Data;
 using Yarnique.Modules.UsersManagement.Application.Authentication.PasswordManagement;
 using Yarnique.Modules.UsersManagement.Application.Authentication.TokenManagement;
-using Yarnique.Modules.UsersManagement.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 
 namespace Yarnique.Modules.UsersManagement.Application.Authentication.Authenticate
 {
