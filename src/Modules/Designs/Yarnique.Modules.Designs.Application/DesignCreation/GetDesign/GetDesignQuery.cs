@@ -1,8 +1,8 @@
-﻿using Yarnique.Common.Application.Contracts;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.GetDesign
 {
-    public class GetDesignQuery: QueryBase<DesignDto>
+    public class GetDesignQuery : QueryBase<DesignDto>
     {
         public GetDesignQuery(Guid designId)
         {

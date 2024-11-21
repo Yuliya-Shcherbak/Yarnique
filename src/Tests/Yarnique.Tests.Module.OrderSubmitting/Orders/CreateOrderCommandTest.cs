@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.OrderSubmitting.Application.Orders.CreateOrder;
+using Yarnique.Modules.OrderSubmitting.Application.Orders.CreateOrder;
 using Yarnique.Test.Common.SqlCommands;
 
 namespace Yarnique.Tests.Module.OrderSubmitting.Orders
@@ -24,7 +24,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting.Orders
 
         private DateOnly GetDateOnly()
         {
-           var dateStr = DateTime.Now.AddDays(4).ToString("yyyy-MM-dd");
+            var dateStr = DateTime.Now.AddDays(4).ToString("yyyy-MM-dd");
             return DateOnly.Parse(dateStr);
         }
     }

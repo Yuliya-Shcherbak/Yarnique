@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure.DomainEventsDispatching
+namespace Yarnique.Common.Infrastructure.DomainEventsDispatching
 {
     public interface IDomainNotificationsMapper
     {

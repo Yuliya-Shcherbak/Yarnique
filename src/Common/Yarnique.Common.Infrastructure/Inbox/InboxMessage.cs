@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure.Inbox
+namespace Yarnique.Common.Infrastructure.Inbox
 {
     public class InboxMessage
     {

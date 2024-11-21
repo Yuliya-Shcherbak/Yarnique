@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Domain;
+using Yarnique.Common.Domain;
 using Yarnique.Modules.Designs.Domain.Designs.Events;
 using Yarnique.Modules.Designs.Domain.Designs.Rules;
 using Yarnique.Modules.Designs.Domain.Designs.DesignPartSpecifications;
@@ -16,7 +16,7 @@ namespace Yarnique.Modules.Designs.Domain.Designs.Designs
         private UserId _sellerId;
         private List<DesignPartSpecification> _parts;
 
-        private Design() 
+        private Design()
         {
             _parts = [];
         }

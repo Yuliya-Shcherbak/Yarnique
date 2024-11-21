@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Pagination;
+using Yarnique.Common.Application.Pagination;
 
 namespace Yarnique.Common.Application.Contracts
 {
@@ -8,7 +8,7 @@ namespace Yarnique.Common.Application.Contracts
         public int PageSize { get; }
         public int Offset { get; }
 
-        protected QueryBaseWithPaging(int pageNumber = 1,  int pageSize = 5) 
+        protected QueryBaseWithPaging(int pageNumber = 1, int pageSize = 5)
             : base()
         {
             PageNumber = pageNumber;

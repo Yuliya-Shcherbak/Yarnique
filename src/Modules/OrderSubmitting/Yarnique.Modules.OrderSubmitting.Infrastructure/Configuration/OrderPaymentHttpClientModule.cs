@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using RestSharp;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
@@ -22,6 +22,6 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
             })
             .As<RestClient>()
             .SingleInstance();
-        }   
+        }
     }
 }

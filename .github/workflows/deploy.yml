@@ -19,13 +19,20 @@ jobs:
           dotnet-version: 8.0
 
       - name: Restore Dependencies
-        run: dotnet restore
+        run: dotnet restore ./src/Yarnique.sln
 
       - name: dotnet lint
-        run: dotnet format --check
+        run: dotnet format ./src/Yarnique.sln --verify-no-changes
 
-      # - name: dotnet test
-      #   run: dotnet test --no-restore --verbosity normal
+      - name: Apply migrations to Test DB
+        env:
+          YarniqueConnectionString: ${{ secrets.YARNIQUEDB_TEST_CONNECTION_STRING }}
+        run: |
+          dotnet build ./src/Database/Yarnique.Database.Migration/Yarnique.Database.Migrations.csproj
+          dotnet run --project ./src/Database/Yarnique.Database.Migration/Yarnique.Database.Migrations.csproj
+
+      - name: dotnet test
+        run: dotnet test --no-restore --verbosity normal
 
   apply-migration:
     name: Apply Database Migrations

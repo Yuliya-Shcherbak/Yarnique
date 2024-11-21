@@ -1,4 +1,4 @@
-﻿using Serilog;
+using Serilog;
 using Serilog.Context;
 using Serilog.Core;
 using Serilog.Events;
@@ -29,7 +29,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processi
         {
             if (command is IRecurringCommand)
             {
-               return await _decorated.Handle(command, cancellationToken);
+                return await _decorated.Handle(command, cancellationToken);
             }
 
             using (

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Yarnique.Common.Infrastructure.DomainEventsDispatching;
 
 namespace Yarnique.Common.Infrastructure.UnitOfWork
@@ -8,7 +8,7 @@ namespace Yarnique.Common.Infrastructure.UnitOfWork
         private readonly DbContext _context;
         private readonly IDomainEventsDispatcher _domainEventsDispatcher;
 
-        public UnitOfWork(DbContext context,IDomainEventsDispatcher domainEventsDispatcher)
+        public UnitOfWork(DbContext context, IDomainEventsDispatcher domainEventsDispatcher)
         {
             this._context = context;
             this._domainEventsDispatcher = domainEventsDispatcher;

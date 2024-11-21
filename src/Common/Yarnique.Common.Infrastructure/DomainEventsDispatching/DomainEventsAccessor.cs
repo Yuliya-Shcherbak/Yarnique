@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Yarnique.Common.Domain;
 
 namespace Yarnique.Common.Infrastructure.DomainEventsDispatching

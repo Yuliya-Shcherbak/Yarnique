@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Concurrent;
@@ -62,12 +62,12 @@ namespace Yarnique.Modules.Designs.Infrastructure
         {
             lock (_keys)
             {
-                foreach(var keyPrefix in keyPrefixes)
-                foreach (var key in _keys.Keys.Where(x => x.StartsWith(keyPrefix)).ToList())
-                {
-                    _cache.Remove(key);
-                    _keys.TryRemove(key, out var _);
-                }
+                foreach (var keyPrefix in keyPrefixes)
+                    foreach (var key in _keys.Keys.Where(x => x.StartsWith(keyPrefix)).ToList())
+                    {
+                        _cache.Remove(key);
+                        _keys.TryRemove(key, out var _);
+                    }
             }
         }
     }

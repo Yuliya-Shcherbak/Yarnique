@@ -20,7 +20,7 @@ namespace Yarnique.Payment.API.Controllers
         public async Task<IActionResult> ProcessPayment([FromBody] PaymentRequest request)
         {
             var result = await _paymentService.Process(request);
-            if (result.StatusCode == StatusCodes.Status200OK) 
+            if (result.StatusCode == StatusCodes.Status200OK)
             {
                 return Ok(result);
             }

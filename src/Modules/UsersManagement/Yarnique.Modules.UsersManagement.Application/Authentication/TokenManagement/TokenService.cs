@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -35,7 +35,7 @@ namespace Yarnique.Modules.UsersManagement.Application.Authentication.TokenManag
                 Subject = claims,
                 Expires = DateTime.UtcNow.Add(TimeSpan.FromMinutes(_identityConfig.TokenExpiration)),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };                
+            };
 
             var token = tokenHandler.CreateToken(jwt);
             var tokenString = tokenHandler.WriteToken(token);

@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Contracts;
+using Yarnique.Common.Application.Contracts;
 using Yarnique.Modules.Designs.Domain.Users;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.CreateDesign
@@ -15,7 +15,7 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.CreateDesign
 
         public string Name { get; }
         public double Price { get; }
-        public UserId SellerId {  get; }
+        public UserId SellerId { get; }
         public List<CreateDesignPartSpecificationCommand> Parts { get; }
     }
 }

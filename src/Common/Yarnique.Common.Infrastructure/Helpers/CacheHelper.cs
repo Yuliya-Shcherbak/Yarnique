@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Configuration.Attributes;
+using Yarnique.Common.Application.Configuration.Attributes;
 using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Common.Infrastructure.Helpers
@@ -18,7 +18,7 @@ namespace Yarnique.Common.Infrastructure.Helpers
                 if (query is QueryBaseWithPaging<TResult>)
                 {
                     var (pageNumber, pageSize) = (QueryBaseWithPaging<TResult>)query;
-                    return [ $"{entitiesNames[0]}|{pageNumber}|{pageSize}" ];
+                    return [$"{entitiesNames[0]}|{pageNumber}|{pageSize}"];
                 }
 
                 return entitiesNames;

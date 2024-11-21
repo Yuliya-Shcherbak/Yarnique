@@ -1,11 +1,11 @@
-﻿using Yarnique.Common.Domain;
+using Yarnique.Common.Domain;
 
 namespace Yarnique.Modules.OrderSubmitting.Domain.Designs
 {
     public class DesignPartSpecification : Entity
     {
         public DesignPartSpecificationId Id { get; private set; }
-        
+
         private DesignId _designId;
         private int _executionOrder;
         private string _term;

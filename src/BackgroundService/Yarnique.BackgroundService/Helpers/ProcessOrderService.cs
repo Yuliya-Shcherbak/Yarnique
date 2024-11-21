@@ -43,8 +43,9 @@ namespace Yarnique.BackgroundService.Helpers
             ";
 
             var dueOrders = await sqlConnection.QueryAsync<DueOrderInformation>(sql,
-                new { 
-                    now = DateTime.UtcNow, 
+                new
+                {
+                    now = DateTime.UtcNow,
                     orderStatuses = new[] { OrderStatus.InProgress.Value, OrderStatus.Accepted.Value },
                     executionStatus = ExecutionStatus.Completed.Value
                 }
@@ -55,7 +56,7 @@ namespace Yarnique.BackgroundService.Helpers
                 SendEmail(order);
             }
         }
-        
+
         private void SendEmail(DueOrderInformation dueOrder)
         {
             var fromAddress = new MailAddress(_config.EmailConfiguration.FromEmail, _config.EmailConfiguration.FromName);

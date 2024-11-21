@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Domain;
+using Yarnique.Common.Domain;
 using Yarnique.Common.Domain.OrderStatuses;
 using Yarnique.Modules.OrderSubmitting.Domain.Designs;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders.Events;
@@ -19,7 +19,7 @@ namespace Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders
         private DateOnly _executionDate;
         private DateTime? _acceptedDate;
 
-        public DesignId DesignId {  get; private set; }
+        public DesignId DesignId { get; private set; }
 
         private Order(DesignId _designId)
         {

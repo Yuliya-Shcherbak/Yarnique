@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 namespace Yarnique.Common.Domain
 {
@@ -8,7 +8,7 @@ namespace Yarnique.Common.Domain
 
         private List<FieldInfo> _fields;
 
-        public static bool operator == (ValueObject obj1, ValueObject obj2)
+        public static bool operator ==(ValueObject obj1, ValueObject obj2)
         {
             if (object.Equals(obj1, null))
             {
@@ -23,7 +23,7 @@ namespace Yarnique.Common.Domain
             return obj1.Equals(obj2);
         }
 
-        public static bool operator != (ValueObject obj1, ValueObject obj2)
+        public static bool operator !=(ValueObject obj1, ValueObject obj2)
         {
             return !(obj1 == obj2);
         }

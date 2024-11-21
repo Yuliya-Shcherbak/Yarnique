@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Serilog;
@@ -103,7 +103,7 @@ namespace Yarnique.Common.Infrastructure.EventBus.RabbitMqEventsBus
                         {
                             _logger.Error("Failed to handle event {EventName} after {MaxAttempts} attempts. Routing to dead-message exchange.", eventName, MaxRetryAttempts);
 
-                            
+
                             var dlxProperties = _channel.CreateBasicProperties();
                             dlxProperties.Headers = new Dictionary<string, object>
                             {
@@ -133,7 +133,7 @@ namespace Yarnique.Common.Infrastructure.EventBus.RabbitMqEventsBus
         }
 
         public void StartConsuming()
-        { 
+        {
         }
     }
 }

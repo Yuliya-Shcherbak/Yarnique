@@ -1,4 +1,4 @@
-﻿using FluentMigrator;
+using FluentMigrator;
 
 namespace Yarnique.Database.Migrations.Scripts
 {
@@ -30,7 +30,7 @@ namespace Yarnique.Database.Migrations.Scripts
                 .WithColumn("Status").AsString();
         }
 
-        public override void Down() 
+        public override void Down()
         {
             Delete.Column("ExecutionOrder").FromTable("DesignPartSpecifications").InSchema("[designs]");
             Delete.Column("SellerId").FromTable("Designs").InSchema("[designs]");

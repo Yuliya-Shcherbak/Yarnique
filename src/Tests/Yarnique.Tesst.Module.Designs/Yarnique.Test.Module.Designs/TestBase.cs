@@ -11,7 +11,7 @@ using Yarnique.Test.Common;
 
 namespace Yarnique.Test.Module.Designs
 {
-    public  abstract partial class TestBase : IDisposable
+    public abstract partial class TestBase : IDisposable
     {
         protected string ConnectionString { get; private set; }
         protected ILogger _logger { get; private set; }
