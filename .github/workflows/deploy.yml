@@ -100,7 +100,7 @@ jobs:
           TF_VAR_resource_group_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
           TF_VAR_resource_location: ${{ secrets.TF_VAR_RESOURCE_LOCATION }}
           TF_VAR_acr_name: ${{ secrets.TF_VAR_ACR_NAME }}
-          TF_VAR_app_service_plan_id: ${{ secrets.TF_VAR_APP_SERVICE_PLAN_ID }}
+          TF_VAR_service_plan_id: ${{ secrets.TF_VAR_SERVICE_PLAN_ID }}
           TF_VAR_key_vault_uri: ${{ secrets.TF_VAR_KEY_VAULT_URI }}
         run: terraform plan -out=tfplan
 
@@ -114,6 +114,6 @@ jobs:
           TF_VAR_resource_group_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
           TF_VAR_resource_location: ${{ secrets.TF_VAR_RESOURCE_LOCATION }}
           TF_VAR_acr_name: ${{ secrets.TF_VAR_ACR_NAME }}
-          TF_VAR_app_service_plan_id: ${{ secrets.TF_VAR_APP_SERVICE_PLAN_ID }}
+          TF_VAR_service_plan_id: ${{ secrets.TF_VAR_SERVICE_PLAN_ID }}
           TF_VAR_key_vault_uri: ${{ secrets.TF_VAR_KEY_VAULT_URI }}
         run: terraform apply -auto-approve tfplan
