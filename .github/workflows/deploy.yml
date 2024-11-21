@@ -1,0 +1,119 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint-and-test:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: dotnet lint
+        run: dotnet format --check
+
+      # - name: dotnet test
+      #   run: dotnet test --no-restore --verbosity normal
+
+  apply-migration:
+    name: Apply Database Migrations
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0
+
+      - name: Run Database Migration
+        env:
+          YarniqueConnectionString: ${{ secrets.YARNIQUEDB_CONNECTION_STRING }}
+        run: |
+          dotnet build ./src/Database/Yarnique.Database.Migration/Yarnique.Database.Migrations.csproj
+          dotnet run --project ./src/Database/Yarnique.Database.Migration/Yarnique.Database.Migrations.csproj
+
+  prepare-images:
+    name: Build and push docker images
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    steps:
+      - name: Log in to ACR
+        uses: azure/docker-login@v1
+        with:
+          login-server: acryarnique.azurecr.io
+          username: ${{ secrets.AZURE_ACR_USERNAME }}
+          password: ${{ secrets.AZURE_ACR_PASSWORD }}
+
+      - name: Build and Push Payment API
+        run: |
+          docker build -t acryarnique.azurecr.io/payment-api:latest -f ./docker/payment.api.dockerfile .
+          docker push acryarnique.azurecr.io/payment-api:latest
+
+      - name: Build and Push Background Service
+        run: |
+          docker build -t acryarnique.azurecr.io/background.service:latest -f ./docker/background.service.dockerfile .
+          docker push acryarnique.azurecr.io/background-service:latest
+
+      - name: Build and Push Main Web API
+        run: |
+          docker build -t acryarnique.azurecr.io/main-webapi:latest -f ./docker/main.webapi.dockerfile .
+          docker push acryarnique.azurecr.io/main-webapi:latest
+
+  terraform-deploy:
+    name: Deploy via Terraform
+    runs-on: ubuntu-latest
+    needs: [lint-and-test, apply-migration, prepare-images]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Terraform Plan
+        env:
+          ARM_USE_OIDC: ${{ secrets.ARM_USE_OIDC }}
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          TF_VAR_resource_group_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+          TF_VAR_resource_location: ${{ secrets.TF_VAR_RESOURCE_LOCATION }}
+          TF_VAR_acr_name: ${{ secrets.TF_VAR_ACR_NAME }}
+          TF_VAR_app_service_plan_id: ${{ secrets.TF_VAR_APP_SERVICE_PLAN_ID }}
+          TF_VAR_key_vault_uri: ${{ secrets.TF_VAR_KEY_VAULT_URI }}
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        env:
+          ARM_USE_OIDC: ${{ secrets.ARM_USE_OIDC }}
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          TF_VAR_resource_group_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
+          TF_VAR_resource_location: ${{ secrets.TF_VAR_RESOURCE_LOCATION }}
+          TF_VAR_acr_name: ${{ secrets.TF_VAR_ACR_NAME }}
+          TF_VAR_app_service_plan_id: ${{ secrets.TF_VAR_APP_SERVICE_PLAN_ID }}
+          TF_VAR_key_vault_uri: ${{ secrets.TF_VAR_KEY_VAULT_URI }}
+        run: terraform apply -auto-approve tfplan
