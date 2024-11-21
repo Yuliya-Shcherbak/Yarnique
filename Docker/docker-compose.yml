@@ -2,11 +2,51 @@ services:
   rabbitmq:
     image: rabbitmq:4.0-management
     environment:
-      RABBITMQ_DEFAULT_USER: rabbitmq
-      RABBITMQ_DEFAULT_PASS: rabbitmq
+      RABBITMQ_DEFAULT_USER: rabbitmq_user
+      RABBITMQ_DEFAULT_PASS: rabbitmq_password
     ports:
       - 5672:5672
     volumes:
       - rabbitmq:/var/lib/rabbitmq
+
+  payment-api:
+    build:
+      dockerfile: ./docker/payment.api.dockerfile
+      context: ./../
+    ports:
+      - 4221:80
+
+  background-service:
+    build:
+      dockerfile: ./docker/background.service.dockerfile
+      context: ./../
+    environment:
+      EmailConfiguration__FromEmail: example@gmail.com
+      EmailConfiguration__FromName: from_name
+      EmailConfiguration__AppPassword: app_password
+      ConnectionStrings__YarniqueConnectionString: db_connection_string
+
+  main-webapi:
+    build:
+      dockerfile: ./docker/main.webapi.dockerfile
+      context: ./../
+    ports:
+      - 5275:8080
+    environment:
+      ConnectionStrings__YarniqueConnectionString: db_connection_string
+      Identity__JwtIssuer: jwt_issuer
+      Identity__Secret: jwt_secret
+      Identity__TokenExpiration: 30
+      Identity__RefreshTokenExpiration: 1440
+      RabbitMQ__HostName: rabbitmq_hostname
+      RabbitMQ__UserName: rabbitmq_user
+      RabbitMQ__Password: rabbitmq_password
+      PaymentUrl: payment-api
+    links:
+      - rabbitmq
+      - payment-api
+    depends_on:
+      - rabbitmq
+
 volumes:
   rabbitmq:

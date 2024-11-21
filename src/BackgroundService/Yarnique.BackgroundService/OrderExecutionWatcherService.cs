@@ -1,4 +1,4 @@
-﻿using Cronos;
+using Cronos;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Polly;
@@ -20,7 +20,7 @@ namespace Yarnique.BackgroundService
         {
             _helper = helper;
             _logger = logger;
-            _cronExpression = "0 */1 * * *"; // For test purpose: every hour 
+            _cronExpression = "0 8 * * *";
             _cronSchedule = CronExpression.Parse(_cronExpression);
 
             _retryPolicy = Policy

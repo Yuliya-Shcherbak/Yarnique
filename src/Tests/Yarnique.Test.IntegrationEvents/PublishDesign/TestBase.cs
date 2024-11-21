@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Dapper;
 using Serilog;
 using System.Data.SqlClient;
@@ -24,7 +24,7 @@ namespace Yarnique.Test.Integration.PublishDesign
 
         protected TestBase()
         {
-            const string connectionStringEnvironmentVariable = "ASPNETCORE_IntegrationTests_ConnectionString";
+            const string connectionStringEnvironmentVariable = "TestDataBase_ConnectionString";
             ConnectionString = EnvironmentVariablesProvider.GetVariable(connectionStringEnvironmentVariable);
             if (ConnectionString == null)
             {

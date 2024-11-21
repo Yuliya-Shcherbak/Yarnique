@@ -20,7 +20,7 @@ namespace Yarnique.Test.Module.Designs
 
         protected TestBase()
         {
-            const string connectionStringEnvironmentVariable = "ASPNETCORE_IntegrationTests_ConnectionString";
+            const string connectionStringEnvironmentVariable = "TestDataBase_ConnectionString";
             ConnectionString = Environment.GetEnvironmentVariable(connectionStringEnvironmentVariable, EnvironmentVariableTarget.User);
             if (ConnectionString == null)
             {

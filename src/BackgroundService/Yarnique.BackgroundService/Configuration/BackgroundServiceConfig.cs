@@ -1,4 +1,4 @@
-﻿namespace Yarnique.BackgroundService.Configuration
+namespace Yarnique.BackgroundService.Configuration
 {
     public class BackgroundServiceConfig
     {
@@ -9,7 +9,7 @@
 
     public class ConnectionStrings
     {
-        public string YarniqueDB { get; set; }
+        public string YarniqueConnectionString { get; set; }
     }
 
     public class EmailConfiguration

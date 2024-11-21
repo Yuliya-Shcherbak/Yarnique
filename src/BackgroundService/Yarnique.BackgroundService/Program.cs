@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+using Azure.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -13,12 +14,19 @@ namespace Yarnique.BackgroundService
 
         static async Task Main(string[] args)
         {
-            var builder = new HostBuilder()                
+            var builder = new HostBuilder()
                 .ConfigureAppConfiguration((context, config) =>
                 {
                     config.SetBasePath(Directory.GetCurrentDirectory());
                     config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    config.AddEnvironmentVariables();
                     config.AddCommandLine(args);
+
+                    var tempConfig = config.Build();
+                    config.AddAzureKeyVault(
+                        new Uri(tempConfig.GetValue<string>("KeyVaultUri")),
+                        new DefaultAzureCredential());
+
                     var builtConfig = config.Build();
 
                     _config = new BackgroundServiceConfig();

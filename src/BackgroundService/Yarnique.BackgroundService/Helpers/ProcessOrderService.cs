@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using System.Data.SqlClient;
 using System.Net.Mail;
 using System.Net;
@@ -20,7 +20,7 @@ namespace Yarnique.BackgroundService.Helpers
 
         public async Task ProcessDueOrders()
         {
-            using var sqlConnection = new SqlConnection(_config.ConnectionStrings.YarniqueDB);
+            using var sqlConnection = new SqlConnection(_config.ConnectionStrings.YarniqueConnectionString);
 
             const string sql =
             @$"

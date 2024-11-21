@@ -3,9 +3,11 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY [ "src/PaymentAPI/Yarnique.Payment.API/", "payment.api/" ]
+COPY [ "src/API/", "API/" ]
+COPY [ "src/Common/", "Common/" ]
+COPY [ "src/Modules/", "Modules/" ]
 
-WORKDIR /src/payment.api
+WORKDIR /src/API/Yarnique.API
 RUN dotnet restore
 RUN dotnet publish -c Release -o /app
 
@@ -15,4 +17,4 @@ COPY --from=build /app .
 
 EXPOSE 8080
 
-ENTRYPOINT ["dotnet", "Yarnique.Payment.API.dll"]
+ENTRYPOINT ["dotnet", "Yarnique.API.dll"]

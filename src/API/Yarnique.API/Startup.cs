@@ -1,8 +1,10 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Azure.Identity;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Serilog;
 using Serilog.Formatting.Compact;
 using System.Text;
@@ -33,16 +35,19 @@ namespace Yarnique.API
         {
             ConfigureLogger();
 
-            _configuration = new ConfigurationBuilder()
+            var confBuilder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
                 .AddUserSecrets<Startup>()
-                .AddEnvironmentVariables("Yarnique_")
-                .Build();
+                .AddEnvironmentVariables();
+            _configuration = confBuilder.Build();
 
+            confBuilder.AddAzureKeyVault(
+                  new Uri(_configuration.GetValue<string>("KeyVaultUri")),
+                  new DefaultAzureCredential());
+
+            _configuration = confBuilder.Build();
             _config = BindApplicationConfig();
-
-            _loggerForApi.Information("Connection string:" + _config.ConnectionStrings.YarniqueConnectionString);
         }
 
         public void ConfigureServices(IServiceCollection services)
