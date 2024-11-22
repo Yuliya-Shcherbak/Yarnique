@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Yarnique.Common.Infrastructure.EventBus.Configuration;
 using Yarnique.Common.Infrastructure.EventBus;
 using Yarnique.Common.Infrastructure.EventBus.RabbitMqEventsBus;

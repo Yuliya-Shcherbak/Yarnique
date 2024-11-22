@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Configuration.Attributes;
+using Yarnique.Common.Application.Configuration.Attributes;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.GetAllDesignParts
 {

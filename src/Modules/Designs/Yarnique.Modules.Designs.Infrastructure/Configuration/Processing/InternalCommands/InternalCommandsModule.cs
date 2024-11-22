@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Yarnique.Common.Infrastructure.InternalCommands;
 using Yarnique.Common.Infrastructure;
 using Yarnique.Common.Application.Configuration.Commands;

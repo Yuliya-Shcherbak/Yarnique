@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Yarnique.Common.Infrastructure.EventBus;
 using Yarnique.Modules.Designs.IntegrationEvents;
 

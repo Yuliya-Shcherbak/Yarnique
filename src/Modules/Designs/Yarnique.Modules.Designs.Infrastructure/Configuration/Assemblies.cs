@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Yarnique.Modules.Designs.Application.Contracts;
 
 namespace Yarnique.Modules.Designs.Infrastructure.Configuration

@@ -1,4 +1,4 @@
-﻿namespace Yarnique.API.Modules.UsersManagement.Authenticate
+namespace Yarnique.API.Modules.UsersManagement.Authenticate
 {
     public class AuthenticationRequest
     {

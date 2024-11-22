@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure
+namespace Yarnique.Common.Infrastructure
 {
     public class BiDictionary<TFirst, TSecond>
     {

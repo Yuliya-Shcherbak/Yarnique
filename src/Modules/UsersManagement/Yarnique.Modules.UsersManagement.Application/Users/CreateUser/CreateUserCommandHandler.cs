@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Modules.UsersManagement.Application.Authentication.PasswordManagement;
 using Yarnique.Modules.UsersManagement.Domain.Users;
 

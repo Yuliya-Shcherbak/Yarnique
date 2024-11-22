@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Yarnique.Common.Infrastructure.UnitOfWork;
 
 namespace Yarnique.Common.Infrastructure.DomainEventsDispatching

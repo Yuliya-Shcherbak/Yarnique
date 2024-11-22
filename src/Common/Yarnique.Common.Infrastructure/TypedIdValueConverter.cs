@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Yarnique.Common.Domain;
 
 namespace Yarnique.Common.Infrastructure

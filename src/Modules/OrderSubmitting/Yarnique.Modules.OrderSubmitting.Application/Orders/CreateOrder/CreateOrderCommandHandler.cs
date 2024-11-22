@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Domain.OrderStatuses;
+using Yarnique.Common.Domain.OrderStatuses;
 using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders;

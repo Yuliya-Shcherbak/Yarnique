@@ -1,4 +1,4 @@
-﻿using Quartz.Logging;
+using Quartz.Logging;
 using Serilog;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Quartz

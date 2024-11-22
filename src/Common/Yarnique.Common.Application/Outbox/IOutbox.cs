@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Application.Outbox
+namespace Yarnique.Common.Application.Outbox
 {
     public interface IOutbox
     {

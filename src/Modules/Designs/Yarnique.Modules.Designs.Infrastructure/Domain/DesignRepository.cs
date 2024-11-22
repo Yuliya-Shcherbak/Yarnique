@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Yarnique.Modules.Designs.Domain.Designs;
 using Yarnique.Modules.Designs.Domain.Designs.Designs;
 using Yarnique.Modules.Designs.Domain.Designs.DesignParts;

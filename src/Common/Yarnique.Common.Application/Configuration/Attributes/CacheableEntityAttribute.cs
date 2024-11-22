@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Application.Configuration.Attributes
+namespace Yarnique.Common.Application.Configuration.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class CacheableEntityAttribute : Attribute

@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using System.Data.SqlClient;
 using Yarnique.Modules.Designs.Application.Contracts;
 using Yarnique.Modules.Designs.Application.DesignCreation.GetDesign;

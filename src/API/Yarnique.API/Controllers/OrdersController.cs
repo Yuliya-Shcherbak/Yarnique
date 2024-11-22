@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yarnique.API.Modules.OrderSubmitting.Orders;
 using Yarnique.Modules.OrderSubmitting.Application.Contracts;

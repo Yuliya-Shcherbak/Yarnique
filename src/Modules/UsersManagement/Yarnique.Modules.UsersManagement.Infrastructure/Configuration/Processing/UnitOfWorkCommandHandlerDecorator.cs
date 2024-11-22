@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Infrastructure.UnitOfWork;
+using Yarnique.Common.Infrastructure.UnitOfWork;
 using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Common.Application.Contracts;
 

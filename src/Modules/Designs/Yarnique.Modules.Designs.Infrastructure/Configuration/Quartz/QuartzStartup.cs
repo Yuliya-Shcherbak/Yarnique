@@ -1,4 +1,4 @@
-﻿using Quartz.Impl;
+using Quartz.Impl;
 using Quartz.Logging;
 using Quartz;
 using System.Collections.Specialized;

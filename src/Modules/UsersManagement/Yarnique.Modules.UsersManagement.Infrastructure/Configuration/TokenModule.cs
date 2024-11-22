@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Yarnique.Modules.UsersManagement.Application.Authentication.TokenManagement;
 using Yarnique.Modules.UsersManagement.Domain.Identity;
 

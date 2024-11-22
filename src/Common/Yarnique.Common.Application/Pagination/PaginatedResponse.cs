@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Application.Pagination
+namespace Yarnique.Common.Application.Pagination
 {
     public class PaginatedResponse<T>
     {

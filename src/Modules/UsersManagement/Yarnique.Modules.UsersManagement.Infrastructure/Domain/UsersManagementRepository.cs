@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Yarnique.Modules.UsersManagement.Domain.Users;
 
 namespace Yarnique.Modules.UsersManagement.Infrastructure.Domain

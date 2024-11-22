@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Payment.API.PaymentProcessing
+namespace Yarnique.Payment.API.PaymentProcessing
 {
     public class PaymentService : IPaymentService
     {

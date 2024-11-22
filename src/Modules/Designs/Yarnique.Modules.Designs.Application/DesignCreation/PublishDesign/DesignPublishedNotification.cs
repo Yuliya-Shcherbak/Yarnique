@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Yarnique.Common.Application.Events;
 using Yarnique.Modules.Designs.Domain.Designs.Events;
 

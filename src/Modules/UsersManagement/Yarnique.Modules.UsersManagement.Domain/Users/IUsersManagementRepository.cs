@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.UsersManagement.Domain.Users
+namespace Yarnique.Modules.UsersManagement.Domain.Users
 {
     public interface IUsersManagementRepository
     {

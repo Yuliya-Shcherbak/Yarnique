@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure.EventBus.Configuration
+namespace Yarnique.Common.Infrastructure.EventBus.Configuration
 {
     public class RabbitMqConfig
     {

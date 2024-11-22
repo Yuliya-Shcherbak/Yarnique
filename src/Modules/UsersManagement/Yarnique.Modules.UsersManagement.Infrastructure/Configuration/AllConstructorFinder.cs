@@ -1,4 +1,4 @@
-﻿using Autofac.Core.Activators.Reflection;
+using Autofac.Core.Activators.Reflection;
 using System.Collections.Concurrent;
 using System.Reflection;
 

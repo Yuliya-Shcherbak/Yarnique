@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Serilog;
 using Yarnique.Common.Application;
 using Yarnique.Common.Infrastructure;

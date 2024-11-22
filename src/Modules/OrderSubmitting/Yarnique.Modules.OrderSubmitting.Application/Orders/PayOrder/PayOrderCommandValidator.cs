@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 
 namespace Yarnique.Modules.OrderSubmitting.Application.Orders.PayOrder
 {

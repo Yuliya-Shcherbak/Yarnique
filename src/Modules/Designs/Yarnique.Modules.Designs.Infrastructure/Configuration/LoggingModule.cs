@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Serilog;
 
 namespace Yarnique.Modules.Designs.Infrastructure.Configuration

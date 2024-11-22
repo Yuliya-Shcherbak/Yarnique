@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.UsersManagement.Infrastructure.Configuration.Processing.Outbox
+namespace Yarnique.Modules.UsersManagement.Infrastructure.Configuration.Processing.Outbox
 {
     public class OutboxMessageDto
     {

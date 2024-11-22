@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using Yarnique.Modules.OrderSubmitting.Domain.Designs;
 using Yarnique.Modules.OrderSubmitting.Domain.Users;

@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.OrderSubmitting.Domain.Orders.OrderExecutions;
+using Yarnique.Modules.OrderSubmitting.Domain.Orders.OrderExecutions;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders;
 
 namespace Yarnique.Modules.OrderSubmitting.Domain.Orders

@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.Designs.Application.DesignCreation.CreateDesignPart;
+using Yarnique.Modules.Designs.Application.DesignCreation.CreateDesignPart;
 using Yarnique.Modules.Designs.Application.DesignCreation.GetAllDesignParts;
 
 namespace Yarnique.Test.Module.Designs.DesignCreation

@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.UsersManagement.Domain.Identity
+namespace Yarnique.Modules.UsersManagement.Domain.Identity
 {
     public class IdentityConfig
     {

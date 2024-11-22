@@ -1,4 +1,4 @@
-﻿namespace Yarnique.BackgroundService.Helpers
+namespace Yarnique.BackgroundService.Helpers
 {
     public interface IProcessOrderService
     {

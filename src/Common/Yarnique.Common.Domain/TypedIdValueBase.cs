@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Domain
+namespace Yarnique.Common.Domain
 {
     public abstract class TypedIdValueBase : IEquatable<TypedIdValueBase>
     {

@@ -1,4 +1,4 @@
-﻿namespace Yarnique.API.Configuration.ExecutionContext
+namespace Yarnique.API.Configuration.ExecutionContext
 {
     internal class CorrelationMiddleware
     {

@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Domain
+namespace Yarnique.Common.Domain
 {
     public interface IBusinessRule
     {

@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Infrastructure.EventBus;
+using Yarnique.Common.Infrastructure.EventBus;
 
 namespace Yarnique.Modules.Designs.IntegrationEvents
 {

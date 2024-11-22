@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Yarnique.Common.Application.Events;
 using Yarnique.Common.Application.Outbox;
 using Yarnique.Common.Infrastructure.DomainEventsDispatching;

@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure.EventBus
+namespace Yarnique.Common.Infrastructure.EventBus
 {
     public interface IEventsBus : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Yarnique.Modules.OrderSubmitting.Application.Contracts;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration

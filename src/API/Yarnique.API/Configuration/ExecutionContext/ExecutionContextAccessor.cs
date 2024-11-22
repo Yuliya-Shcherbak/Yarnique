@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application;
+using Yarnique.Common.Application;
 
 namespace Yarnique.API.Configuration.ExecutionContext
 {

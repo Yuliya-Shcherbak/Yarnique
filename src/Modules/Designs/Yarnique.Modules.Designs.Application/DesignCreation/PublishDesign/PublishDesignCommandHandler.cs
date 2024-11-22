@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Modules.Designs.Domain.Designs;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign

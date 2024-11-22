@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.Designs.Application.DesignCreation.GetDesign
+namespace Yarnique.Modules.Designs.Application.DesignCreation.GetDesign
 {
     public class DesignPartsSpecificationDto
     {

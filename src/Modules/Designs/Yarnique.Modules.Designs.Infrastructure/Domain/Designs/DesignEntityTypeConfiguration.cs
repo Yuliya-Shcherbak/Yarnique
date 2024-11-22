@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using Yarnique.Modules.Designs.Domain.Designs.Designs;
 using Yarnique.Modules.Designs.Domain.Designs.DesignPartSpecifications;

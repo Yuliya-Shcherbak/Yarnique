@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
 namespace Yarnique.Modules.OrderSubmitting.Application.Orders.PayOrder

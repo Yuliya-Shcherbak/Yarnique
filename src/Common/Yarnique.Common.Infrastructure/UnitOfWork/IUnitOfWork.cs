@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure.UnitOfWork
+namespace Yarnique.Common.Infrastructure.UnitOfWork
 {
     public interface IUnitOfWork
     {

@@ -1,4 +1,4 @@
-﻿namespace Yarnique.API.Modules.Designs.DesignParts
+namespace Yarnique.API.Modules.Designs.DesignParts
 {
     public class CreateDesignPartRequest
     {

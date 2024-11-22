@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Test.Common.Probing
+namespace Yarnique.Test.Common.Probing
 {
     public interface IProbe
     {

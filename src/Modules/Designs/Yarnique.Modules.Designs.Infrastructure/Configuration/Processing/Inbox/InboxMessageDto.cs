@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Processing.Inbox
+namespace Yarnique.Modules.Designs.Infrastructure.Configuration.Processing.Inbox
 {
     public class InboxMessageDto
     {

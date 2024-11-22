@@ -1,4 +1,4 @@
-﻿using FluentMigrator.Builders.Create.Table;
+using FluentMigrator.Builders.Create.Table;
 
 namespace Yarnique.Database.Migrations.Extensions
 {

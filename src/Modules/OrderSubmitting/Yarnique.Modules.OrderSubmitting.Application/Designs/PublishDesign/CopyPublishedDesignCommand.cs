@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Yarnique.Common.Application.Configuration.Commands;
 
 namespace Yarnique.Modules.OrderSubmitting.Application.Designs.PublishDesign

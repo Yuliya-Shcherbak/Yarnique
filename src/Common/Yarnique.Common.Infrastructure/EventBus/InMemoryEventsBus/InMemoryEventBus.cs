@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure.EventBus.InMemoryEventsBus
+namespace Yarnique.Common.Infrastructure.EventBus.InMemoryEventsBus
 {
     public sealed class InMemoryEventBus
     {

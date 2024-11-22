@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 
 namespace Yarnique.Common.Application.Data
 {

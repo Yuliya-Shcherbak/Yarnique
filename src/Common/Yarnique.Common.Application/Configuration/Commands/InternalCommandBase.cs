@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Contracts;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Common.Application.Configuration.Commands
 {

@@ -1,4 +1,4 @@
-﻿namespace Yarnique.API.Modules.OrderSubmitting.Orders
+namespace Yarnique.API.Modules.OrderSubmitting.Orders
 {
     public class CreateOrderRequest
     {

@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Infrastructure.InternalCommands
+namespace Yarnique.Common.Infrastructure.InternalCommands
 {
     public interface IInternalCommandsMapper
     {

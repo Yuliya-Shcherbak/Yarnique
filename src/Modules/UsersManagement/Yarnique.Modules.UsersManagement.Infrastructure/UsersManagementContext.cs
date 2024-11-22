@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Yarnique.Common.Application.Outbox;
 using Yarnique.Modules.UsersManagement.Domain.Users;

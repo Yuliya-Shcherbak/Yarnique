@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Contracts;
+using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing.InternalCommands
 {

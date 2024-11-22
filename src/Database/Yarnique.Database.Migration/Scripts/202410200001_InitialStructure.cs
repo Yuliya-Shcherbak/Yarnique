@@ -1,4 +1,4 @@
-﻿using FluentMigrator;
+using FluentMigrator;
 using FluentMigrator.SqlServer;
 using Yarnique.Database.Migrations.Extensions;
 

@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Yarnique.Common.Application;
 using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Common.Application.Contracts;

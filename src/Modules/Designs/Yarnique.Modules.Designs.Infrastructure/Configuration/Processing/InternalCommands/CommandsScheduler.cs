@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Newtonsoft.Json;
 using Yarnique.Common.Application.Data;
 using Yarnique.Common.Infrastructure.Serialization;

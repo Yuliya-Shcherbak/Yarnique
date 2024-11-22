@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using System.Data.SqlClient;
 
 namespace Yarnique.Test.Common.SqlCommands

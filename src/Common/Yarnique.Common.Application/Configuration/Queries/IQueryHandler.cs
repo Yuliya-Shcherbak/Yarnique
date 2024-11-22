@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Yarnique.Common.Application.Contracts;
 
 namespace Yarnique.Common.Application.Configuration.Queries

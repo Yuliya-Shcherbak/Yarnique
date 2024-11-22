@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.Consumables.Application.Contracts
+namespace Yarnique.Modules.Consumables.Application.Contracts
 {
     public abstract class QueryBase<TResult> : IQuery<TResult>
     {

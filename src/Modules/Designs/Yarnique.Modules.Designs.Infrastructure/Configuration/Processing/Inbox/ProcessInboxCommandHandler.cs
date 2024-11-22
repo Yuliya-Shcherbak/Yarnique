@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using MediatR;
 using Newtonsoft.Json;
 using Yarnique.Common.Application.Data;

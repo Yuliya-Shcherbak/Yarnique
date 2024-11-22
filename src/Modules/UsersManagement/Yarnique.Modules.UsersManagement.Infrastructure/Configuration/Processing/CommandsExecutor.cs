@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using MediatR;
 using Yarnique.Common.Application.Contracts;
 

@@ -1,4 +1,4 @@
-﻿using Quartz;
+using Quartz;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Processing.Inbox
 {

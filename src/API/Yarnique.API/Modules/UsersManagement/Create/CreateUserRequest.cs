@@ -1,4 +1,4 @@
-﻿namespace Yarnique.API.Modules.UsersManagement.Create
+namespace Yarnique.API.Modules.UsersManagement.Create
 {
     public class CreateUserRequest
     {

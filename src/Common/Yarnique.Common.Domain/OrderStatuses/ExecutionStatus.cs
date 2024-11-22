@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Domain.OrderStatuses
+namespace Yarnique.Common.Domain.OrderStatuses
 {
     public class ExecutionStatus : ValueObject
     {

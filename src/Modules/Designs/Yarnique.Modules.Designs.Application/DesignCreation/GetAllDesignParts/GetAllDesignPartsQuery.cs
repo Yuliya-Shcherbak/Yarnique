@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Configuration.Attributes;
+using Yarnique.Common.Application.Configuration.Attributes;
 using Yarnique.Common.Application.Contracts;
 using Yarnique.Common.Application.Pagination;
 

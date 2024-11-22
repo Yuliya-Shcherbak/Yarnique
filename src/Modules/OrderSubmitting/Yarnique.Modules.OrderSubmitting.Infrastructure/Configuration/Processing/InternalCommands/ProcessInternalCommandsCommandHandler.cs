@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Newtonsoft.Json;
 using Polly;
 using Yarnique.Common.Application.Data;

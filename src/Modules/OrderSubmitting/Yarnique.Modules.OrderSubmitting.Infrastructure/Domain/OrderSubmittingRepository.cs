@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders.OrderExecutions;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders;

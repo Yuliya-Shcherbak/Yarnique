@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Yarnique.Modules.OrderSubmitting.Infrastructure;
 using Yarnique.Modules.OrderSubmitting.Application.Contracts;
 

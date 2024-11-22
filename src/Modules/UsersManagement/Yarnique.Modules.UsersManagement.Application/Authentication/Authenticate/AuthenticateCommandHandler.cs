@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Yarnique.Common.Application.Data;
 using Yarnique.Modules.UsersManagement.Application.Authentication.PasswordManagement;
 using Yarnique.Modules.UsersManagement.Application.Authentication.TokenManagement;

@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Configuration.Attributes;
+using Yarnique.Common.Application.Configuration.Attributes;
 using Yarnique.Common.Application.Contracts;
 using Yarnique.Modules.Designs.Application.DesignCreation.CreateDesign;
 using Yarnique.Modules.Designs.Domain.Designs.Designs;

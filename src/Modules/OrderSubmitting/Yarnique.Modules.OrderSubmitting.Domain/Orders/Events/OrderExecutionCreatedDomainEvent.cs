@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Domain;
+using Yarnique.Common.Domain;
 using Yarnique.Modules.OrderSubmitting.Domain.Orders.OrderExecutions;
 
 namespace Yarnique.Modules.OrderSubmitting.Domain.Orders.Events

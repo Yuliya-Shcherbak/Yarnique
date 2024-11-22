@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.UsersManagement.Application.Authentication.Authenticate;
+using Yarnique.Modules.UsersManagement.Application.Authentication.Authenticate;
 
 namespace Yarnique.Modules.UsersManagement.Application.Authentication.TokenManagement
 {

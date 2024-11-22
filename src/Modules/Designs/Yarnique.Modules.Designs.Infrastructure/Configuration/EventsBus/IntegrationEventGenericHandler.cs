@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Dapper;
 using Newtonsoft.Json;
 using Yarnique.Common.Application.Data;

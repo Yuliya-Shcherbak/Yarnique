@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Quartz;
 
 namespace Yarnique.Modules.Designs.Infrastructure

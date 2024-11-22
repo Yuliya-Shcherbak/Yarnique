@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.UsersManagement.Application.Authentication.Authenticate
+namespace Yarnique.Modules.UsersManagement.Application.Authentication.Authenticate
 {
     public class AuthenticationResult
     {

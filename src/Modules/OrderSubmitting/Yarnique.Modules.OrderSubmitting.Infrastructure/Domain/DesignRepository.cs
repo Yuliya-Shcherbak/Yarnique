@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Yarnique.Modules.OrderSubmitting.Domain.Designs;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Domain

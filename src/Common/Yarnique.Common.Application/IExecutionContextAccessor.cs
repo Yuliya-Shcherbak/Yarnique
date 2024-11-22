@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Common.Application
+namespace Yarnique.Common.Application
 {
     public interface IExecutionContextAccessor
     {

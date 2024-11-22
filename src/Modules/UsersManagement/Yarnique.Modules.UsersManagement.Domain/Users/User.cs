@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Domain;
+using Yarnique.Common.Domain;
 using Yarnique.Modules.UsersManagement.Domain.Users.Events;
 
 namespace Yarnique.Modules.UsersManagement.Domain.Users

@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Configuration.Commands;
+using Yarnique.Common.Application.Configuration.Commands;
 using Yarnique.Modules.Designs.Domain.Designs;
 using Yarnique.Modules.Designs.Domain.Designs.DesignPartSpecifications;
 

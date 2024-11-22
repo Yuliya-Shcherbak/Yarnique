@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Yarnique.Modules.UsersManagement.Application.Contracts;
 using Yarnique.Modules.UsersManagement.Infrastructure;
 

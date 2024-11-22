@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Yarnique.Common.Application;
 
 namespace Yarnique.API.Configuration.Validation

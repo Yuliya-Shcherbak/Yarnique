@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Modules.OrderSubmitting.Domain.Designs
+namespace Yarnique.Modules.OrderSubmitting.Domain.Designs
 {
     public interface IDesignRepository
     {

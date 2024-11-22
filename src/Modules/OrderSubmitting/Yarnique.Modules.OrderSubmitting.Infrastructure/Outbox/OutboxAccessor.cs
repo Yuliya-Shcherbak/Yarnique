@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Application.Outbox;
+using Yarnique.Common.Application.Outbox;
 
 namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Outbox
 {

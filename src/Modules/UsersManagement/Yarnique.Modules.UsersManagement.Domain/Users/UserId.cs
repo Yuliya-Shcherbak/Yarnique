@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Domain;
+using Yarnique.Common.Domain;
 
 namespace Yarnique.Modules.UsersManagement.Domain.Users
 {

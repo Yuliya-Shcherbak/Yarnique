@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Yarnique.Common.Infrastructure.EventBus;
 
 namespace Yarnique.Modules.Designs.Infrastructure.Configuration.EventsBus

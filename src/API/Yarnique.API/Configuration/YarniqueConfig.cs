@@ -1,4 +1,4 @@
-﻿using Yarnique.Common.Infrastructure.EventBus.Configuration;
+using Yarnique.Common.Infrastructure.EventBus.Configuration;
 using Yarnique.Modules.UsersManagement.Domain.Identity;
 
 namespace Yarnique.API.Configuration

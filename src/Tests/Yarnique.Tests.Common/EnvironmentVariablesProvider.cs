@@ -1,4 +1,4 @@
-﻿namespace Yarnique.Test.Common
+namespace Yarnique.Test.Common
 {
     public static class EnvironmentVariablesProvider
     {

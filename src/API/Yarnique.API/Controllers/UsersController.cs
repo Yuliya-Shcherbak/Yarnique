@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Yarnique.API.Modules.UsersManagement.Authenticate;
 using Yarnique.API.Modules.UsersManagement.Create;

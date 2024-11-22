@@ -1,4 +1,4 @@
-﻿using Yarnique.Modules.Designs.Domain.Designs.DesignParts;
+using Yarnique.Modules.Designs.Domain.Designs.DesignParts;
 using Yarnique.Modules.Designs.Domain.Designs.Designs;
 
 namespace Yarnique.Modules.Designs.Domain.Designs
