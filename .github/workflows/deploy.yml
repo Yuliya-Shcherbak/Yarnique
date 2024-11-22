@@ -27,7 +27,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az sql server firewall-rule create --name ${{ secret.SERVER_FIREWALL_RULE }} --resource-group "${{ secrets.RESOURCE_GROUP }}" --server "${{ secrets.AZURE_SERVER_NAME }}" --start-ip-address ${{ secrets.AGENT_IP }} --end-ip-address ${{ secrets.AGENT_IP }}
+            az sql server firewall-rule create --name ${{ secrets.SERVER_FIREWALL_RULE }} --resource-group ${{ secrets.RESOURCE_GROUP }} --server ${{ secrets.AZURE_SERVER_NAME }} --start-ip-address ${{ secrets.AGENT_IP }} --end-ip-address ${{ secrets.AGENT_IP }}
             sleep 50
 
   lint-and-test:
@@ -163,7 +163,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az sql server firewall-rule delete --name ${{ secret.SERVER_FIREWALL_RULE }} --resource-group "${{ secrets.RESOURCE_GROUP }}" --server "${{ secrets.AZURE_SERVER_NAME }}"
+            az sql server firewall-rule delete --name ${{ secrets.SERVER_FIREWALL_RULE }} --resource-group ${{ secrets.RESOURCE_GROUP }} --server ${{ secrets.AZURE_SERVER_NAME }}
 
       - name: logout
         if: always()
