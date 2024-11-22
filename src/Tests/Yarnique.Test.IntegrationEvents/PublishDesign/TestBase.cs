@@ -91,6 +91,7 @@ namespace Yarnique.Test.Integration.PublishDesign
                 DELETE FROM [orders].[DesignParts]
                 DELETE FROM [orders].[Orders]
                 DELETE FROM [orders].[Designs]
+                DELETE FROM [users].[Users]
                 ";
 
                 sqlConnection.ExecuteScalar(sql);

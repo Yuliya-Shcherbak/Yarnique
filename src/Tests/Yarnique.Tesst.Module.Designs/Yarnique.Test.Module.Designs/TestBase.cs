@@ -70,6 +70,8 @@ namespace Yarnique.Test.Module.Designs
                 DELETE FROM [designs].[DesignPartSpecifications]
                 DELETE FROM [designs].[Designs]
                 DELETE FROM [designs].[DesignParts]
+                DELETE FROM [orders].[Orders]
+                DELETE FROM [users].[Users]
                 ";
 
                 sqlConnection.ExecuteScalar(sql);

@@ -77,7 +77,6 @@ namespace Yarnique.Tests.Module.OrderSubmitting
             {
                 const string sql =
                 @"
-                DELETE FROM [users].[Users]
                 DELETE FROM [orders].[InboxMessages]
                 DELETE FROM [orders].[InternalCommands]
                 DELETE FROM [orders].[OutboxMessages]
@@ -85,6 +84,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting
                 DELETE FROM [orders].[DesignParts]
                 DELETE FROM [orders].[Orders]
                 DELETE FROM [orders].[Designs]
+                DELETE FROM [users].[Users]
                 ";
 
                 sqlConnection.ExecuteScalar(sql);

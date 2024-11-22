@@ -1,6 +1,7 @@
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Reflection;
 
 namespace Yarnique.Database.Migrations
@@ -9,10 +10,15 @@ namespace Yarnique.Database.Migrations
     {
         public static void Main(string[] args)
         {
+            var isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development;
+
             var builder = new ConfigurationBuilder();
-            builder.SetBasePath(Directory.GetCurrentDirectory())
-               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-               .AddEnvironmentVariables();
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+
+            if (isDevelopment)
+                builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            builder.AddEnvironmentVariables();
 
             IConfiguration config = builder.Build();
 
