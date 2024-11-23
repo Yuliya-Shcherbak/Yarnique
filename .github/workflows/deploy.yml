@@ -14,20 +14,18 @@ jobs:
         uses: actions/checkout@v3
         with:
           inlineScript: |
-            gh variable set AGENT_IP --body $(curl -s https://api.ipify.org/)
+            gh secret set AGENT_IP --body $(curl -s https://api.ipify.org/)
 
       - name: Log in to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          creds: ${{ secrets.AZURE_CREDS }}
 
       - name: Whitelist GitHub Actions runner
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az sql server firewall-rule create --name ${{ secrets.SERVER_FIREWALL_RULE }} --resource-group ${{ secrets.RESOURCE_GROUP }} --server ${{ secrets.AZURE_SERVER_NAME }} --start-ip-address ${{ secrets.AGENT_IP }} --end-ip-address ${{ secrets.AGENT_IP }}
+            az sql server firewall-rule create --name ${{ secrets.AZURE_SERVER_FIREWALL_RULE }} --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --server ${{ secrets.AZURE_SERVER_NAME }} --start-ip-address ${{ secrets.AGENT_IP }} --end-ip-address ${{ secrets.AGENT_IP }}
             sleep 50
 
   lint-and-test:
@@ -163,7 +161,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az sql server firewall-rule delete --name ${{ secrets.SERVER_FIREWALL_RULE }} --resource-group ${{ secrets.RESOURCE_GROUP }} --server ${{ secrets.AZURE_SERVER_NAME }}
+            az sql server firewall-rule delete --name ${{ secrets.AZURE_SERVER_FIREWALL_RULE }} --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --server ${{ secrets.AZURE_SERVER_NAME }}
 
       - name: logout
         if: always()
