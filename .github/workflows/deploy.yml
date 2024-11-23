@@ -145,6 +145,7 @@ jobs:
           TF_VAR_acr_name: ${{ secrets.TF_VAR_ACR_NAME }}
           TF_VAR_service_plan_id: ${{ secrets.TF_VAR_SERVICE_PLAN_ID }}
           TF_VAR_key_vault_uri: ${{ secrets.TF_VAR_KEY_VAULT_URI }}
+          TF_VAR_storage_account_name : ${{ secrets.TF_VAR_TFSTATE_STORAGE }}
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
@@ -154,6 +155,7 @@ jobs:
           TF_VAR_acr_name: ${{ secrets.TF_VAR_ACR_NAME }}
           TF_VAR_service_plan_id: ${{ secrets.TF_VAR_SERVICE_PLAN_ID }}
           TF_VAR_key_vault_uri: ${{ secrets.TF_VAR_KEY_VAULT_URI }}
+          TF_VAR_storage_account_name : ${{ secrets.TF_VAR_TFSTATE_STORAGE }}
         run: terraform apply -auto-approve tfplan
 
   post-deployment:
