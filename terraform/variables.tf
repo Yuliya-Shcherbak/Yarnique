@@ -22,3 +22,8 @@ variable "key_vault_uri" {
   description = "Azure Key Vault URL"
   type        = string
 }
+
+variable "terraform_state_storage" {
+  description = "Terraform state storage namr"
+  type        = string
+}

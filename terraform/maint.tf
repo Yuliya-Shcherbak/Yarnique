@@ -9,6 +9,13 @@ terraform {
       version = "~> 3.0"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name  = var.resource_group_name
+    storage_account_name = var.terraform_state_storage
+    container_name       = "tfstate"
+    key                  = "infrastructure.tfstate"
+  }
 }
 
 module "yarnique_api_app_service" {
