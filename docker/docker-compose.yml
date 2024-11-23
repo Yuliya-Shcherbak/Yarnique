@@ -1,0 +1,52 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq-user
+      RABBITMQ_DEFAULT_PASS: rabbitmq-pass
+    ports:
+      - 5672:5672
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+
+  payment-api:
+    build:
+      dockerfile: ./docker/payment.api.dockerfile
+      context: ./../
+    ports:
+      - 4221:80
+
+  background-service:
+    build:
+      dockerfile: ./docker/background.service.dockerfile
+      context: ./../
+    environment:
+      EmailConfiguration__FromEmail: example@gmail.com
+      EmailConfiguration__FromName: Yarnique Notification Service
+      EmailConfiguration__AppPassword: app-password
+      ConnectionStrings__YarniqueConnectionString: connection-string
+
+  main-webapi:
+    build:
+      dockerfile: ./docker/main.webapi.dockerfile
+      context: ./../
+    ports:
+      - 5275:8080
+    environment:
+      ConnectionStrings__YarniqueConnectionString: connection-string
+      Identity__JwtIssuer: http://yarnique.com
+      Identity__Secret: secret
+      Identity__TokenExpiration: 30
+      Identity__RefreshTokenExpiration: 1440
+      RabbitMQ__HostName: rabbitmq-hostname
+      RabbitMQ__UserName: rabbitmq-user
+      RabbitMQ__Password: rabbitmq-pass
+      PaymentUrl: payment-api
+    links:
+      - rabbitmq
+      - payment-api
+    depends_on:
+      - rabbitmq
+
+volumes:
+  rabbitmq:
