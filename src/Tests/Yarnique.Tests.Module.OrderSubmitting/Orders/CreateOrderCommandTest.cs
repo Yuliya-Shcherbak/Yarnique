@@ -6,20 +6,19 @@ namespace Yarnique.Tests.Module.OrderSubmitting.Orders
     public class CreateOrderCommandTest : TestBase
     {
         [Fact]
-        public async Task GetDesignsQueryHandler_ShouldReturnDesigns()
+        public async Task CreateOrderCommandHandler_ShouldReturnDesigns()
         {
             // Arrange
-            var designId = Guid.NewGuid();
             var userId = Guid.NewGuid();
-            await AddDesign(designId);
+            var designInfo = await AddDesign();
             await Users.AddUser(ConnectionString, userId);
-            var command = new CreateOrderCommand(userId, designId, GetDateOnly());
+            var command = new CreateOrderCommand(userId, designInfo.designId, GetDateOnly());
 
             // Act
-            var order = await _ordersModule.ExecuteCommandAsync(command);
+            var orderId = await _ordersModule.ExecuteCommandAsync(command);
 
             // Assert
-            Assert.NotEqual(order, Guid.Empty);
+            Assert.NotEqual(orderId, Guid.Empty);
         }
 
         private DateOnly GetDateOnly()

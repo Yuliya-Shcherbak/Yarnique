@@ -50,32 +50,11 @@ namespace Yarnique.Test.Module.Designs
                 true);
 
             _designsModule = new DesignsModule();
-            ClearDatabase();
         }
 
         public void Dispose()
         {
             DesignsStartup.Stop();
-        }
-
-        private void ClearDatabase()
-        {
-            using (var sqlConnection = new SqlConnection(ConnectionString))
-            {
-                const string sql =
-                @"
-                DELETE FROM [designs].[InboxMessages]
-                DELETE FROM [designs].[InternalCommands]
-                DELETE FROM [designs].[OutboxMessages]
-                DELETE FROM [designs].[DesignPartSpecifications]
-                DELETE FROM [designs].[Designs]
-                DELETE FROM [designs].[DesignParts]
-                DELETE FROM [orders].[Orders]
-                DELETE FROM [users].[Users]
-                ";
-
-                sqlConnection.ExecuteScalar(sql);
-            }
         }
     }
 }

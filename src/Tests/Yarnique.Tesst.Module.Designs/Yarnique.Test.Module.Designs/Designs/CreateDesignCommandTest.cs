@@ -11,18 +11,17 @@ namespace Yarnique.Test.Module.Designs.Designs
         public async Task CreateDesignCommandHandler_ShouldSaveDesign()
         {
             // Arrange
-            var designPartIdFirst = Guid.NewGuid();
-            var designPartIdSecond = Guid.NewGuid();
-            await SetUp(designPartIdFirst, designPartIdSecond);
+            var designPartIds = await SetUp();
+            var userId = Guid.NewGuid();
 
             var designParts = new List<CreateDesignPartSpecificationCommand> {
-                new CreateDesignPartSpecificationCommand(designPartIdFirst, 50, 1, TimeSpan.FromDays(1).ToString()),
-                new CreateDesignPartSpecificationCommand(designPartIdSecond, 80, 2, TimeSpan.FromDays(2).ToString()),
+                new CreateDesignPartSpecificationCommand(designPartIds[0], 50, 1, TimeSpan.FromDays(1).ToString()),
+                new CreateDesignPartSpecificationCommand(designPartIds[1], 80, 2, TimeSpan.FromDays(2).ToString()),
             };
 
             // Act
             var designId = await _designsModule.ExecuteCommandAsync(
-                new CreateDesignCommand("Creative Design", 123, Guid.NewGuid(), designParts));
+                new CreateDesignCommand("Creative Design", 123, userId, designParts));
 
             // Assert
             var design = await _designsModule.ExecuteQueryAsync(new GetDesignQuery(designId));
@@ -33,13 +32,16 @@ namespace Yarnique.Test.Module.Designs.Designs
             Assert.Equal(2, design.Parts.Count);
         }
 
-        private async Task SetUp(Guid designPartIdFirst, Guid designPartIdSecond)
+        private async Task<List<Guid>> SetUp()
         {
+            var designPartIds = new List<Guid>() { Guid.NewGuid(), Guid.NewGuid() };
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, 'Pretty Tie') ", new { Id = designPartIdFirst });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, 'Pretty Bow') ", new { Id = designPartIdSecond });
+                foreach (var id in designPartIds)
+                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, @Name) ", new { Id = id, Name = $"DP-{Guid.NewGuid()}" });
             }
+
+            return designPartIds;
         }
     }
 }

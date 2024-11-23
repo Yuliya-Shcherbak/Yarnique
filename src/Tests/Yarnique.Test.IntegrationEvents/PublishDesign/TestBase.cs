@@ -63,39 +63,11 @@ namespace Yarnique.Test.Integration.PublishDesign
 
             _ordersModule = new OrderSubmittingModule();
             _designsModule = new DesignsModule();
-
-            ClearDatabase();
         }
 
         protected static async Task AssertEventually(IProbe probe, int timeout)
         {
             await new Poller(timeout).CheckAsync(probe);
-        }
-
-        private void ClearDatabase()
-        {
-            using (var sqlConnection = new SqlConnection(ConnectionString))
-            {
-                const string sql =
-                @"
-                DELETE FROM [designs].[InboxMessages]
-                DELETE FROM [designs].[InternalCommands]
-                DELETE FROM [designs].[OutboxMessages]
-                DELETE FROM [designs].[DesignPartSpecifications]
-                DELETE FROM [designs].[Designs]
-                DELETE FROM [designs].[DesignParts]
-                DELETE FROM [orders].[InboxMessages]
-                DELETE FROM [orders].[InternalCommands]
-                DELETE FROM [orders].[OutboxMessages]
-                DELETE FROM [orders].[DesignPartSpecifications]
-                DELETE FROM [orders].[DesignParts]
-                DELETE FROM [orders].[Orders]
-                DELETE FROM [orders].[Designs]
-                DELETE FROM [users].[Users]
-                ";
-
-                sqlConnection.ExecuteScalar(sql);
-            }
         }
     }
 }

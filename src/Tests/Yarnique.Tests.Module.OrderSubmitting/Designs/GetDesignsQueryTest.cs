@@ -1,5 +1,3 @@
-using Dapper;
-using System.Data.SqlClient;
 using Yarnique.Modules.OrderSubmitting.Application.Designs.GetDesigns;
 
 namespace Yarnique.Tests.Module.OrderSubmitting.Designs
@@ -10,8 +8,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting.Designs
         public async Task GetDesignsQueryHandler_ShouldReturnDesigns()
         {
             // Arrange
-            var designId = Guid.NewGuid();
-            await AddDesign(designId);
+            var designInfo = await AddDesign();
             var query = new GetDesignsQuery();
 
             // Act
@@ -19,7 +16,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting.Designs
 
             // Assert
             Assert.NotNull(designs);
-            var design = designs.Items.FirstOrDefault(x => x.Id == designId);
+            var design = designs.Items.FirstOrDefault(x => x.Id == designInfo.designId);
             Assert.NotNull(design);
             Assert.Equal("Tiny Rabbit", design.Name);
             Assert.Equal(2, design.Parts.Count);

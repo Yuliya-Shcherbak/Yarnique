@@ -57,13 +57,24 @@ jobs:
           ASPNETCORE_ENVIRONMENT: ${{ secrets.ASPNETCORE_ENVIRONMENT }}
           YarniqueConnectionString: ${{ secrets.YARNIQUEDB_TEST_CONNECTION_STRING }}
         run: |
-          dotnet build ./src/Database/Yarnique.Database.Migration/Yarnique.Database.Migrations.csproj
+          dotnet build ./src/Database/Yarnique.Database.Migration/Yarnique.Database.Migrations.csproj --no-restore
           dotnet run --project ./src/Database/Yarnique.Database.Migration/Yarnique.Database.Migrations.csproj
 
       - name: dotnet test
         env:
           TestDataBase_ConnectionString: ${{ secrets.YARNIQUEDB_TEST_CONNECTION_STRING }}
         run: dotnet test ./src/Yarnique.sln --no-restore --verbosity normal
+
+      - name: Install Azure SQL CLI
+        run: |
+          curl -sL https://aka.ms/sqlclilinux | bash
+          sqlcmd --version
+
+      - name: Clean up database
+        env:
+          AZURE_SQL_CONNECTION_STRING: "Server=tcp:${{ secrets.AZURE_DB_SERVER }};Database=${{ secrets.AZURE_DB_NAME }};User ID=${{ secrets.AZURE_DB_USERNAME }};Password=${{ secrets.AZURE_DB_PASSWORD }};Encrypt=true;"
+        run: |
+          sqlcmd -S "${{ secrets.AZURE_DB_SERVER }}" -d "${{ secrets.AZURE_DB_NAME }}" -U "${{ secrets.AZURE_DB_USERNAME }}" -P "${{ secrets.AZURE_DB_PASSWORD }}" -Q "EXEC ${{ secrets.AZURE_DB_STORED_PROCEDURE_NAME }};"
 
   apply-migration:
     name: Apply Database Migrations

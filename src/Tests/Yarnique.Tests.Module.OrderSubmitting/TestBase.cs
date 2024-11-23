@@ -50,45 +50,34 @@ namespace Yarnique.Tests.Module.OrderSubmitting
                 true);
 
             _ordersModule = new OrderSubmittingModule();
-
-            ClearDatabase();
         }
 
-        internal async Task AddDesign(Guid designId)
+        internal async Task<(Guid designId, List<Guid> designPartIds, List<Guid> designPartSpecificationIds)> AddDesign()
         {
+            var faker = new Faker("en");
+            var designId = Guid.NewGuid();
+            var designPartIds = new List<Guid>() { Guid.NewGuid(), Guid.NewGuid() };
+            var designPartSpecificationIds = new List<Guid>();
+
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {
-                var designPartIdFirst = Guid.NewGuid();
-                var designPartIdSecond = Guid.NewGuid();
+                foreach (var id in designPartIds)
+                {
+                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignParts] VALUES (@Id, 'Pretty Tie') ", new { Id = id, Name = $"DP-{Guid.NewGuid()}" });
+                }
 
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignParts] VALUES (@Id, 'Pretty Tie') ", new { Id = designPartIdFirst });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignParts] VALUES (@Id, 'Pretty Bow') ", new { Id = designPartIdSecond });
                 await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[Designs] VALUES (@Id, 'Tiny Rabbit', 120, 0, @SellerId) ", new { Id = designId, SellerId = Guid.NewGuid() });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 80, '1.00:00:00', 1) ",
-                    new { Id = Guid.NewGuid(), DesignId = designId, DesignPartId = designPartIdFirst });
-                await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 50, '1.00:00:00', 2) ",
-                    new { Id = Guid.NewGuid(), DesignId = designId, DesignPartId = designPartIdSecond });
-            }
-        }
 
-        private void ClearDatabase()
-        {
-            using (var sqlConnection = new SqlConnection(ConnectionString))
-            {
-                const string sql =
-                @"
-                DELETE FROM [orders].[InboxMessages]
-                DELETE FROM [orders].[InternalCommands]
-                DELETE FROM [orders].[OutboxMessages]
-                DELETE FROM [orders].[DesignPartSpecifications]
-                DELETE FROM [orders].[DesignParts]
-                DELETE FROM [orders].[Orders]
-                DELETE FROM [orders].[Designs]
-                DELETE FROM [users].[Users]
-                ";
-
-                sqlConnection.ExecuteScalar(sql);
+                foreach (var id in designPartIds)
+                {
+                    var dpsId = Guid.NewGuid();
+                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignPartSpecifications] VALUES (@Id, @DesignId, @DesignPartId, 80, '1.00:00:00', 1) ",
+                        new { Id = dpsId, DesignId = designId, DesignPartId = id });
+                    designPartSpecificationIds.Add(dpsId);
+                }
             }
+
+            return (designId, designPartIds, designPartSpecificationIds);
         }
     }
 }
