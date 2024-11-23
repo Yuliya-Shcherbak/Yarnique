@@ -106,7 +106,7 @@ jobs:
 
       - name: Build and Push Background Service
         run: |
-          docker build -t acryarnique.azurecr.io/background.service:latest -f ./docker/background.service.dockerfile .
+          docker build -t acryarnique.azurecr.io/background-service:latest -f ./docker/background.service.dockerfile .
           docker push acryarnique.azurecr.io/background-service:latest
 
       - name: Build and Push Main Web API
