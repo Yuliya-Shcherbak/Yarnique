@@ -155,6 +155,7 @@ jobs:
   post-deployment:
     name: Post-Deployment
     runs-on: ubuntu-latest
+    needs: [pre-deployment, terraform-deploy]
     steps:
       - name: Remove GitHub Runner IP from Whitelist
         if: always()
