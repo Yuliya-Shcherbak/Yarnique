@@ -21,7 +21,8 @@ jobs:
         run: |
           docker --version
           find . -name "*.dockerfile"
-          ls -l ./docker/service1.dockerfile
+          ls -l
+          ls -l ./docker/
           docker build -t acryarnique.azurecr.io/payment-api:latest -f ./docker/payment.api.dockerfile .
           docker push acryarnique.azurecr.io/payment-api:latest
 
