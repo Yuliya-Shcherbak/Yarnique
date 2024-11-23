@@ -24,7 +24,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting
             if (ConnectionString == null)
             {
                 throw new ApplicationException(
-                    $"Define connection string to integration tests database using environment variable: {connectionStringEnvironmentVariable}");
+                    $"Define connection string to Order Submitting module database using environment variable: {connectionStringEnvironmentVariable}");
             }
 
             _logger = new LoggerConfiguration()

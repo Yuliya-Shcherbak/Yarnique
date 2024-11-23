@@ -21,11 +21,11 @@ namespace Yarnique.Test.Module.Designs
         protected TestBase()
         {
             const string connectionStringEnvironmentVariable = "TestDataBase_ConnectionString";
-            ConnectionString = Environment.GetEnvironmentVariable(connectionStringEnvironmentVariable, EnvironmentVariableTarget.User);
+            ConnectionString = EnvironmentVariablesProvider.GetVariable(connectionStringEnvironmentVariable);
             if (ConnectionString == null)
             {
                 throw new ApplicationException(
-                    $"Define connection string to integration tests database using environment variable: {connectionStringEnvironmentVariable}");
+                    $"Define connection string to Designs Module tests database using environment variable: {connectionStringEnvironmentVariable}");
             }
 
             _logger = new LoggerConfiguration()

@@ -15,7 +15,7 @@ jobs:
         with:
           inlineScript: |
             gh secret set AGENT_IP --body $(curl -s https://api.ipify.org/)
-            echo ${{secrets.AGENT_IP}} | sed 's/./& /g'
+            echo AGENT_IP is set up with value $(curl -s https://api.ipify.org/)
 
       - name: Log in to Azure
         uses: azure/login@v1
