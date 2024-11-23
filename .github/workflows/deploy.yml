@@ -10,6 +10,9 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
       - name: Log in to ACR
         uses: azure/docker-login@v1
         with:
@@ -30,6 +33,9 @@ jobs:
     name: Pre-Deployment
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
       - name: Define Actions Runner IP
         env:
           GH_TOKEN: ${{ secrets.TOKEN }}
