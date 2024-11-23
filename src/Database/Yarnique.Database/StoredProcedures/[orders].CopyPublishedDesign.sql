@@ -42,7 +42,7 @@ AS
 
 	INSERT INTO @TempDesigns
 	SELECT
-		NEWID()
+		d.Id
 		, d.Name
 		, d.Price
 		, 0
@@ -54,7 +54,7 @@ AS
 
 	INSERT INTO @TempDesignSpecifications
 	SELECT
-		NEWID()
+		dps.Id
 		, @NewDesignId
 		, odp.Id
 		, dps.YarnAmount
@@ -67,7 +67,7 @@ AS
 
 	INSERT INTO @TempDesignSpecificationsWithNewParts
 	SELECT
-		NEWID()
+		dps.Id
 		, @NewDesignId
 		, dps.DesignPartId
 		, dp.Name
@@ -76,7 +76,7 @@ AS
 		, dps.ExecutionOrder
 	FROM [designs].[DesignPartSpecifications] AS dps
 	JOIN [designs].[DesignParts] AS dp ON dps.DesignPartId = dp.Id
-	WHERE dps.DesignId = @DesignId AND Name NOT IN (SELECT Name FROM [orders].[DesignParts])
+	WHERE dps.DesignId = @DesignId AND dp.Name NOT IN (SELECT Name FROM [orders].[DesignParts])
 
 	BEGIN TRANSACTION [CopyPublishedDesignTransaction]
 	BEGIN TRY

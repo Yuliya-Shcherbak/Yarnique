@@ -69,5 +69,49 @@ namespace Yarnique.Test.Integration.PublishDesign
         {
             await new Poller(timeout).CheckAsync(probe);
         }
+
+        public void CleanUp(
+            Guid[] designPartIds,
+            Guid[] designPartSpecificationIds,
+            Guid[] designIds,
+            Guid[] userIds)
+        {
+            using (var sqlConnection = new SqlConnection(ConnectionString))
+            {
+                const string deleteMessagesSql =
+                @"
+                DELETE FROM [designs].[InboxMessages]
+                DELETE FROM [designs].[InternalCommands]
+                DELETE FROM [designs].[OutboxMessages]
+                DELETE FROM [orders].[InboxMessages]
+                DELETE FROM [orders].[InternalCommands]
+                DELETE FROM [orders].[OutboxMessages]
+                ";
+                sqlConnection.ExecuteScalar(deleteMessagesSql);
+
+                if (designPartSpecificationIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [designs].[DesignPartSpecifications] WHERE Id in @designPartSpecificationIds", new { designPartSpecificationIds });
+                    sqlConnection.ExecuteScalar("DELETE FROM [orders].[DesignPartSpecifications] WHERE Id in @designPartSpecificationIds", new { designPartSpecificationIds });
+                }
+
+                if (designPartIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [designs].[DesignParts] WHERE Id in @designPartIds", new { designPartIds });
+                    sqlConnection.ExecuteScalar("DELETE FROM [orders].[DesignParts] WHERE Id in @designPartIds", new { designPartIds });
+                }
+
+                if (designIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [designs].[Designs] WHERE Id in @designIds", new { designIds });
+                    sqlConnection.ExecuteScalar("DELETE FROM [orders].[Designs] WHERE Id in @designIds", new { designIds });
+                }
+
+                if (userIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [users].[Users] WHERE Id in @userIds", new { userIds });
+                }
+            }
+        }
     }
 }

@@ -13,13 +13,14 @@ namespace Yarnique.Test.Module.Designs.DesignCreation
             var command = new CreateDesignPartCommand(designPartName);
 
             // Act
-            await _designsModule.ExecuteCommandAsync(command);
+            var designPartId = await _designsModule.ExecuteCommandAsync(command);
 
             // Assert
             var designParts = await _designsModule.ExecuteQueryAsync(new GetAllDesignPartsQuery(1, 5));
-            var designPart = designParts.Items.FirstOrDefault(x => x.Name == designPartName);
+            var designPart = designParts.Items.FirstOrDefault(x => x.Id == designPartId);
             Assert.NotNull(designPart);
             Assert.Equal(designPartName, designPart.Name);
+            CleanUp([designPartId], Array.Empty<Guid>(), Array.Empty<Guid>(), Array.Empty<Guid>());
         }
     }
 }

@@ -4,7 +4,7 @@ using Yarnique.Modules.Designs.Domain.Designs.DesignParts;
 
 namespace Yarnique.Modules.Designs.Application.DesignCreation.CreateDesignPart
 {
-    internal class CreateDesignPartCommandHandler : ICommandHandler<CreateDesignPartCommand>
+    internal class CreateDesignPartCommandHandler : ICommandHandler<CreateDesignPartCommand, Guid>
     {
         private readonly IDesignsRepository _designsRepository;
 
@@ -13,11 +13,13 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.CreateDesignPart
             _designsRepository = designsRepository;
         }
 
-        public async Task Handle(CreateDesignPartCommand command, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateDesignPartCommand command, CancellationToken cancellationToken)
         {
             var designPart = DesignPart.Create(command.Name);
 
             await _designsRepository.AddDesignPartAsync(designPart);
+
+            return designPart.Id.Value;
         }
     }
 }

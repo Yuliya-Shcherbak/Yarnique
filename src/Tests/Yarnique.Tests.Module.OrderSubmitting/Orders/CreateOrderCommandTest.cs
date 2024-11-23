@@ -19,6 +19,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting.Orders
 
             // Assert
             Assert.NotEqual(orderId, Guid.Empty);
+            CleanUp(designInfo.designPartIds.ToArray(), designInfo.designPartSpecificationIds.ToArray(), [designInfo.designId], [orderId], [userId]);
         }
 
         private DateOnly GetDateOnly()

@@ -1,4 +1,5 @@
 using Yarnique.Modules.OrderSubmitting.Application.Designs.GetDesigns;
+using Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders;
 
 namespace Yarnique.Tests.Module.OrderSubmitting.Designs
 {
@@ -20,6 +21,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting.Designs
             Assert.NotNull(design);
             Assert.Equal("Tiny Rabbit", design.Name);
             Assert.Equal(2, design.Parts.Count);
+            CleanUp(designInfo.designPartIds.ToArray(), designInfo.designPartSpecificationIds.ToArray(), [designInfo.designId], Array.Empty<Guid>(), Array.Empty<Guid>());
         }
     }
 }

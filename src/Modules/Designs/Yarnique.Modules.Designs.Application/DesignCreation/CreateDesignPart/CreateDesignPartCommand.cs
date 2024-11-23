@@ -4,7 +4,7 @@ using Yarnique.Common.Application.Contracts;
 namespace Yarnique.Modules.Designs.Application.DesignCreation.CreateDesignPart
 {
     [CacheableEntity("DesignPart")]
-    public class CreateDesignPartCommand : CommandBase
+    public class CreateDesignPartCommand : CommandBase<Guid>
     {
         public CreateDesignPartCommand(string name)
         {

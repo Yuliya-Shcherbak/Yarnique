@@ -30,6 +30,7 @@ namespace Yarnique.Test.Module.Designs.Designs
             Assert.Equal("Creative Design", design.Name);
             Assert.Equal(123, design.Price);
             Assert.Equal(2, design.Parts.Count);
+            CleanUp(designPartIds.ToArray(), design.Parts.Select(x => x.Id).ToArray(), [designId], [userId]);
         }
 
         private async Task<List<Guid>> SetUp()

@@ -56,5 +56,43 @@ namespace Yarnique.Test.Module.Designs
         {
             DesignsStartup.Stop();
         }
+
+        public void CleanUp(
+            Guid[] designPartIds,
+            Guid[] designPartSpecificationIds,
+            Guid[] designIds,
+            Guid[] userIds)
+        {
+            using (var sqlConnection = new SqlConnection(ConnectionString))
+            {
+                const string deleteMessagesSql =
+                @"
+                DELETE FROM [designs].[InboxMessages]
+                DELETE FROM [designs].[InternalCommands]
+                DELETE FROM [designs].[OutboxMessages]
+                ";
+                sqlConnection.ExecuteScalar(deleteMessagesSql);
+
+                if (designPartSpecificationIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [designs].[DesignPartSpecifications] WHERE Id in @designPartSpecificationIds", new { designPartSpecificationIds });
+                }
+
+                if (designPartIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [designs].[DesignParts] WHERE Id in @designPartIds", new { designPartIds });
+                }
+
+                if (designIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [designs].[Designs] WHERE Id in @designIds", new { designIds });
+                }
+
+                if (userIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [users].[Users] WHERE Id in @userIds", new { userIds });
+                }
+            }
+        }
     }
 }

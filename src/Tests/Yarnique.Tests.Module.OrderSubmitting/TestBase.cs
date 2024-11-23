@@ -78,5 +78,49 @@ namespace Yarnique.Tests.Module.OrderSubmitting
 
             return (designId, designPartIds, designPartSpecificationIds);
         }
+
+        public void CleanUp(
+            Guid[] designPartIds,
+            Guid[] designPartSpecificationIds,
+            Guid[] designIds,
+            Guid[] orderIds,
+            Guid[] userIds)
+        {
+            using (var sqlConnection = new SqlConnection(ConnectionString))
+            {
+                const string deleteMessagesSql =
+                @"
+                DELETE FROM [orders].[InboxMessages]
+                DELETE FROM [orders].[InternalCommands]
+                DELETE FROM [orders].[OutboxMessages]
+                ";
+                sqlConnection.ExecuteScalar(deleteMessagesSql);
+
+                if (designPartSpecificationIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [orders].[DesignPartSpecifications] WHERE Id in @designPartSpecificationIds", new { designPartSpecificationIds });
+                }
+
+                if (designPartIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [orders].[DesignParts] WHERE Id IN @designPartIds", new { designPartIds });
+                }
+
+                if (orderIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [orders].[Orders] WHERE Id IN @orderIds", new { orderIds });
+                }
+
+                if (designIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [orders].[Designs] WHERE Id IN @designIds", new { designIds });
+                }
+
+                if (userIds.Length > 0)
+                {
+                    sqlConnection.ExecuteScalar("DELETE FROM [users].[Users] WHERE Id IN @userIds", new { userIds });
+                }
+            }
+        }
     }
 }
