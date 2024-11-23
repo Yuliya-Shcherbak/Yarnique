@@ -14,6 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Define Actions Runner IP
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN }}
         run: |
           gh secret set AGENT_IP --body $(curl -s https://api.ipify.org/)
           echo AGENT_IP is set up with value $(curl -s https://api.ipify.org/)
