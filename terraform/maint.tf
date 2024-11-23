@@ -11,8 +11,8 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = var.resource_group_name
-    storage_account_name = var.terraform_state_storage
+    resource_group_name  = "yarnique-app"
+    storage_account_name = "yarniquetfstatestorage"
     container_name       = "tfstate"
     key                  = "infrastructure.tfstate"
   }
