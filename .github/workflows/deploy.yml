@@ -60,7 +60,7 @@ jobs:
       - name: dotnet test
         env:
           TestDataBase_ConnectionString: ${{ secrets.YARNIQUEDB_TEST_CONNECTION_STRING }}
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test ./src/Yarnique.sln --no-restore --verbosity normal
 
   apply-migration:
     name: Apply Database Migrations
