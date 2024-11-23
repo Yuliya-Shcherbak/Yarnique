@@ -54,7 +54,6 @@ namespace Yarnique.Tests.Module.OrderSubmitting
 
         internal async Task<(Guid designId, List<Guid> designPartIds, List<Guid> designPartSpecificationIds)> AddDesign()
         {
-            var faker = new Faker("en");
             var designId = Guid.NewGuid();
             var designPartIds = new List<Guid>() { Guid.NewGuid(), Guid.NewGuid() };
             var designPartSpecificationIds = new List<Guid>();
