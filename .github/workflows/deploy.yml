@@ -10,12 +10,13 @@ jobs:
     name: Pre-Deployment
     runs-on: ubuntu-latest
     steps:
-      - name: Define Actions Runner IP
+      - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          inlineScript: |
-            gh secret set AGENT_IP --body $(curl -s https://api.ipify.org/)
-            echo AGENT_IP is set up with value $(curl -s https://api.ipify.org/)
+
+      - name: Define Actions Runner IP
+        run: |
+          gh secret set AGENT_IP --body $(curl -s https://api.ipify.org/)
+          echo AGENT_IP is set up with value $(curl -s https://api.ipify.org/)
 
       - name: Log in to Azure
         uses: azure/login@v1
