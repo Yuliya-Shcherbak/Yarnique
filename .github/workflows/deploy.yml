@@ -130,22 +130,18 @@ jobs:
         with:
           terraform_version: 1.5.7
 
+      - name: Set up Azure authentication
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
       - name: Initialize Terraform
         run: terraform init
-        env:
-          ARM_USE_OIDC: ${{ secrets.ARM_USE_OIDC }}
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
       - name: Terraform Plan
         env:
-          ARM_USE_OIDC: ${{ secrets.ARM_USE_OIDC }}
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           TF_VAR_resource_group_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
           TF_VAR_resource_location: ${{ secrets.TF_VAR_RESOURCE_LOCATION }}
           TF_VAR_acr_name: ${{ secrets.TF_VAR_ACR_NAME }}
@@ -156,11 +152,6 @@ jobs:
 
       - name: Terraform Apply
         env:
-          ARM_USE_OIDC: ${{ secrets.ARM_USE_OIDC }}
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           TF_VAR_resource_group_name: ${{ secrets.TF_VAR_RESOURCE_GROUP_NAME }}
           TF_VAR_resource_location: ${{ secrets.TF_VAR_RESOURCE_LOCATION }}
           TF_VAR_acr_name: ${{ secrets.TF_VAR_ACR_NAME }}
