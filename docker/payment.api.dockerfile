@@ -14,5 +14,6 @@ WORKDIR /app
 COPY --from=build /app .
 
 EXPOSE 8080
+EXPOSE 8081
 
 ENTRYPOINT ["dotnet", "Yarnique.Payment.API.dll"]

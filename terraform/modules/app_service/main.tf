@@ -14,5 +14,6 @@ resource "azurerm_linux_web_app" "app_service" {
 
   app_settings = {
     "KeyVaultUri" = var.key_vault_uri
+    "WEBSITES_PORT" = 8080
   }
 }
