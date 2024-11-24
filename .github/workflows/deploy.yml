@@ -171,7 +171,7 @@ jobs:
 
       - name: Unlock Terraform blob storage
         run: |
-          az storage blob lease break -b infrastructure.tfstate -c tfstate
+          az storage blob lease break --blob-name ${{ secrets.TF_STATE_BLOB_NAME }} --container-name ${{ secrets.TF_STATE_CONTAINER_NAME }} --account-name ${{ secrets.TF_STATE_ACCOUNT_NAME }} --account-key ${{ secrets.TF_STATE_ACCOUNT_KEY }}
 
   post-deployment:
     name: Post-Deployment
