@@ -158,16 +158,17 @@ jobs:
           TF_VAR_storage_account_name : ${{ secrets.TF_VAR_TFSTATE_STORAGE }}
         run: terraform apply -auto-approve tfplan
 
-      - name: Force Unlock Terraform State on failure
-        if: failure()
+  terraform-unlock:
+    if: steps.terraform-deploy.outcome == 'failure'
+    steps:
+      - name: Log in to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDS }}
+
+      - name: Unlock Terraform blob storage
         run: |
-          echo "Attempting to force-unlock the Terraform state..."
-          LOCK_ID=$(terraform plan 2>&1 | grep -oP 'ID: \K[0-9a-f\-]+')
-          if [ -n "$LOCK_ID" ]; then
-            terraform force-unlock "$LOCK_ID"
-          else
-            echo "No lock ID found. Skipping unlock step."
-          fi
+          az storage blob lease break -b infrastructure.tfstate -c tfstate
 
   post-deployment:
     name: Post-Deployment
@@ -182,7 +183,7 @@ jobs:
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDS }}
-          inlineScript: |
+        run: |
             az sql server firewall-rule delete --name ${{ secrets.AZURE_SERVER_FIREWALL_RULE }} --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --server ${{ secrets.AZURE_SERVER_NAME }}
 
       - name: logout
