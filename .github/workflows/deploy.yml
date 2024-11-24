@@ -161,7 +161,7 @@ jobs:
   terraform-unlock:
     name: Terraform unlock
     runs-on: ubuntu-latest
-    if: steps.terraform-deploy.outcome == 'failure'
+    if: jobs.terraform-deploy.outcome == 'failure'
     steps:
       - name: Log in to Azure
         uses: azure/login@v2
