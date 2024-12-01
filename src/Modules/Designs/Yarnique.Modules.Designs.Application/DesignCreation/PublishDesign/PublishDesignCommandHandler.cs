@@ -14,7 +14,7 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign
 
         public async Task Handle(PublishDesignCommand command, CancellationToken cancellationToken)
         {
-            var design = await _designsRepository.GetByIdAsync(command.DesignId);
+            var design = await _designsRepository.GetDesignByIdAsync(command.DesignId);
             design.Publish();
         }
     }

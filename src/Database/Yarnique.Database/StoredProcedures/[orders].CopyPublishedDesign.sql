@@ -35,6 +35,7 @@ AS
 		[DesignId] UNIQUEIDENTIFIER NOT NULL,
 		[DesignPartId] UNIQUEIDENTIFIER NOT NULL,
 		[Name] VARCHAR(255) NOT NULL,
+		[BlobName] VARCHAR(255) NULL,
 		[YarnAmount] INT NOT NULL,
 		[Term] VARCHAR(255) NOT NULL,
 		[ExecutionOrder] INT NOT NULL
@@ -71,6 +72,7 @@ AS
 		, @NewDesignId
 		, dps.DesignPartId
 		, dp.Name
+		, dp.BlobName
 		, dps.YarnAmount
 		, dps.Term
 		, dps.ExecutionOrder
@@ -81,7 +83,7 @@ AS
 	BEGIN TRANSACTION [CopyPublishedDesignTransaction]
 	BEGIN TRY
 		INSERT INTO [orders].[Designs] SELECT [Id], [Name], [Price], [Discontinued], [SellerId] FROM @TempDesigns
-		INSERT INTO [orders].[DesignParts] SELECT [DesignPartId], [Name] FROM @TempDesignSpecificationsWithNewParts
+		INSERT INTO [orders].[DesignParts] SELECT [DesignPartId], [Name], [BlobName] FROM @TempDesignSpecificationsWithNewParts
 		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount], [Term], [ExecutionOrder] FROM @TempDesignSpecifications
 		INSERT INTO [orders].[DesignPartSpecifications] SELECT [Id], [DesignId], [DesignPartId], [YarnAmount], [Term], [ExecutionOrder] FROM @TempDesignSpecificationsWithNewParts
 		COMMIT

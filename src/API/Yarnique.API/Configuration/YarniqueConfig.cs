@@ -17,5 +17,7 @@ namespace Yarnique.API.Configuration
     public class ConnectionStringsConfig
     {
         public string YarniqueConnectionString { get; set; }
+
+        public string BlobStorageConnectionString { get; set; }
     }
 }

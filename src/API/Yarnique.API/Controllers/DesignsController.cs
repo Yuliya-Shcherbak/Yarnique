@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+using System.Net.Mime;
 using Yarnique.API.Modules.Designs.DesignParts;
 using Yarnique.API.Modules.Designs.Designs;
 using Yarnique.Common.Application.Pagination;
@@ -10,7 +10,9 @@ using Yarnique.Modules.Designs.Application.DesignCreation.CreateDesignPart;
 using Yarnique.Modules.Designs.Application.DesignCreation.EditDesign;
 using Yarnique.Modules.Designs.Application.DesignCreation.GetAllDesignParts;
 using Yarnique.Modules.Designs.Application.DesignCreation.GetDesign;
+using Yarnique.Modules.Designs.Application.DesignCreation.GetDesignPartPatternPreview;
 using Yarnique.Modules.Designs.Application.DesignCreation.PublishDesign;
+using Yarnique.Modules.Designs.Application.DesignCreation.UploadDesignPartPattern;
 
 namespace Yarnique.API.Controllers
 {
@@ -92,6 +94,28 @@ namespace Yarnique.API.Controllers
             await _designsModule.ExecuteCommandAsync(new CreateDesignPartCommand(request.Name));
 
             return Ok();
+        }
+
+        [HttpPost("parts/{id}/upload")]
+        public async Task<IActionResult> UploadImage([FromRoute] Guid id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+            
+            await _designsModule.ExecuteCommandAsync(new UploadDesignPartPatternCommand(id, file));
+
+            return Ok();
+        }
+
+        [HttpGet("parts/{id}/preview")]
+        [Produces(MediaTypeNames.Image.Jpeg, Type = typeof(File))]
+        public async Task<IActionResult> GetDesignPartPreview([FromRoute] Guid id)
+        {
+            var previewImage = await _designsModule.ExecuteQueryAsync(new GetDesignPartPatternPreviewQuery(id));
+
+            return File(previewImage, MediaTypeNames.Image.Jpeg);
         }
     }
 }

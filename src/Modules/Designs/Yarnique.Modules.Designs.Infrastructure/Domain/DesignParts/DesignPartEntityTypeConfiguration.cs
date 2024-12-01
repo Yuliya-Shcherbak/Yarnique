@@ -13,6 +13,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Domain.DesignParts
             builder.HasKey(x => x.Id);
 
             builder.Property<string>("_name").HasColumnName("Name");
+            builder.Property<string>("_blobName").HasColumnName("BlobName");
         }
     }
 }

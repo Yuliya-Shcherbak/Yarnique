@@ -62,7 +62,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting
             {
                 foreach (var id in designPartIds)
                 {
-                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignParts] VALUES (@Id, 'Pretty Tie') ", new { Id = id, Name = $"DP-{Guid.NewGuid()}" });
+                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[DesignParts] VALUES (@Id, 'Pretty Tie', NULL) ", new { Id = id, Name = $"DP-{Guid.NewGuid()}" });
                 }
 
                 await sqlConnection.ExecuteScalarAsync("INSERT INTO [orders].[Designs] VALUES (@Id, 'Tiny Rabbit', 120, 0, @SellerId) ", new { Id = designId, SellerId = Guid.NewGuid() });

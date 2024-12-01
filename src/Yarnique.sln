@@ -84,6 +84,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackgroundService", "Backgr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.BackgroundService", "BackgroundService\Yarnique.BackgroundService\Yarnique.BackgroundService.csproj", "{004D2B36-28D5-4B1E-8A33-7816F81BDD73}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functions", "Functions", "{C1CD4BF5-3B18-4EDB-94E2-35DFF99A271B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yarnique.Functions.DesignParts", "Functions\Yarnique.Functions.DesignParts\Yarnique.Functions.DesignParts.csproj", "{FD2367BF-CB38-4A8B-9799-57C16B7E771E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +207,10 @@ Global
 		{004D2B36-28D5-4B1E-8A33-7816F81BDD73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{004D2B36-28D5-4B1E-8A33-7816F81BDD73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{004D2B36-28D5-4B1E-8A33-7816F81BDD73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD2367BF-CB38-4A8B-9799-57C16B7E771E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD2367BF-CB38-4A8B-9799-57C16B7E771E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD2367BF-CB38-4A8B-9799-57C16B7E771E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD2367BF-CB38-4A8B-9799-57C16B7E771E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -240,6 +248,7 @@ Global
 		{061DDF85-A8C7-4BA3-AA16-E53E92B6C6A1} = {7CDAA6FC-4B7E-4CF3-B868-E10A7805D5EC}
 		{CA9F6D29-A0C4-4BD4-8741-FB423917ADB6} = {7CDAA6FC-4B7E-4CF3-B868-E10A7805D5EC}
 		{004D2B36-28D5-4B1E-8A33-7816F81BDD73} = {DD7F6BC3-BEFA-4BBD-96FE-DA5E7B72D437}
+		{FD2367BF-CB38-4A8B-9799-57C16B7E771E} = {C1CD4BF5-3B18-4EDB-94E2-35DFF99A271B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80077703-C2FF-48D5-9529-1855A1858F61}

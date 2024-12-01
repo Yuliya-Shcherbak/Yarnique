@@ -44,7 +44,7 @@ namespace Yarnique.Test.Integration.PublishDesign
 
                 foreach (var id in designPartIds)
                 {
-                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, @Name) ", new { Id = id, Name = $"DP-{Guid.NewGuid()}" });
+                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, @Name, NULL) ", new { Id = id, Name = $"DP-{Guid.NewGuid()}" });
                 }
 
                 await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[Designs] VALUES (@Id, @Name, 120, 0, @SellerId) ", new { Id = designId, Name = designName, SellerId = userId });

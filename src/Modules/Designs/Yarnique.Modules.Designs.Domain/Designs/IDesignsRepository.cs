@@ -11,6 +11,8 @@ namespace Yarnique.Modules.Designs.Domain.Designs
 
         void PublishDesignAsync(Design design);
 
-        Task<Design> GetByIdAsync(DesignId id);
+        Task<Design> GetDesignByIdAsync(DesignId id);
+
+        Task<DesignPart> GetDesignPartByIdAsync(DesignPartId id);
     }
 }

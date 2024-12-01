@@ -1,4 +1,5 @@
 using Autofac;
+using Azure.Storage.Blobs;
 using Dapper;
 using Serilog;
 using System.Data.SqlClient;
@@ -58,6 +59,7 @@ namespace Yarnique.Test.Integration.PublishDesign
                 ConnectionString,
                 _executionContext,
                 _logger,
+                new BlobServiceClient("UseDevelopmentStorage=true"),
                 eventsBus,
                 true);
 

@@ -39,7 +39,7 @@ namespace Yarnique.Test.Module.Designs.Designs
             using (var sqlConnection = new SqlConnection(ConnectionString))
             {
                 foreach (var id in designPartIds)
-                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, @Name) ", new { Id = id, Name = $"DP-{Guid.NewGuid()}" });
+                    await sqlConnection.ExecuteScalarAsync("INSERT INTO [designs].[DesignParts] VALUES (@Id, @Name, NULL) ", new { Id = id, Name = $"DP-{Guid.NewGuid()}" });
             }
 
             return designPartIds;

@@ -1,16 +1,17 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Azure.Identity;
+using Azure.Storage.Blobs;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using Serilog;
 using Serilog.Formatting.Compact;
 using System.Text;
 using Yarnique.API.Configuration;
 using Yarnique.API.Configuration.ExecutionContext;
 using Yarnique.API.Configuration.Validation;
+using Yarnique.API.Modules.BlobSorage;
 using Yarnique.API.Modules.Designs;
 using Yarnique.API.Modules.EventsBus;
 using Yarnique.API.Modules.OrderSubmitting;
@@ -40,11 +41,14 @@ namespace Yarnique.API
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json")
                 .AddUserSecrets<Startup>()
                 .AddEnvironmentVariables();
-            _configuration = confBuilder.Build();
 
-            confBuilder.AddAzureKeyVault(
-                  new Uri(_configuration.GetValue<string>("KeyVaultUri")),
-                  new DefaultAzureCredential());
+            if (env.IsProduction())
+            {
+                _configuration = confBuilder.Build();
+                confBuilder.AddAzureKeyVault(
+                      new Uri(_configuration.GetValue<string>("KeyVaultUri")),
+                      new DefaultAzureCredential());
+            }
 
             _configuration = confBuilder.Build();
             _config = BindApplicationConfig();
@@ -72,6 +76,7 @@ namespace Yarnique.API
         public void ConfigureContainer(ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterModule(new EventsBusAutofacModule(_config.Rabbitmq, _logger));
+            containerBuilder.RegisterModule(new BlobStorageAutofacModule(_config.ConnectionStrings.BlobStorageConnectionString));
             containerBuilder.RegisterModule(new DesignsAutofacModule());
             containerBuilder.RegisterModule(new OrderSubmittingAutofacModule());
             containerBuilder.RegisterModule(new UsersManagementAutofacModule());
@@ -132,11 +137,13 @@ namespace Yarnique.API
             var executionContextAccessor = new ExecutionContextAccessor(httpContextAccessor);
 
             var eventsBus = container.Resolve<IEventsBus>();
+            var blobStorageClient = container.Resolve<BlobServiceClient>();
 
             DesignsStartup.Initialize(
                 _config.ConnectionStrings.YarniqueConnectionString,
                 executionContextAccessor,
                 _logger,
+                blobStorageClient,
                 eventsBus);
 
             OrderSubmittingStartup.Initialize(

@@ -1,4 +1,5 @@
 using Autofac;
+using Azure.Storage.Blobs;
 using Serilog;
 using Yarnique.Common.Application;
 using Yarnique.Common.Infrastructure;
@@ -21,6 +22,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration
             string connectionString,
             IExecutionContextAccessor executionContextAccessor,
             ILogger logger,
+            BlobServiceClient blobServiceClient,
             IEventsBus eventsBus,
             bool inTest = false,
             long? internalProcessingPoolingInterval = null)
@@ -31,6 +33,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration
                 connectionString,
                 executionContextAccessor,
                 logger,
+                blobServiceClient,
                 eventsBus);
 
             QuartzStartup.Initialize(moduleLogger, inTest, internalProcessingPoolingInterval);
@@ -47,6 +50,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration
             string connectionString,
             IExecutionContextAccessor executionContextAccessor,
             ILogger logger,
+            BlobServiceClient blobServiceClient,
             IEventsBus eventsBus)
         {
             var containerBuilder = new ContainerBuilder();
@@ -56,6 +60,7 @@ namespace Yarnique.Modules.Designs.Infrastructure.Configuration
             var loggerFactory = new Serilog.Extensions.Logging.SerilogLoggerFactory(logger);
             containerBuilder.RegisterModule(new DataAccessModule(connectionString, loggerFactory));
             containerBuilder.RegisterModule(new ProcessingModule());
+            containerBuilder.RegisterModule(new BlobServiceModule(blobServiceClient));
             containerBuilder.RegisterModule(new EventsBusModule(eventsBus));
             containerBuilder.RegisterModule(new MediatorModule());
 

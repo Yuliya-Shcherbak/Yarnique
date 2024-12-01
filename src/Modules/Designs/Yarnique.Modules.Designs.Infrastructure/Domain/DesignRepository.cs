@@ -28,9 +28,14 @@ namespace Yarnique.Modules.Designs.Infrastructure.Domain
             _designsContext.Designs.Update(designPart);
         }
 
-        public async Task<Design> GetByIdAsync(DesignId id)
+        public async Task<Design> GetDesignByIdAsync(DesignId id)
         {
             return await _designsContext.Designs.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<DesignPart> GetDesignPartByIdAsync(DesignPartId id)
+        {
+            return await _designsContext.DesignParts.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Yarnique.BackgroundService
 
         static async Task Main(string[] args)
         {
-            var builder = new HostBuilder()
+            var builder = Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
                 {
                     config.SetBasePath(Directory.GetCurrentDirectory());
@@ -22,10 +22,14 @@ namespace Yarnique.BackgroundService
                     config.AddEnvironmentVariables();
                     config.AddCommandLine(args);
 
-                    var tempConfig = config.Build();
-                    config.AddAzureKeyVault(
-                        new Uri(tempConfig.GetValue<string>("KeyVaultUri")),
-                        new DefaultAzureCredential());
+                    var env = context.HostingEnvironment;
+                    if (env.IsProduction())
+                    {
+                        var tempConfig = config.Build();
+                        config.AddAzureKeyVault(
+                            new Uri(tempConfig.GetValue<string>("KeyVaultUri")),
+                            new DefaultAzureCredential());
+                    }
 
                     var builtConfig = config.Build();
 
