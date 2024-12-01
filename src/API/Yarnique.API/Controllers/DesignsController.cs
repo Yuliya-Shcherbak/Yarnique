@@ -103,7 +103,7 @@ namespace Yarnique.API.Controllers
             {
                 return BadRequest("No file uploaded.");
             }
-            
+
             await _designsModule.ExecuteCommandAsync(new UploadDesignPartPatternCommand(id, file));
 
             return Ok();

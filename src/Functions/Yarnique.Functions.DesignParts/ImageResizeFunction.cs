@@ -44,7 +44,6 @@ namespace Yarnique.Functions.DesignParts
                 }
 
                 _logger.LogInformation($"Resized image saved as preview: {blobName}.{blobExtension}");
-  
 
                 return data.ToArray();
             }

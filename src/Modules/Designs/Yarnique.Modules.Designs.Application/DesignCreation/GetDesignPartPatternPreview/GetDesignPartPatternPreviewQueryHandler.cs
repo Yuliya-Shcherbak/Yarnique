@@ -20,7 +20,7 @@ namespace Yarnique.Modules.Designs.Application.DesignCreation.GetDesignPartPatte
         public async Task<Stream> Handle(GetDesignPartPatternPreviewQuery query, CancellationToken cancellationToken)
         {
             var connection = _sqlConnectionFactory.GetOpenConnection();
-            var designPart = await connection.QuerySingleAsync<DesignPartBlobNameDto>("SELECT BlobName FROM [designs].[DesignParts] WHERE Id = @Id", new { Id =  query.DesignPartId.Value });
+            var designPart = await connection.QuerySingleAsync<DesignPartBlobNameDto>("SELECT BlobName FROM [designs].[DesignParts] WHERE Id = @Id", new { Id = query.DesignPartId.Value });
 
             var validator = new DesignPartPatternUploadedValidator();
             validator.ValidateAndThrow(designPart);
