@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Yarnique.API.Configuration.Filters;
 using Yarnique.API.Modules.OrderSubmitting.Orders;
 using Yarnique.Modules.OrderSubmitting.Application.Contracts;
 using Yarnique.Modules.OrderSubmitting.Application.Designs.GetDesigns;
 using Yarnique.Modules.OrderSubmitting.Application.Orders.AcceptOrder;
+using Yarnique.Modules.OrderSubmitting.Application.Orders.ChangeOrderStatus;
 using Yarnique.Modules.OrderSubmitting.Application.Orders.CreateOrder;
 using Yarnique.Modules.OrderSubmitting.Application.Orders.PayOrder;
 
@@ -39,11 +41,22 @@ namespace Yarnique.API.Controllers
             return Ok();
         }
 
+        [RoleAuthorize("Seller")]
         [HttpPut("{orderId}/accept")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> AcceptOrder([FromRoute] Guid orderId)
         {
             await _ordersModule.ExecuteCommandAsync(new AcceptOrderCommand(orderId));
+
+            return Ok();
+        }
+
+        [RoleAuthorize("Seller")]
+        [HttpPut("{orderId}/status")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> ChangeOrderStatus([FromRoute] Guid orderId, [FromBody] ChangeOrderStatusRequest request)
+        {
+            await _ordersModule.ExecuteCommandAsync(new ChangeOrderStatusCommand(orderId, request.Status));
 
             return Ok();
         }

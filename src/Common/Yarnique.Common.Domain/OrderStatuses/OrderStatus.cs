@@ -20,5 +20,20 @@ namespace Yarnique.Common.Domain.OrderStatuses
         {
             this.Value = value;
         }
+
+        public static OrderStatus GetOrderStatus(string status)
+        {
+            var value = status?.Trim();
+            return value?.ToLowerInvariant() switch
+            {
+                "pending" => Pending,
+                "negotiation" => Negotiation,
+                "accepted" => Accepted,
+                "inprogress" => InProgress,
+                "onhold" => OnHold,
+                "completed" => Completed,
+                _ => throw new ArgumentException($"Invalid OrderStatus value: {value}")
+            };
+        }
     }
 }

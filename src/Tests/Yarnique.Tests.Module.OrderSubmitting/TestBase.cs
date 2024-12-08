@@ -47,6 +47,7 @@ namespace Yarnique.Tests.Module.OrderSubmitting
                 _executionContext,
                 _logger,
                 eventsBus,
+                null,
                 true);
 
             _ordersModule = new OrderSubmittingModule();

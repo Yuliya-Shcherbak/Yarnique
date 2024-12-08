@@ -53,6 +53,7 @@ namespace Yarnique.Test.Integration.PublishDesign
                 _executionContext,
                 _logger,
                 eventsBus,
+                null,
                 true);
 
             DesignsStartup.Initialize(

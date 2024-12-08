@@ -42,6 +42,14 @@ namespace Yarnique.Modules.OrderSubmitting.Domain.Orders.Orders
         {
             _status = OrderStatus.Accepted;
             _acceptedDate = DateTime.UtcNow;
+
+            AddDomainEvent(new OrderStatusChangedDomainEvent(Id, _status));
+        }
+
+        public void ChangeStatus(OrderStatus status)
+        {
+            _status = status;
+            AddDomainEvent(new OrderStatusChangedDomainEvent(Id, _status));
         }
 
         private Order(Guid id, UserId userId, DesignId designId, OrderStatus status, DateOnly executionDate)

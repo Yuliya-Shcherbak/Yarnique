@@ -1,8 +1,10 @@
 using Autofac;
+using Microsoft.AspNetCore.SignalR;
 using Serilog;
 using Yarnique.Common.Application;
 using Yarnique.Common.Infrastructure;
 using Yarnique.Common.Infrastructure.EventBus;
+using Yarnique.Modules.OrderSubmitting.Application.Callbacks;
 using Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.DataAccess;
 using Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.EventsBus;
 using Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration.Mediator;
@@ -22,6 +24,7 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
             IExecutionContextAccessor executionContextAccessor,
             ILogger logger,
             IEventsBus eventsBus,
+            IHubContext<OrderStatusHub, IOrderStatusHub> hubContext = null,
             bool inTest = false,
             long? internalProcessingPoolingInterval = null)
         {
@@ -32,7 +35,8 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
                 paymentApiUrl,
                 executionContextAccessor,
                 logger,
-                eventsBus);
+                eventsBus,
+                hubContext);
 
             QuartzStartup.Initialize(moduleLogger, inTest, internalProcessingPoolingInterval);
 
@@ -44,7 +48,8 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
             string paymentApiUrl,
             IExecutionContextAccessor executionContextAccessor,
             ILogger logger,
-            IEventsBus eventsBus)
+            IEventsBus eventsBus,
+            IHubContext<OrderStatusHub, IOrderStatusHub> hubContext = null)
         {
             var containerBuilder = new ContainerBuilder();
 
@@ -62,8 +67,9 @@ namespace Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration
 
             containerBuilder.RegisterModule(new OrderPaymentHttpClientModule(paymentApiUrl));
 
-            containerBuilder.RegisterInstance(executionContextAccessor);
+            if (hubContext != null) containerBuilder.RegisterModule(new CallbackModule(hubContext));
 
+            containerBuilder.RegisterInstance(executionContextAccessor);
             _container = containerBuilder.Build();
 
             OrderSubmittingCompositionRoot.SetContainer(_container);

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Yarnique.BackgroundService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

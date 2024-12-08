@@ -4,12 +4,14 @@ using Azure.Identity;
 using Azure.Storage.Blobs;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Formatting.Compact;
 using System.Text;
 using Yarnique.API.Configuration;
 using Yarnique.API.Configuration.ExecutionContext;
+using Yarnique.API.Configuration.Formatters;
 using Yarnique.API.Configuration.Validation;
 using Yarnique.API.Modules.BlobSorage;
 using Yarnique.API.Modules.Designs;
@@ -19,6 +21,7 @@ using Yarnique.Common.Application;
 using Yarnique.Common.Domain;
 using Yarnique.Common.Infrastructure.EventBus;
 using Yarnique.Modules.Designs.Infrastructure.Configuration;
+using Yarnique.Modules.OrderSubmitting.Application.Callbacks;
 using Yarnique.Modules.OrderSubmitting.Infrastructure.Configuration;
 using Yarnique.Modules.UsersManagement.Infrastructure.Configuration;
 using ILogger = Serilog.ILogger;
@@ -59,7 +62,10 @@ namespace Yarnique.API
             ConfigureAuthentication(services, _config);
 
 
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.OutputFormatters.Add(new CsvOutputFormatter());
+            });
 
             services.AddSwaggerDocumentation();
 
@@ -71,6 +77,8 @@ namespace Yarnique.API
                 x.Map<InvalidCommandException>(ex => new InvalidCommandProblemDetails(ex));
                 x.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
             });
+
+            services.AddSignalR();
         }
 
         public void ConfigureContainer(ContainerBuilder containerBuilder)
@@ -113,7 +121,11 @@ namespace Yarnique.API
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<OrderStatusHub>("/api/order-status-hub");
+                endpoints.MapControllers();
+            });
         }
 
         private static void ConfigureLogger()
@@ -138,6 +150,7 @@ namespace Yarnique.API
 
             var eventsBus = container.Resolve<IEventsBus>();
             var blobStorageClient = container.Resolve<BlobServiceClient>();
+            var hubContext = container.Resolve<IHubContext<OrderStatusHub, IOrderStatusHub>>();
 
             DesignsStartup.Initialize(
                 _config.ConnectionStrings.YarniqueConnectionString,
@@ -151,7 +164,8 @@ namespace Yarnique.API
                _config.PaymentUrl,
                executionContextAccessor,
                _logger,
-               eventsBus);
+               eventsBus,
+               hubContext);
 
             UsersManagementStartup.Initialize(
                _config.ConnectionStrings.YarniqueConnectionString,

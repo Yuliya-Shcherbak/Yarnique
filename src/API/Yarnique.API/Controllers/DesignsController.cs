@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using Yarnique.API.Configuration.Filters;
 using Yarnique.API.Modules.Designs.DesignParts;
 using Yarnique.API.Modules.Designs.Designs;
 using Yarnique.Common.Application.Pagination;
@@ -16,7 +16,7 @@ using Yarnique.Modules.Designs.Application.DesignCreation.UploadDesignPartPatter
 
 namespace Yarnique.API.Controllers
 {
-    [Authorize]
+    [RoleAuthorize("Seller")]
     [ApiController]
     [Route("api/designs")]
     public class DesignsController : BaseController
@@ -81,6 +81,15 @@ namespace Yarnique.API.Controllers
         [HttpGet("parts")]
         [ProducesResponseType(typeof(List<DesignPartDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllDesignParts([FromQuery] PaginatedRequest request)
+        {
+            var result = await _designsModule.ExecuteQueryAsync(new GetAllDesignPartsQuery(request.PageNumber, request.PageSize));
+
+            return Ok(result);
+        }
+
+        [HttpGet("parts/csv")]
+        [Produces(MediaTypeNames.Text.Csv)]
+        public async Task<IActionResult> GetAllDesignPartsCsv([FromQuery] PaginatedRequest request)
         {
             var result = await _designsModule.ExecuteQueryAsync(new GetAllDesignPartsQuery(request.PageNumber, request.PageSize));
 
