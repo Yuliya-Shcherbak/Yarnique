@@ -1,0 +1,50 @@
+@startuml
+
+title Order placement
+
+|Customer|
+start
+:Selects default or customezed design;
+if (Customized design?) then (Yes)
+  :Create and configure the design;
+  :Add settings (e.g. color, yarn type, price, parts of design);
+
+  |Seller|
+  if (Requested modification is complex) then (Yes)
+    :Updates the Order;
+  else (No)
+    |Seller|
+    :Accepts the Order;
+    stop
+  endif
+
+
+  |Customer|
+  if (Confirms) then (No)
+    :Rejects the Order;
+    stop
+  else (Yes)
+    :Submits the Order;
+    |Seller|
+    label sp_lab010
+    label sp_lab020
+    :Accepts the Order;
+    stop
+  endif
+
+|Customer|
+else (No)
+  :Select design from default catalog;
+  label sp_lab01
+  label sp_lab02
+  label sp_lab03
+  label sp_lab04
+  label sp_lab05
+  label sp_lab06
+  label sp_lab07
+  label sp_lab08
+  label sp_lab09
+  goto sp_lab20
+endif
+
+@enduml

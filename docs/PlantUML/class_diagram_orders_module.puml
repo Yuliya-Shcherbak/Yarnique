@@ -1,0 +1,47 @@
+@startuml
+class Order {
+  - OrderId Id
+  - UserId _userId
+  - DesignId _designId
+  - bool _isPaid
+  - string _transactionId
+  - string _transactionError
+  - OrderStatus _status
+  - DateOnly _executionDate
+  - DateTime? _acceptedDate
+  + DesignId DesignId
+  + Order(DesignId _designId)
+  + static Order Create(UserId userId, DesignId designId, OrderStatus status, DateOnly executionDate)
+}
+class OrderId {
+    + OrderId(Guid value)
+}
+class OrderExecution {
+  - OrderExecutionId Id
+  - OrderId _orderId
+  - DesignPartSpecificationId _designPartSpecificationId
+  - DateTime _dueDate
+  - ExecutionStatus _status
+  + OrderExecution()
+  + static OrderExecution Create(OrderId orderId, DesignPartSpecificationId designPartSpecificationId, DateTime dueDate)
+  + void UpdateStatus(ExecutionStatus status)
+}
+class OrderExecutionId {
+  + OrderExecutionId(Guid value)
+}
+Order "1" --> OrderId
+Order "1" --> UserId
+Order "1" --> DesignId
+Order "1" --> OrderStatus
+Order ..> Entity
+Order ..> OrderCreatedDomainEvent
+OrderId ..|> TypedIdValueBase
+OrderExecution "1" --> OrderExecutionId
+OrderExecution "1" --> OrderId
+OrderExecution "1"--> DesignPartSpecificationId
+OrderExecution "1"--> ExecutionStatus
+OrderExecution ..> Entity
+OrderExecution ..> OrderExecutionCreatedDomainEvent
+OrderExecutionId ..|> TypedIdValueBase
+
+@enduml

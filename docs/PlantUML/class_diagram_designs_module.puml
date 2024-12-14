@@ -1,0 +1,64 @@
+@startuml
+class DesignPartId {
+  +DesignPartId(Guid value)
+}
+
+class DesignPart {
+  - DesignPartId Id
+- string _name
+- string _blobName
++ DesignPart()
++ static DesignPart Create(string name)
++ void UpdateBlobName(string blobName)
++ string GetName()
+}
+
+class DesignParSpecificationtId {
+  +DesignPartSpecificationId(Guid value)
+}
+
+class DesignPartSpecification {
+  - DesignPartSpecificationId Id
+  - DesignPartId _designPartId
+  - int _yarnAmount
+  - int _executionOrder
+  - string _term
+  + DesignPartSpecification()
+  + static DesignPartSpecification Create(DesignPartId designPartId, int yarnAmount, int order, string term)
+}
+
+class DesignId {
+  +DesignId(Guid value)
+}
+
+class Design {
+  - DesignId Id
+  - string _name
+  - double _price
+  - bool _published
+  - UserId _sellerId
+  - List~DesignPartSpecification~ _parts
+  + Design()
+  + static Design Create(string name, double price, UserId sellerId, List~DesignPartSpecification~ parts)
+  + void Update(string name, double price, List~DesignPartSpecification~ parts)
+}
+
+Design "1" --> DesignId
+Design "1" --> UserId
+Design "1" --> "many" DesignPartSpecification
+Design ..> Entity
+Design ..> DesignCreatedDomainEvent
+Design ..> DesignNameRequiredRule
+DesignId ..|> TypedIdValueBase
+DesignPart "1" --> DesignPartId
+DesignPart ..> Entity
+DesignPart ..> DesignPartCreatedDomainEvent
+DesignPart ..> DesignPartNameRequiredRule
+DesignPartId ..|> TypedIdValueBase
+DesignPartSpecificationId ..|> TypedIdValueBase
+DesignPartSpecification "1" --> DesignPartSpecificationId
+DesignPartSpecification "1" --> DesignPartId
+DesignPartSpecification ..> Entity
+DesignPartSpecification ..> DesignPartSpecificationCreatedDomainEvent
+
+@enduml

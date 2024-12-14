@@ -1,0 +1,17 @@
+@startuml
+
+title Order progress tracking
+
+start
+
+repeat
+  :Get Order Execution data;
+  :Check Design Part execution Due Date;
+  if (Is due) then (Yes)
+    :Send notification to Seller;
+  else (No)
+    :Wait and retry;
+  endif
+repeat while (Design is In Progress) is (Yes) not (No)
+
+@enduml
